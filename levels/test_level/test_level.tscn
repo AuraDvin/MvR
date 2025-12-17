@@ -1,0 +1,51 @@
+[gd_scene load_steps=5 format=3 uid="uid://dhnsyca0qjvsx"]
+
+[ext_resource type="Texture2D" uid="uid://nbh38iwehec2" path="res://assets/textures/tmp_background.png" id="1_isn0r"]
+[ext_resource type="Script" uid="uid://bgm3qfjnvvyts" path="res://levels/test_level/test_level.gd" id="1_qo0ko"]
+[ext_resource type="PackedScene" uid="uid://m6frxvk7gisf" path="res://characters/enemies/test_enemy/test_enemy.tscn" id="3_65yy3"]
+[ext_resource type="PackedScene" uid="uid://dmnoikpo0j2xp" path="res://levels/grid/grid.tscn" id="4_qo0ko"]
+
+[node name="test_level" type="Node2D"]
+script = ExtResource("1_qo0ko")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = -100
+follow_viewport_enabled = true
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+color = Color(0.4745098, 0.40392157, 0.33333334, 1)
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource("1_isn0r")
+expand_mode = 3
+
+[node name="TestEnemy" parent="." instance=ExtResource("3_65yy3")]
+position = Vector2(945, 264)
+
+[node name="Grid" parent="." instance=ExtResource("4_qo0ko")]
+position = Vector2(115.207886, 134.40585)
+scale = Vector2(86.42081, 48.038334)
+
+[node name="bottomLeft" parent="Grid" index="1"]
+visible = false
+
+[node name="towers" type="Node2D" parent="."]
+position = Vector2(115.208, 134.406)
+
+[connection signal="clicked_on_grid" from="Grid" to="." method="_on_grid_clicked_on_grid"]
+
+[editable path="Grid"]

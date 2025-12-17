@@ -1,0 +1,25 @@
+[gd_scene load_steps=4 format=3 uid="uid://btha5jjhnugtx"]
+
+[ext_resource type="Script" uid="uid://jve5um8fr2ei" path="res://characters/towers/test_tower/test_bullet.gd" id="1_ntcmj"]
+[ext_resource type="Texture2D" uid="uid://bdk0eqv2uxunq" path="res://icon.svg" id="2_5ruwa"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_rdm33"]
+radius = 7.0
+height = 24.0
+
+[node name="TestBullet" type="Node2D"]
+script = ExtResource("1_ntcmj")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(0.29333335, 0.5063266, 1, 1)
+position = Vector2(7.1525574e-07, 0)
+scale = Vector2(0.18749999, 0.10937501)
+texture = ExtResource("2_5ruwa")
+
+[node name="Area2D" type="Area2D" parent="." groups=["bullet"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+rotation = 1.5707964
+shape = SubResource("CapsuleShape2D_rdm33")
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]

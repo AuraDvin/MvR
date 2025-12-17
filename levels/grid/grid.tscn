@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://dmnoikpo0j2xp"]
+
+[ext_resource type="Script" uid="uid://c11xxacpry1n" path="res://levels/grid/grid.gd" id="1_s12gf"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_p737v"]
+size = Vector2(10, 10)
+
+[node name="Grid" type="Area2D"]
+script = ExtResource("1_s12gf")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(5, 5)
+shape = SubResource("RectangleShape2D_p737v")
+
+[node name="bottomLeft" type="Node2D" parent="."]
+position = Vector2(10, 10)
+
+[connection signal="input_event" from="." to="." method="_on_input_event"]
