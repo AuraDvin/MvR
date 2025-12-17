@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://ccr03u3ywih4"]
+
+[ext_resource type="PackedScene" uid="uid://dk4uxgbf8hb33" path="res://characters/enemies/test_enemy.tscn" id="1_i8js2"]
+[ext_resource type="Script" uid="uid://elv8p0eqeab" path="res://characters/enemies/basic_enemy.gd" id="2_3xshd"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_i8js2"]
+
+[node name="BasicEnemy" instance=ExtResource("1_i8js2")]
+script = ExtResource("2_3xshd")
+
+[node name="AttackArea2D" type="Area2D" parent="." index="2"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackArea2D" index="0"]
+position = Vector2(-70, 0)
+shape = SubResource("RectangleShape2D_i8js2")
+
+[connection signal="body_entered" from="AttackArea2D" to="." method="_on_attack_area_2d_body_entered"]
+[connection signal="body_exited" from="AttackArea2D" to="." method="_on_attack_area_2d_body_exited"]
