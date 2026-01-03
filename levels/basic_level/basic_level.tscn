@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://cl5i6jqism35s"]
 
-[ext_resource type="Script" uid="uid://c2bq01dxk51eb" path="res://levels/basic_level.gd" id="1_x83mk"]
+[ext_resource type="Script" uid="uid://c2bq01dxk51eb" path="res://levels/basic_level/basic_level.gd" id="1_x83mk"]
 [ext_resource type="PackedScene" uid="uid://emqcm546jpvb" path="res://levels/grid/grid.tscn" id="2_h6lqb"]
 
 [node name="BasicLevel" type="Node2D"]
@@ -26,5 +26,7 @@ position = Vector2(1152, 593)
 [node name="Grid" parent="." instance=ExtResource("2_h6lqb")]
 
 [node name="EnemySpawnTimer" type="Timer" parent="."]
+
+[node name="Towers" type="Node" parent="."]
 
 [editable path="Grid"]
