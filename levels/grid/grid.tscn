@@ -9,7 +9,10 @@ size = Vector2(10, 10)
 script = ExtResource("1_s12gf")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(5, 5)
 shape = SubResource("RectangleShape2D_s12gf")
 
 [node name="BottomLeft" type="Node2D" parent="."]
 position = Vector2(10, 10)
+
+[connection signal="input_event" from="." to="." method="_on_input_event"]

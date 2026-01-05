@@ -18,7 +18,6 @@ func _process(delta):
 
 func _on_input_event(viewport, event, shape_idx):
 	if event is InputEventMouseButton:
-		
 		var grid_scale = $BottomLeft.global_position - position
 		var grid_x = floor((event.position.x - position.x) / grid_scale.x * x_len)
 		var grid_y = floor((event.position.y - position.y) / grid_scale.y * y_len)

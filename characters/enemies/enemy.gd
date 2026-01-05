@@ -8,7 +8,7 @@ static var line_count: int = 5
 var line: int = randi() % line_count # [0, line_count - 1]
 var velocity: Vector2
 var movable: bool = true
-var towers_in_range: Dictionary = {}
+var towers_in_range = {}
 
 @export var speed: float
 @export var max_speed: float = 1000.0
@@ -21,9 +21,9 @@ var towers_in_range: Dictionary = {}
 
 func _ready() -> void:
 	print_debug("Enemy with id %s ready on line %d" % [name, line])
-	body_area.area_entered.connect(self.on_body_area_entered)
-	body_area.area_exited.connect(self.on_attack_area_exited)
-	attack_area.area_entered.connect(self.on_attack_area_entered)
+	body_area.area_entered.connect(on_body_area_entered)
+	body_area.area_exited.connect(on_attack_area_exited)
+	attack_area.area_entered.connect(on_attack_area_entered)
 
 
 func _process(_delta: float) -> void:
@@ -43,25 +43,25 @@ func _physics_process(delta: float) -> void:
 	if not movable: 
 		return
 	
-	self.velocity.x += -self.speed * delta
-	if abs(self.velocity.x) >= self.max_speed:
-		self.velocity.x = sign(self.velocity.x) * self.max_speed
+	velocity.x += -speed * delta
+	if abs(velocity.x) >= max_speed:
+		velocity.x = sign(velocity.x) * max_speed
 	
-	self.position += self.velocity * delta
+	position += velocity * delta
 	
 	# For testing purposes - remove if off-screen
-	if self.position.x <= -20000.0:
+	if position.x <= -20000.0:
 		queue_free()
 
 
 func _init(starting_line: int = 0, starting_speed: float = 600.0, starting_health: int = 3) -> void:
-	self.line = starting_line
-	self.speed = starting_speed
-	self.health_points = starting_health
+	line = starting_line
+	speed = starting_speed
+	health_points = starting_health
 
 
 func _exit_tree() -> void:
-	print_debug("Enemy with name %s removed from tree" % self.name)
+	print_debug("Enemy with name %s removed from tree" % name)
 
 
 func ability():
@@ -70,9 +70,9 @@ func ability():
 
 func on_body_area_entered(area:Area2D) -> void:
 	if area.is_in_group("bullet"):
-		self.health_points -= 1 
-		if self.health_points <= 0: 
-			self.queue_free()
+		health_points -= 1 
+		if health_points <= 0: 
+			queue_free()
 
 func on_attack_area_entered(area:Area2D) -> void: 
 	if area.is_in_group("tower"):

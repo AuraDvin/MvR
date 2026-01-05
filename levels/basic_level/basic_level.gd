@@ -20,12 +20,15 @@ func _process(delta):
 
 
 func _on_grid_clicked_on_grid(tile_position, tile_size):
+	print(tile_position, tile_size)
 	if local_cooldown > 0:
 		return
 	var new_tower = tower.instantiate()
 	$Towers.add_child(new_tower)
 	new_tower.position += tile_position * tile_size
-	new_tower.position += tile_size / 5
+	new_tower.position += $Grid.position
+	new_tower.position += tile_size / 2
+	print(new_tower.position)
 	local_cooldown = cooldown
 
 

@@ -24,9 +24,13 @@ position = Vector2(1152, 490)
 position = Vector2(1152, 593)
 
 [node name="Grid" parent="." instance=ExtResource("2_h6lqb")]
+position = Vector2(74, 92)
+scale = Vector2(100, 50)
 
 [node name="EnemySpawnTimer" type="Timer" parent="."]
 
 [node name="Towers" type="Node" parent="."]
+
+[connection signal="clicked_on_grid" from="Grid" to="." method="_on_grid_clicked_on_grid"]
 
 [editable path="Grid"]
