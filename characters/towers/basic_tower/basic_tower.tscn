@@ -1,7 +1,10 @@
-[gd_scene load_steps=3 format=3 uid="uid://belhk4oowm4dq"]
+[gd_scene load_steps=4 format=3 uid="uid://belhk4oowm4dq"]
 
 [ext_resource type="Script" uid="uid://cxn2573oiu1p6" path="res://characters/towers/basic_tower/basic_tower.gd" id="1_h1sln"]
 [ext_resource type="Texture2D" uid="uid://bdk0eqv2uxunq" path="res://icon.svg" id="2_6wl0l"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6wl0l"]
+size = Vector2(52, 52)
 
 [node name="BasicTower" type="Node2D"]
 script = ExtResource("1_h1sln")
@@ -11,5 +14,10 @@ scale = Vector2(0.4047505, 0.4047505)
 texture = ExtResource("2_6wl0l")
 
 [node name="ReloadTimer" type="Timer" parent="."]
+
+[node name="BodyShape2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BodyShape2D"]
+shape = SubResource("RectangleShape2D_6wl0l")
 
 [connection signal="timeout" from="ReloadTimer" to="." method="_on_timer_timeout"]
