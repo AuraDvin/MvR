@@ -39,7 +39,7 @@ func _on_grid_clicked_on_grid(tile_position, tile_size):
 
 func _on_enemy_spawn_timer_timeout():
 	var rng = RandomNumberGenerator.new()
-	var lane = rng.randi_range(0, self.lane_count)
+	var lane = rng.randi_range(0, self.lane_count - 1) # From to is inclusive
 	var enemy_inst = enemy.instantiate()
 	$Lanes.get_child(lane).add_child(enemy_inst)
 	$EnemySpawnTimer.start(rng.randf()* 3 + 2)
