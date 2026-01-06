@@ -32,5 +32,6 @@ scale = Vector2(100, 50)
 [node name="Towers" type="Node" parent="."]
 
 [connection signal="clicked_on_grid" from="Grid" to="." method="_on_grid_clicked_on_grid"]
+[connection signal="timeout" from="EnemySpawnTimer" to="." method="_on_enemy_spawn_timer_timeout"]
 
 [editable path="Grid"]
