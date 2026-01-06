@@ -9,3 +9,7 @@ script = ExtResource("1_h1sln")
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(0.4047505, 0.4047505)
 texture = ExtResource("2_6wl0l")
+
+[node name="ReloadTimer" type="Timer" parent="."]
+
+[connection signal="timeout" from="ReloadTimer" to="." method="_on_timer_timeout"]
