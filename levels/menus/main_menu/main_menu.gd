@@ -17,6 +17,7 @@ extends Control
 # https://www.flaticon.com/free-icon/logout_1828479?term=exit&page=1&position=5&origin=search&related_id=1828479
 
 func _on_quit_confirmation_confirmed() -> void:
+	PlayerConfig.save()
 	get_tree().quit(0)
 
 func _on_quit_btn_pressed() -> void:
