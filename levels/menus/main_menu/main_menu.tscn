@@ -1,6 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://d0o7unf8sblwn"]
+[gd_scene load_steps=7 format=3 uid="uid://d0o7unf8sblwn"]
 
 [ext_resource type="Script" uid="uid://3b13wr3ettbf" path="res://levels/menus/main_menu/main_menu.gd" id="1_s1k5s"]
+[ext_resource type="PackedScene" uid="uid://ckfkoclivdl6b" path="res://levels/menus/level_select/level_select.tscn" id="2_0g4bd"]
 [ext_resource type="Texture2D" uid="uid://cts1ly866wacc" path="res://assets/textures/settings-icon.png" id="2_dpmub"]
 [ext_resource type="Texture2D" uid="uid://dvb6qqkwe8ax1" path="res://assets/textures/play-icon.png" id="3_g0xku"]
 [ext_resource type="Texture2D" uid="uid://wsiuryiq4uch" path="res://assets/textures/exit-icon.png" id="4_4l573"]
@@ -16,6 +17,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = SubResource("Theme_6huvb")
 script = ExtResource("1_s1k5s")
+level_selected_packed = ExtResource("2_0g4bd")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 1

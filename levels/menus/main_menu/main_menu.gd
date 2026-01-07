@@ -3,8 +3,8 @@ extends Control
 
 
 # todo:
-@export var settings_path = null
-@export var level_select_path = "res://levels/menus/level_select/level_select.tscn"
+@export var settings_packed: PackedScene
+@export var level_selected_packed:PackedScene
 
 # Icons are currently from the following sources: 
 # Settings:
@@ -23,8 +23,8 @@ func _on_quit_btn_pressed() -> void:
 	$QuitConfirmation.visible = true
 
 func _on_play_btn_pressed() -> void:
-	get_tree().change_scene_to_packed(load(level_select_path))
+	SceneSwitcher.switchScene("res://levels/menus/level_select/level_select.tscn")
 	
 # todo: settings have to return you to the scene from which you came
 func _on_settings_btn_pressed() -> void:
-	get_tree().change_scene_to_packed(settings_path)
+	SceneSwitcher.switchScene("res://levels/menus/settings/settings.tscn")
