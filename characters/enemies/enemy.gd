@@ -11,7 +11,7 @@ var movable: bool = true
 var towers_in_range = {}
 
 @export var speed: float
-@export var max_speed: float = 1000.0
+@export var max_speed: float = 10.0
 @export var health_points: int = 3
 
 @onready var body_area: Area2D = $BodyArea2D

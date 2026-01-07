@@ -1,13 +1,63 @@
-[gd_scene load_steps=5 format=3 uid="uid://c31r4xho31h28"]
+[gd_scene load_steps=12 format=3 uid="uid://c31r4xho31h28"]
 
 [ext_resource type="Script" uid="uid://blk2rivjn6jmj" path="res://characters/enemies/basic_enemy/basic_enemy.gd" id="1_hlkjt"]
-[ext_resource type="Texture2D" uid="uid://bdk0eqv2uxunq" path="res://icon.svg" id="2_vt4g7"]
+[ext_resource type="Texture2D" uid="uid://biio8yughr7o8" path="res://assets/textures/tracks-sheet.png" id="2_c4jce"]
+[ext_resource type="Texture2D" uid="uid://cfkxo7w1h4jx7" path="res://assets/textures/simple-enemy-body.png" id="3_0mce4"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_c4jce"]
 size = Vector2(51.84, 51.84)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0mce4"]
 size = Vector2(42, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c4jce"]
+atlas = ExtResource("2_c4jce")
+region = Rect2(0, 0, 35, 13)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0mce4"]
+atlas = ExtResource("2_c4jce")
+region = Rect2(35, 0, 35, 13)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m50j3"]
+atlas = ExtResource("2_c4jce")
+region = Rect2(70, 0, 35, 13)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jdxxv"]
+atlas = ExtResource("2_c4jce")
+region = Rect2(105, 0, 35, 13)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_el2ld"]
+atlas = ExtResource("2_c4jce")
+region = Rect2(140, 0, 35, 13)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_hh672"]
+resource_local_to_scene = true
+animations = [{
+"frames": [],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c4jce")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0mce4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m50j3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jdxxv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_el2ld")
+}],
+"loop": true,
+"name": &"tracks_roll",
+"speed": 9.0
+}]
 
 [node name="BasicEnemy" type="Node2D"]
 script = ExtResource("1_hlkjt")
@@ -23,10 +73,18 @@ shape = SubResource("RectangleShape2D_c4jce")
 position = Vector2(-47.25, 0)
 shape = SubResource("RectangleShape2D_0mce4")
 
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(3, 31)
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_hh672")
+animation = &"tracks_roll"
+autoplay = "tracks_roll"
+frame_progress = 0.7061962
+
 [node name="Sprite2D" type="Sprite2D" parent="."]
-modulate = Color(1, 0.3, 0.3, 1)
-scale = Vector2(0.405, 0.405)
-texture = ExtResource("2_vt4g7")
+position = Vector2(3, -13)
+scale = Vector2(2, 2)
+texture = ExtResource("3_0mce4")
 
 [node name="AttackTimer" type="Timer" parent="."]
 one_shot = true
