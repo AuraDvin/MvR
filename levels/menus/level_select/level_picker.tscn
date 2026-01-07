@@ -1,0 +1,44 @@
+[gd_scene load_steps=5 format=3 uid="uid://dpxxvou3uyr11"]
+
+[ext_resource type="Script" uid="uid://euoguk1ty6fg" path="res://levels/menus/level_select/level_picker.gd" id="1_qsylp"]
+[ext_resource type="Texture2D" uid="uid://cdjjomguti4jv" path="res://assets/textures/back-icon.png" id="2_u55cg"]
+[ext_resource type="PackedScene" uid="uid://bpr6i4auacjqh" path="res://levels/menus/level_select/level_selection_item.tscn" id="3_ed8i0"]
+[ext_resource type="Texture2D" uid="uid://dvb6qqkwe8ax1" path="res://assets/textures/play-icon.png" id="4_s2tjs"]
+
+[node name="LevelPicker" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_qsylp")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="LeftLevelPickBTN" type="Button" parent="HBoxContainer"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+icon = ExtResource("2_u55cg")
+flat = true
+expand_icon = true
+
+[node name="LevelSelectionItem" parent="HBoxContainer" instance=ExtResource("3_ed8i0")]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="RightLevelPickBTN" type="Button" parent="HBoxContainer"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+icon = ExtResource("4_s2tjs")
+flat = true
+expand_icon = true
+
+[connection signal="pressed" from="HBoxContainer/LeftLevelPickBTN" to="." method="_on_left_level_pick_btn_pressed"]
+[connection signal="pressed" from="HBoxContainer/RightLevelPickBTN" to="." method="_on_right_level_pick_btn_pressed"]
