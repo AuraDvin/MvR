@@ -15,6 +15,10 @@ run/main_scene="uid://cl5i6jqism35s"
 config/features=PackedStringArray("4.5", "GL Compatibility")
 config/icon="res://icon.svg"
 
+[autoload]
+
+SceneSwitcher="*res://misc/scene_switcher.gd"
+
 [rendering]
 
 textures/canvas_textures/default_texture_filter=0
