@@ -1,9 +1,9 @@
 [gd_scene load_steps=5 format=3 uid="uid://dpxxvou3uyr11"]
 
 [ext_resource type="Script" uid="uid://euoguk1ty6fg" path="res://levels/menus/level_select/level_picker.gd" id="1_qsylp"]
-[ext_resource type="Texture2D" uid="uid://cdjjomguti4jv" path="res://assets/textures/back-icon.png" id="2_u55cg"]
+[ext_resource type="Texture2D" uid="uid://bbee0775bhm8o" path="res://assets/textures/left-arrow-icon.png" id="2_qsylp"]
 [ext_resource type="PackedScene" uid="uid://bpr6i4auacjqh" path="res://levels/menus/level_select/level_selection_item.tscn" id="3_ed8i0"]
-[ext_resource type="Texture2D" uid="uid://dvb6qqkwe8ax1" path="res://assets/textures/play-icon.png" id="4_s2tjs"]
+[ext_resource type="Texture2D" uid="uid://qu7rnhs6e02e" path="res://assets/textures/right-arrow-icon.png" id="4_u55cg"]
 
 [node name="LevelPicker" type="Control"]
 layout_mode = 3
@@ -25,7 +25,7 @@ grow_vertical = 2
 [node name="LeftLevelPickBTN" type="Button" parent="HBoxContainer"]
 custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
-icon = ExtResource("2_u55cg")
+icon = ExtResource("2_qsylp")
 flat = true
 expand_icon = true
 
@@ -36,7 +36,7 @@ size_flags_horizontal = 3
 [node name="RightLevelPickBTN" type="Button" parent="HBoxContainer"]
 custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
-icon = ExtResource("4_s2tjs")
+icon = ExtResource("4_u55cg")
 flat = true
 expand_icon = true
 
