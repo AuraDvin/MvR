@@ -1,13 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://cda4i2ncmge2x"]
+[gd_scene load_steps=6 format=3 uid="uid://cda4i2ncmge2x"]
 
 [ext_resource type="Script" uid="uid://xi7rhi2d0kjs" path="res://levels/menus/settings/settings.gd" id="1_uu6rw"]
 [ext_resource type="Texture2D" uid="uid://cdjjomguti4jv" path="res://assets/textures/back-icon.png" id="2_ifqal"]
-
-[sub_resource type="LabelSettings" id="LabelSettings_uv2fn"]
-font_size = 48
-
-[sub_resource type="LabelSettings" id="LabelSettings_c7vy1"]
-font_size = 24
+[ext_resource type="LabelSettings" uid="uid://dk5rixitres36" path="res://misc/PageTitleLabelTheme.tres" id="3_ifqal"]
+[ext_resource type="LabelSettings" uid="uid://ddwwuccbw03wi" path="res://misc/PageSubtitleLabelTheme.tres" id="4_rrw4a"]
+[ext_resource type="LabelSettings" uid="uid://cbqx3qie0kyui" path="res://misc/LabelTheme.tres" id="5_15gkg"]
 
 [node name="Settings" type="Control"]
 layout_mode = 3
@@ -29,18 +26,23 @@ expand_icon = true
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 1
-anchors_preset = 13
+anchors_preset = 7
 anchor_left = 0.5
+anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
+offset_left = -250.0
+offset_top = -649.0
+offset_right = 250.0
 grow_horizontal = 2
-grow_vertical = 2
+grow_vertical = 0
 theme_override_constants/separation = 50
 
 [node name="SettingsPageTitle" type="Label" parent="VBoxContainer"]
 layout_mode = 2
 text = "Settings"
-label_settings = SubResource("LabelSettings_uv2fn")
+label_settings = ExtResource("3_ifqal")
+horizontal_alignment = 1
 
 [node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer"]
 custom_minimum_size = Vector2(0, 532)
@@ -48,11 +50,13 @@ layout_mode = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/ScrollContainer"]
 layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
 
 [node name="AudioTitle" type="Label" parent="VBoxContainer/ScrollContainer/VBoxContainer"]
 layout_mode = 2
 text = "Audio"
-label_settings = SubResource("LabelSettings_c7vy1")
+label_settings = ExtResource("4_rrw4a")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/ScrollContainer/VBoxContainer"]
 layout_mode = 2
@@ -60,15 +64,43 @@ layout_mode = 2
 [node name="Label" type="Label" parent="VBoxContainer/ScrollContainer/VBoxContainer/VBoxContainer"]
 layout_mode = 2
 text = "Music"
+label_settings = ExtResource("5_15gkg")
 
-[node name="MusicVolSlider" type="HSlider" parent="VBoxContainer/ScrollContainer/VBoxContainer/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/ScrollContainer/VBoxContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="Label2" type="Label" parent="VBoxContainer/ScrollContainer/VBoxContainer/VBoxContainer"]
+[node name="MusicVal" type="Label" parent="VBoxContainer/ScrollContainer/VBoxContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+text = "100"
+
+[node name="MusicSlider" type="HSlider" parent="VBoxContainer/ScrollContainer/VBoxContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+value = 100.0
+
+[node name="Label3" type="Label" parent="VBoxContainer/ScrollContainer/VBoxContainer/VBoxContainer"]
 layout_mode = 2
 text = "Effects"
+label_settings = ExtResource("5_15gkg")
 
-[node name="SfxVolSlider" type="HSlider" parent="VBoxContainer/ScrollContainer/VBoxContainer/VBoxContainer"]
+[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer/ScrollContainer/VBoxContainer/VBoxContainer"]
 layout_mode = 2
 
+[node name="EffectsVal" type="Label" parent="VBoxContainer/ScrollContainer/VBoxContainer/VBoxContainer/HBoxContainer2"]
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+text = "100"
+
+[node name="EffectsSlider" type="HSlider" parent="VBoxContainer/ScrollContainer/VBoxContainer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+value = 100.0
+
 [connection signal="pressed" from="ReturnBTN" to="." method="_on_return_btn_pressed"]
+[connection signal="value_changed" from="VBoxContainer/ScrollContainer/VBoxContainer/VBoxContainer/HBoxContainer/MusicSlider" to="." method="_on_music_slider_value_changed"]
+[connection signal="value_changed" from="VBoxContainer/ScrollContainer/VBoxContainer/VBoxContainer/HBoxContainer2/EffectsSlider" to="." method="_on_effects_slider_value_changed"]
