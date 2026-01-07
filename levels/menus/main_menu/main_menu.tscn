@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://d0o7unf8sblwn"]
+[gd_scene load_steps=8 format=3 uid="uid://d0o7unf8sblwn"]
 
 [ext_resource type="Script" uid="uid://3b13wr3ettbf" path="res://levels/menus/main_menu/main_menu.gd" id="1_s1k5s"]
 [ext_resource type="PackedScene" uid="uid://ckfkoclivdl6b" path="res://levels/menus/level_select/level_select.tscn" id="2_0g4bd"]
 [ext_resource type="Texture2D" uid="uid://cts1ly866wacc" path="res://assets/textures/settings-icon.png" id="2_dpmub"]
+[ext_resource type="LabelSettings" uid="uid://dk5rixitres36" path="res://misc/PageTitleLabelTheme.tres" id="3_2gskt"]
 [ext_resource type="Texture2D" uid="uid://dvb6qqkwe8ax1" path="res://assets/textures/play-icon.png" id="3_g0xku"]
 [ext_resource type="Texture2D" uid="uid://wsiuryiq4uch" path="res://assets/textures/exit-icon.png" id="4_4l573"]
 
@@ -30,8 +31,8 @@ alignment = 1
 
 [node name="TitleLabel" type="Label" parent="VBoxContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 48
 text = "Machine VS Robots"
+label_settings = ExtResource("3_2gskt")
 horizontal_alignment = 1
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
