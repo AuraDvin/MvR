@@ -20,6 +20,15 @@ config/icon="res://icon.svg"
 SceneSwitcher="*res://misc/scene_switcher.gd"
 PlayerConfig="*res://misc/player_config.gd"
 
+[file_customization]
+
+folder_colors={
+"res://assets/": "pink",
+"res://characters/": "yellow",
+"res://levels/": "purple",
+"res://misc/": "green"
+}
+
 [rendering]
 
 textures/canvas_textures/default_texture_filter=0

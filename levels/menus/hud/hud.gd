@@ -20,5 +20,7 @@ func _process(delta):
 func _on_button_pressed(node: tower_type):
 		_mode_selectd.emit(node)
 				
-func _energy_amount_changed(value: int):
-	$MarginContainer/VBoxContainer/HBoxContainer2/resources/energy_amount.text = " " + str(value)
+
+
+func _on_basic_level_energy_changed(newAmount):
+	$MarginContainer/VBoxContainer/HBoxContainer2/resources/energy_amount.text = " " + str(newAmount)

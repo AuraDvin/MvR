@@ -1,14 +1,25 @@
-extends CharacterBody2D
+extends Node
 class_name Player
 
 # Get audio and sprite animation
 #@onready var sfx_dmg: AudioStreamPlayer2D = $sfx_dmg
-#@onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
+#@onready var animate, d_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
+enum hand {NONE, SOLAR, TURRET, MORTAR, DELETE}
 
 var money: int = 0
-
 var maxHealth: int = 3
+var energy: int = 50
 var currentHealth: int = maxHealth
+var holdnig: hand = hand.NONE
+
+
+func spend_energy(amount: int) -> int:
+	var new_amount = energy - amount
+	print_debug(amount)
+	if new_amount < 0:
+		return -1
+	energy = new_amount
+	return new_amount
 
 func setMoney(amount):
 	#Get starting money from scene
@@ -37,3 +48,6 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	pass
+	
+func _set_hand(index: int):
+	holdnig = index as hand 
