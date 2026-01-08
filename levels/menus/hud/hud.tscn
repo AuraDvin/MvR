@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://c7t5icwhp12gx"]
+[gd_scene load_steps=12 format=3 uid="uid://c7t5icwhp12gx"]
 
 [ext_resource type="Script" uid="uid://drmcio5yk84ap" path="res://levels/menus/hud/hud.gd" id="1_pnpax"]
 [ext_resource type="Texture2D" uid="uid://cfgb5ug1qj1xr" path="res://assets/textures/solar-pannel-sheet.png" id="1_vtdkw"]
@@ -6,6 +6,8 @@
 [ext_resource type="Texture2D" uid="uid://8hmvqxym3c6b" path="res://assets/textures/shooter-turret.png" id="3_5aamc"]
 [ext_resource type="Texture2D" uid="uid://blbh53yq7ouwg" path="res://assets/textures/energy.png" id="3_buv7h"]
 [ext_resource type="Texture2D" uid="uid://cou8mdpj3qrou" path="res://assets/textures/mortar.png" id="4_buv7h"]
+[ext_resource type="Texture2D" uid="uid://c646ojx7odwbg" path="res://assets/textures/trash_can.png" id="7_tqvyd"]
+[ext_resource type="Texture2D" uid="uid://dnhh1sc2lkpq6" path="res://assets/textures/cancel.png" id="8_62nfb"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_y2vs7"]
 atlas = ExtResource("1_vtdkw")
@@ -92,13 +94,13 @@ texture_normal = ExtResource("4_buv7h")
 material = SubResource("CanvasItemMaterial_buv7h")
 layout_mode = 2
 size_flags_vertical = 0
-texture_normal = ExtResource("4_buv7h")
+texture_normal = ExtResource("7_tqvyd")
 
 [node name="TextureButton5" type="TextureButton" parent="MarginContainer/VBoxContainer/HBoxContainer"]
 material = SubResource("CanvasItemMaterial_buv7h")
 layout_mode = 2
 size_flags_vertical = 0
-texture_normal = ExtResource("4_buv7h")
+texture_normal = ExtResource("8_62nfb")
 
 [node name="Selector" type="ColorRect" parent="."]
 visible = false
