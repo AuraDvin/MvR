@@ -22,7 +22,7 @@ var towers_in_range = {}
 func _ready() -> void:
 	print_debug("Enemy with id %s ready on line %d" % [name, line])
 	body_area.area_entered.connect(on_body_area_entered)
-	body_area.area_exited.connect(on_attack_area_exited)
+	attack_area.area_exited.connect(on_attack_area_exited)
 	attack_area.area_entered.connect(on_attack_area_entered)
 
 
