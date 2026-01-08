@@ -18,11 +18,14 @@ func _process(delta):
 	pass
 
 func _on_button_pressed(node: tower_type):
-		_mode_selectd.emit(node)
+	_mode_selectd.emit(node)
+	if node != 4:
 		$Selector.visible = true
-		var box_container = $"MarginContainer/VBoxContainer/HBoxContainer"
-		$Selector.position = box_container.get_child(node).global_position
-		$Selector.size = box_container.get_child(node).size * box_container.get_child(node).scale
+	else:
+		$Selector.visible = false
+	var box_container = $"MarginContainer/VBoxContainer/HBoxContainer"
+	$Selector.position = box_container.get_child(node).global_position
+	$Selector.size = box_container.get_child(node).size * box_container.get_child(node).scale
 
 
 func _on_basic_level_energy_changed(newAmount):

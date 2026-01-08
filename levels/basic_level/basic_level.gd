@@ -37,9 +37,8 @@ func _on_grid_clicked_on_grid(tile_position, tile_size):
 		var energy = player.spend_energy(-deleting_tower.return_price)
 		emit_signal("energy_changed", energy)
 		deleting_tower.queue_free()
-		player.holding = player.hand.NONE
-		$"../Hud/Selector".visible = false
-
+		empty_selection()
+	# we are placing towers
 	if local_cooldown > 0:
 		return
 	if grid_spaces.get(tile_position) != null:
@@ -59,8 +58,7 @@ func _on_grid_clicked_on_grid(tile_position, tile_size):
 	new_tower.position += tile_size / 2
 	#print(new_tower.position)
 	local_cooldown = cooldown
-	player.holding = player.hand.NONE
-	$"../Hud/Selector".visible = false
+	empty_selection()
 
 func _on_enemy_spawn_timer_timeout():
 	var rng = RandomNumberGenerator.new()
@@ -77,3 +75,10 @@ func _get_enemy_spawn_position(lane) -> Vector2:
 
 func _mode_selected(node):
 	$"../Player"._set_hand(node)
+	if node == $"../Player".hand.NONE:
+		empty_selection()
+
+func empty_selection():
+	var player = $"../Player"
+	player.holding = player.hand.NONE
+	$"../Hud/Selector".visible = false
