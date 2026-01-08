@@ -41,6 +41,9 @@ func _on_enemy_spawn_timer_timeout():
 	var rng = RandomNumberGenerator.new()
 	var lane = rng.randi_range(0, self.lane_count - 1) # From to is inclusive
 	var enemy_inst = enemy.instantiate()
+	var bottom_left_pos = ($Grid.position + $Grid/BottomLeft.position * $Grid.scale)
+	var box_width = $Grid/BottomLeft.position.y * $Grid.scale.y / lane_count
+	enemy_inst.position = Vector2(bottom_left_pos.x, $Grid.position.y + ((0.5 + lane) * box_width))
 	$Lanes.get_child(lane).add_child(enemy_inst)
 	$EnemySpawnTimer.start(rng.randf()* 3 + 2)
 
