@@ -34,7 +34,7 @@ func _on_grid_clicked_on_grid(tile_position, tile_size):
 	if local_cooldown > 0:
 		return
 	if grid_spaces.get(tile_position) != null:
-		print("zasedeno")
+		print_debug("zasedeno")
 		return 
 	var new_tower = towers[player.holding].instantiate()
 	await get_tree().process_frame
@@ -48,9 +48,10 @@ func _on_grid_clicked_on_grid(tile_position, tile_size):
 	new_tower.position += tile_position * tile_size
 	new_tower.position += $Grid.position
 	new_tower.position += tile_size / 2
-	print(new_tower.position)
+	#print(new_tower.position)
 	local_cooldown = cooldown
-
+	player.holding = player.hand.NONE
+	$"../Hud/Selector".visible = false
 
 func _on_enemy_spawn_timer_timeout():
 	var rng = RandomNumberGenerator.new()

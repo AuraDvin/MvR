@@ -87,3 +87,11 @@ material = SubResource("CanvasItemMaterial_buv7h")
 layout_mode = 2
 size_flags_vertical = 0
 texture_normal = ExtResource("4_buv7h")
+
+[node name="Selector" type="ColorRect" parent="."]
+visible = false
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+mouse_filter = 2
+color = Color(0.8627013, 0.66399425, 0.3947354, 0.39215687)
