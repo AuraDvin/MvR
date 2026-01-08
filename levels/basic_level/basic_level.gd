@@ -51,7 +51,7 @@ func _on_grid_clicked_on_grid(tile_position, tile_size):
 	#print(new_tower.position)
 	local_cooldown = cooldown
 	player.holding = player.hand.NONE
-
+	$"../Hud/Selector".visible = false
 
 func _on_enemy_spawn_timer_timeout():
 	var rng = RandomNumberGenerator.new()
