@@ -9,11 +9,11 @@ var grid_spaces = {}
 # Todo 
 var tower = preload("res://characters/towers/basic_tower/basic_tower.tscn")
 var enemy = preload("res://characters/enemies/basic_enemy/basic_enemy.tscn")
-
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	$EnemySpawnTimer.start(RandomNumberGenerator.new().randf()* 3)
 	lane_count = $Lanes.get_child_count() 
+	$Hud.connect("_mode_selectd", _mode_selected)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -43,3 +43,6 @@ func _on_enemy_spawn_timer_timeout():
 	var enemy_inst = enemy.instantiate()
 	$Lanes.get_child(lane).add_child(enemy_inst)
 	$EnemySpawnTimer.start(rng.randf()* 3 + 2)
+
+func _mode_selected(node):
+	print(node)

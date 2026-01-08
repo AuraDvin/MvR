@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="MvR"
-run/main_scene="uid://cl5i6jqism35s"
+run/main_scene="uid://d0o7unf8sblwn"
 config/features=PackedStringArray("4.5", "GL Compatibility")
 config/icon="res://icon.svg"
 

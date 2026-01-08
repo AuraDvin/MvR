@@ -4,7 +4,7 @@ extends Control
 
 # todo:
 @export var settings_packed: PackedScene
-@export var level_selected_packed:PackedScene
+@export var level_selected_packed: PackedScene
 
 # Icons are currently from the following sources: 
 # Settings:
