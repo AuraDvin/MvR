@@ -7,7 +7,7 @@ func _ready() -> void:
 	var root = get_tree().root
 	current_scene = root.get_child(root.get_child_count() - 1)
 	scene_history.append(current_scene)
-	print_debug(current_scene)
+#	print_debug(current_scene)
 
 func switchScene(res_path: String) -> void: 
 	call_deferred("defferedSwitchScene", res_path)
