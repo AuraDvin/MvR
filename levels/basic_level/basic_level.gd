@@ -8,7 +8,10 @@ var grid_spaces = {}
 signal energy_changed(newAmount: int) 
 
 # Todo 
-var tower = preload("res://characters/towers/basic_tower/basic_tower.tscn")
+var towers = [
+	preload("res://characters/towers/solar_pannel/solar_pannel.tscn"),
+	preload("res://characters/towers/basic_tower/basic_tower.tscn")
+]
 var enemy = preload("res://characters/enemies/basic_enemy/basic_enemy.tscn")
 
 # Called when the node enters the scene tree for the first time.
@@ -25,7 +28,7 @@ func _process(delta):
 
 func _on_grid_clicked_on_grid(tile_position, tile_size):
 	var player = $"../Player"
-	if player.holdnig == player.hand.NONE:
+	if player.holding == player.hand.NONE:
 		return
 		
 	if local_cooldown > 0:
@@ -33,7 +36,7 @@ func _on_grid_clicked_on_grid(tile_position, tile_size):
 	if grid_spaces.get(tile_position) != null:
 		print("zasedeno")
 		return 
-	var new_tower = tower.instantiate()
+	var new_tower = towers[player.holding].instantiate()
 	await get_tree().process_frame
 	var energy = player.spend_energy(new_tower.price)
 	if energy < 0:

@@ -74,13 +74,16 @@ theme_override_constants/separation = 29
 
 [node name="TextureButton" type="TextureButton" parent="MarginContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
+size_flags_vertical = 0
 texture_normal = SubResource("AtlasTexture_y2vs7")
 
 [node name="TextureButton2" type="TextureButton" parent="MarginContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
+size_flags_vertical = 0
 texture_normal = SubResource("AtlasTexture_6bkdy")
 
 [node name="TextureButton3" type="TextureButton" parent="MarginContainer/VBoxContainer/HBoxContainer"]
 material = SubResource("CanvasItemMaterial_buv7h")
 layout_mode = 2
+size_flags_vertical = 0
 texture_normal = ExtResource("4_buv7h")

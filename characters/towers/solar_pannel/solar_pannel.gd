@@ -1,8 +1,8 @@
 extends Tower
-class_name SolarPannel
+class_name BasicTower
 
 func _init():
-	self.price = 10
+	self.price = 25
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	attack_timer.start()
