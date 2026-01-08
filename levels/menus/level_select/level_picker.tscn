@@ -16,11 +16,15 @@ script = ExtResource("1_qsylp")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 layout_mode = 1
-anchors_preset = 15
+anchors_preset = 14
+anchor_top = 0.5
 anchor_right = 1.0
-anchor_bottom = 1.0
+anchor_bottom = 0.5
+offset_top = -150.0
+offset_bottom = 150.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_constants/separation = 320
 
 [node name="LeftLevelPickBTN" type="Button" parent="HBoxContainer"]
 custom_minimum_size = Vector2(100, 100)
@@ -32,11 +36,12 @@ expand_icon = true
 
 [node name="LevelSelectionItem" parent="HBoxContainer" instance=ExtResource("3_ed8i0")]
 layout_mode = 2
-size_flags_horizontal = 3
+size_flags_horizontal = 4
 
 [node name="RightLevelPickBTN" type="Button" parent="HBoxContainer"]
 custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
+size_flags_horizontal = 8
 focus_mode = 0
 icon = ExtResource("4_u55cg")
 flat = true

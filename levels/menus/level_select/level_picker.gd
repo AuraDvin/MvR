@@ -7,14 +7,15 @@ extends Control
 var selected_level = 0
 var old_selected = 0
 # Index of the last level that the player unlocked 
-var last_level_unlocked = 0 
+var last_level_unlocked
 
 
 func _ready() -> void:
-	# todo: check settings/saved data to set other levels to unlock 
+	last_level_unlocked = PlayerConfig.get_level_beat()
 	selected_level_ref.text = "1"
+	selected_level_ref.grab_focus.call_deferred()
+	selected_level_ref.grab_click_focus.call_deferred()
 	left_btn.disabled = true
-	pass
 
 
 func _process(_delta: float) -> void:
@@ -65,7 +66,5 @@ func level_right() -> void:
 	left_btn.disabled = false
 
 func level_click() -> void: 
-	if selected_level_ref.disabled:
-		return
-	selected_level_ref.emit_signal("button_pressed")
+	pass 
 	
