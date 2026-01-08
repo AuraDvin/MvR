@@ -30,6 +30,8 @@ scale = Vector2(84.193245, 42.096622)
 
 [node name="Towers" type="Node" parent="BasicLevel"]
 
+[node name="Pickups" type="Node" parent="BasicLevel"]
+
 [node name="Hud" parent="." instance=ExtResource("3_akcht")]
 custom_minimum_size = Vector2(600, 400)
 size_flags_horizontal = 3

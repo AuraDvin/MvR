@@ -1,0 +1,27 @@
+[gd_scene load_steps=4 format=3 uid="uid://bxst250rs3x0w"]
+
+[ext_resource type="Script" uid="uid://girpa6de6uga" path="res://characters/towers/solar_pannel/energy_pickup/energy_pickup.gd" id="1_2quif"]
+[ext_resource type="Texture2D" uid="uid://blbh53yq7ouwg" path="res://assets/textures/energy.png" id="2_i321u"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_u2kdt"]
+
+[node name="EnergyPickup" type="Node2D"]
+script = ExtResource("1_2quif")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+scale = Vector2(1.4399984, 1.4400007)
+shape = SubResource("RectangleShape2D_u2kdt")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(2, 2)
+texture = ExtResource("2_i321u")
+
+[node name="Lifetime" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true
+autostart = true
+
+[connection signal="input_event" from="Area2D" to="." method="_on_area_2d_input_event"]
+[connection signal="timeout" from="Lifetime" to="." method="_on_lifetime_timeout"]

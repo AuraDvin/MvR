@@ -1,5 +1,5 @@
 extends Tower
-class_name SolarPannel
+class_name BasicTower
 
 func _init():
 	self.price = 10
@@ -11,6 +11,3 @@ func _process(delta: float) -> void:
 	pass
 
 # strelja
-func _on_timer_timeout():
-	#print("attacking")
-	attack_timer.start()
