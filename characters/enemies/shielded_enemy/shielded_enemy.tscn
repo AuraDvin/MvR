@@ -1,0 +1,124 @@
+[gd_scene load_steps=16 format=3 uid="uid://bgrnespgnxvsj"]
+
+[ext_resource type="Texture2D" uid="uid://biio8yughr7o8" path="res://assets/textures/tracks-sheet.png" id="1_w87x1"]
+[ext_resource type="Texture2D" uid="uid://c7q5rix213bt0" path="res://assets/textures/shielded-enemy-body.png" id="2_w87x1"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jto1h"]
+size = Vector2(51.84, 51.84)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gacjp"]
+size = Vector2(42, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c4jce"]
+atlas = ExtResource("1_w87x1")
+region = Rect2(0, 0, 35, 13)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0mce4"]
+atlas = ExtResource("1_w87x1")
+region = Rect2(35, 0, 35, 13)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m50j3"]
+atlas = ExtResource("1_w87x1")
+region = Rect2(70, 0, 35, 13)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jdxxv"]
+atlas = ExtResource("1_w87x1")
+region = Rect2(105, 0, 35, 13)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_el2ld"]
+atlas = ExtResource("1_w87x1")
+region = Rect2(140, 0, 35, 13)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_7mv01"]
+resource_local_to_scene = true
+animations = [{
+"frames": [],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c4jce")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0mce4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m50j3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jdxxv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_el2ld")
+}],
+"loop": true,
+"name": &"tracks_roll",
+"speed": 9.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tt7lk"]
+atlas = ExtResource("2_w87x1")
+region = Rect2(0, 0, 25, 37)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jto1h"]
+atlas = ExtResource("2_w87x1")
+region = Rect2(25, 0, 25, 37)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gacjp"]
+atlas = ExtResource("2_w87x1")
+region = Rect2(50, 0, 25, 37)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7mv01"]
+atlas = ExtResource("2_w87x1")
+region = Rect2(75, 0, 25, 37)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_y4d8v"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tt7lk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jto1h")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gacjp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7mv01")
+}],
+"loop": false,
+"name": &"Shield",
+"speed": 1.0
+}]
+
+[node name="ShieldedEnemy" type="Node2D"]
+
+[node name="BodyArea2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BodyArea2D"]
+shape = SubResource("RectangleShape2D_jto1h")
+
+[node name="AttackArea2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackArea2D"]
+position = Vector2(-47.25, 0)
+shape = SubResource("RectangleShape2D_gacjp")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(3, 31)
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_7mv01")
+animation = &"tracks_roll"
+autoplay = "tracks_roll"
+
+[node name="AnimatedSprite2D_shield" type="AnimatedSprite2D" parent="."]
+position = Vector2(-1.7881393e-07, -11.453129)
+scale = Vector2(2.0800002, 2.0244932)
+sprite_frames = SubResource("SpriteFrames_y4d8v")
+animation = &"Shield"
+
+[node name="AttackTimer" type="Timer" parent="."]
+one_shot = true
