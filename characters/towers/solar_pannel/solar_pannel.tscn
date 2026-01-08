@@ -1,26 +1,13 @@
 [gd_scene load_steps=4 format=3 uid="uid://ciydil38wct30"]
 
 [ext_resource type="Script" uid="uid://c6muunj0fsu04" path="res://characters/towers/solar_pannel/solar_pannel.gd" id="1_8iovp"]
+[ext_resource type="PackedScene" uid="uid://belhk4oowm4dq" path="res://characters/towers/basic_tower/basic_tower.tscn" id="1_txgm3"]
 [ext_resource type="Texture2D" uid="uid://cfgb5ug1qj1xr" path="res://assets/textures/solar-pannel-sheet.png" id="2_8iovp"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_6wl0l"]
-size = Vector2(52, 52)
-
-[node name="BasicTower" type="Node2D"]
+[node name="SolarPannel" instance=ExtResource("1_txgm3")]
 script = ExtResource("1_8iovp")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(0, -11)
-scale = Vector2(2, 2)
+[node name="Sprite2D" parent="." index="0"]
 texture = ExtResource("2_8iovp")
 hframes = 3
 vframes = 2
-
-[node name="AttackTimer" type="Timer" parent="."]
-
-[node name="BodyShape2D" type="Area2D" parent="."]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="BodyShape2D"]
-shape = SubResource("RectangleShape2D_6wl0l")
-
-[connection signal="timeout" from="AttackTimer" to="." method="_on_timer_timeout"]
