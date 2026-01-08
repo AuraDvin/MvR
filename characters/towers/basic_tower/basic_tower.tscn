@@ -15,11 +15,11 @@ scale = Vector2(2, 2)
 texture = ExtResource("2_6wl0l")
 hframes = 2
 
-[node name="ReloadTimer" type="Timer" parent="."]
+[node name="AttackTimer" type="Timer" parent="."]
 
 [node name="BodyShape2D" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BodyShape2D"]
 shape = SubResource("RectangleShape2D_6wl0l")
 
-[connection signal="timeout" from="ReloadTimer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="AttackTimer" to="." method="_on_timer_timeout"]
