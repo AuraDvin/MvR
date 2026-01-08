@@ -1,5 +1,6 @@
-[gd_scene load_steps=16 format=3 uid="uid://bgrnespgnxvsj"]
+[gd_scene load_steps=13 format=3 uid="uid://bgrnespgnxvsj"]
 
+[ext_resource type="Script" uid="uid://7w54u5hikob6" path="res://characters/enemies/shielded_enemy/shielded_enemy.gd" id="1_tt7lk"]
 [ext_resource type="Texture2D" uid="uid://biio8yughr7o8" path="res://assets/textures/tracks-sheet.png" id="1_w87x1"]
 [ext_resource type="Texture2D" uid="uid://c7q5rix213bt0" path="res://assets/textures/shielded-enemy-body.png" id="2_w87x1"]
 
@@ -60,41 +61,9 @@ animations = [{
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_tt7lk"]
 atlas = ExtResource("2_w87x1")
-region = Rect2(0, 0, 25, 37)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_jto1h"]
-atlas = ExtResource("2_w87x1")
-region = Rect2(25, 0, 25, 37)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_gacjp"]
-atlas = ExtResource("2_w87x1")
-region = Rect2(50, 0, 25, 37)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_7mv01"]
-atlas = ExtResource("2_w87x1")
-region = Rect2(75, 0, 25, 37)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_y4d8v"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_tt7lk")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_jto1h")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_gacjp")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_7mv01")
-}],
-"loop": false,
-"name": &"Shield",
-"speed": 1.0
-}]
 
 [node name="ShieldedEnemy" type="Node2D"]
+script = ExtResource("1_tt7lk")
 
 [node name="BodyArea2D" type="Area2D" parent="."]
 
@@ -114,11 +83,11 @@ sprite_frames = SubResource("SpriteFrames_7mv01")
 animation = &"tracks_roll"
 autoplay = "tracks_roll"
 
-[node name="AnimatedSprite2D_shield" type="AnimatedSprite2D" parent="."]
+[node name="ShieldSprite" type="Sprite2D" parent="."]
 position = Vector2(-1.7881393e-07, -11.453129)
 scale = Vector2(2.0800002, 2.0244932)
-sprite_frames = SubResource("SpriteFrames_y4d8v")
-animation = &"Shield"
+texture = SubResource("AtlasTexture_tt7lk")
+hframes = 4
 
 [node name="AttackTimer" type="Timer" parent="."]
 one_shot = true

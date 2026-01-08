@@ -37,6 +37,8 @@ layout_mode = 1
 
 [node name="HSplitContainer" type="HSplitContainer" parent="VBoxContainer"]
 layout_mode = 2
+dragging_enabled = false
+dragger_visibility = 2
 
 [node name="ReturnBTN" type="Button" parent="VBoxContainer/HSplitContainer"]
 custom_minimum_size = Vector2(100, 100)

@@ -1,19 +1,20 @@
 class_name ShieldedEnemy
 extends Enemy
 
-@onready var anim: AnimatedSprite2D = $AnimatedSprite2D_shield
+@onready var sprite = $ShieldSprite
 
 # Number of frames in the shield animation
 const SHIELD_STAGES: int = 4  # Full, minor cracks, major cracks, gone
 
 # Current shield HP (starts full)
-var shield_hp: int
+@export var shield_hp: int
 
 # Track shield + enemy health combined
 var last_total_hp: int
 
 
 func _ready() -> void:
+	print_debug("ready")
 	super()
 
 	# Initialize shield HP to match number of stages
@@ -23,23 +24,10 @@ func _ready() -> void:
 	last_total_hp = health_points + shield_hp
 
 	# Initialize animation
-	anim.stop()
-	anim.animation = "shield"
-	anim.frame = 0
-
+	sprite.frame = 0
 
 func _process(delta: float) -> void:
 	super(delta)
-
-	# Total HP = shield + enemy health
-	var total_hp: int = health_points + shield_hp
-
-	# Detect damage (any HP lost)
-	if total_hp < last_total_hp:
-		var lost: int = last_total_hp - total_hp
-		last_total_hp = total_hp
-		apply_damage(lost)
-
 
 func apply_damage(amount: int) -> void:
 	# Apply damage to shield first
@@ -53,16 +41,23 @@ func apply_damage(amount: int) -> void:
 	if amount > 0:
 		health_points -= amount
 		if health_points <= 0:
+			print_debug("queueueing freeing here", health_points)
 			queue_free()
 
 
 func advance_frame(frames: int = 1) -> void:
-	if anim.sprite_frames == null:
-		return
-
-	var frame_count: int = anim.sprite_frames.get_frame_count(anim.animation)
+	var frame_count: int = sprite.hframes
 	if frame_count <= 0:
 		return
 
 	# Advance animation by the number of frames lost
-	anim.frame = min(anim.frame + frames, frame_count - 1)
+	sprite.frame = min(sprite.frame + frames, frame_count - 1)
+
+func on_body_area_entered(area:Area2D) -> void:
+	var before = health_points
+	super(area)
+	var diff = before - health_points
+	if diff == 0: 
+		return
+	# Handle the shield vs real health
+	apply_damage(diff)

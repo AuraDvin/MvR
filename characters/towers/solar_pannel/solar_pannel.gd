@@ -5,7 +5,8 @@ const ENERGY_PICKUP = preload("uid://bxst250rs3x0w")
 var rng: RandomNumberGenerator
 
 func _init():
-	self.price = 25
+	price = 25
+	return_price = 10
 	needs_check = false
 	ability_delay = 3.1
 # Called when the node enters the scene tree for the first time.
