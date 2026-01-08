@@ -13,7 +13,7 @@ var enemy = preload("res://characters/enemies/basic_enemy/basic_enemy.tscn")
 func _ready():
 	$EnemySpawnTimer.start(RandomNumberGenerator.new().randf()* 3)
 	lane_count = $Lanes.get_child_count() 
-	$Hud.connect("_mode_selectd", _mode_selected)
+	get_parent().get_child(1).connect("_mode_selectd", _mode_selected)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

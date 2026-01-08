@@ -4,34 +4,35 @@
 [ext_resource type="PackedScene" uid="uid://emqcm546jpvb" path="res://levels/grid/grid.tscn" id="2_h6lqb"]
 [ext_resource type="PackedScene" uid="uid://c7t5icwhp12gx" path="res://levels/menus/hud/hud.tscn" id="3_akcht"]
 
-[node name="BasicLevel" type="Node2D"]
+[node name="BasicLevel" type="Node"]
+
+[node name="BasicLevel" type="Node2D" parent="."]
 script = ExtResource("1_x83mk")
 
-[node name="Lanes" type="Node" parent="."]
+[node name="Lanes" type="Node" parent="BasicLevel"]
 
-[node name="1" type="Node" parent="Lanes"]
+[node name="1" type="Node" parent="BasicLevel/Lanes"]
 
-[node name="2" type="Node" parent="Lanes"]
+[node name="2" type="Node" parent="BasicLevel/Lanes"]
 
-[node name="3" type="Node" parent="Lanes"]
+[node name="3" type="Node" parent="BasicLevel/Lanes"]
 
-[node name="4" type="Node" parent="Lanes"]
+[node name="4" type="Node" parent="BasicLevel/Lanes"]
 
-[node name="5" type="Node" parent="Lanes"]
+[node name="5" type="Node" parent="BasicLevel/Lanes"]
 
-[node name="Grid" parent="." instance=ExtResource("2_h6lqb")]
+[node name="Grid" parent="BasicLevel" instance=ExtResource("2_h6lqb")]
 position = Vector2(89.00001, 198)
 scale = Vector2(84.193245, 42.096622)
 
-[node name="EnemySpawnTimer" type="Timer" parent="."]
+[node name="EnemySpawnTimer" type="Timer" parent="BasicLevel"]
 
-[node name="Towers" type="Node" parent="."]
+[node name="Towers" type="Node" parent="BasicLevel"]
 
 [node name="Hud" parent="." instance=ExtResource("3_akcht")]
+custom_minimum_size = Vector2(600, 400)
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[connection signal="clicked_on_grid" from="Grid" to="." method="_on_grid_clicked_on_grid"]
-[connection signal="timeout" from="EnemySpawnTimer" to="." method="_on_enemy_spawn_timer_timeout"]
-
-[editable path="Hud"]
+[connection signal="clicked_on_grid" from="BasicLevel/Grid" to="BasicLevel" method="_on_grid_clicked_on_grid"]
+[connection signal="timeout" from="BasicLevel/EnemySpawnTimer" to="BasicLevel" method="_on_enemy_spawn_timer_timeout"]
