@@ -10,6 +10,9 @@ var velocity: Vector2
 var movable: bool = true
 var towers_in_range = {}
 
+# Override for each enemy type, so bigger/stronger enemies progress the level more
+var score: int = 1
+
 @export var speed: float
 @export var max_speed: float = 10.0
 @export var health_points: int = 3
