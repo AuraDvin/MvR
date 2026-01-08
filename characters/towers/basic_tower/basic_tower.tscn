@@ -17,7 +17,7 @@ hframes = 2
 
 [node name="AttackTimer" type="Timer" parent="."]
 
-[node name="BodyShape2D" type="Area2D" parent="."]
+[node name="BodyShape2D" type="Area2D" parent="." groups=["tower"]]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BodyShape2D"]
 shape = SubResource("RectangleShape2D_6wl0l")
