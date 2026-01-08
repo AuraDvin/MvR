@@ -15,7 +15,7 @@ var holding: hand = hand.NONE
 
 func spend_energy(amount: int) -> int:
 	var new_amount = energy - amount
-	print_debug(amount)
+	#print_debug(amount)
 	if new_amount < 0:
 		return -1
 	energy = new_amount
