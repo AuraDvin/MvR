@@ -30,7 +30,16 @@ func _on_grid_clicked_on_grid(tile_position, tile_size):
 	var player = $"../Player"
 	if player.holding == player.hand.NONE:
 		return
-		
+	if player.holding == player.hand.DELETE:
+		var deleting_tower = grid_spaces.get(tile_position) 
+		if deleting_tower == null:
+			return
+		var energy = player.spend_energy(-deleting_tower.return_price)
+		emit_signal("energy_changed", energy)
+		deleting_tower.queue_free()
+		player.holding = player.hand.NONE
+		$"../Hud/Selector".visible = false
+
 	if local_cooldown > 0:
 		return
 	if grid_spaces.get(tile_position) != null:

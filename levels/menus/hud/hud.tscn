@@ -88,6 +88,12 @@ layout_mode = 2
 size_flags_vertical = 0
 texture_normal = ExtResource("4_buv7h")
 
+[node name="TextureButton4" type="TextureButton" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+material = SubResource("CanvasItemMaterial_buv7h")
+layout_mode = 2
+size_flags_vertical = 0
+texture_normal = ExtResource("4_buv7h")
+
 [node name="Selector" type="ColorRect" parent="."]
 visible = false
 layout_mode = 0
