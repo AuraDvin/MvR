@@ -15,6 +15,7 @@ func _ready():
 		child.pressed.connect(_on_button_pressed.bind(child.get_index() as tower_type))
 		var tb = child as TextureButton
 		tb.scale = tb.get_transform().get_scale() * 2
+	update_energy_value($"../Player".energy)
 
 
 
