@@ -26,7 +26,7 @@ var enemies = [ enemy ]
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	$EnemySpawnTimer.start(RandomNumberGenerator.new().randf()* 3)
+	$EnemySpawnTimer.start(RandomNumberGenerator.new().randf_range(7, 11))
 	lane_count = $Lanes.get_child_count() 
 	$"../Hud".connect("_mode_selectd", _mode_selected)
 	
@@ -53,6 +53,9 @@ func free() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	local_cooldown -= delta
+	if current_wave_score >= current_wave_max_score/2:
+		$EnemySpawnTimer.stop()
+		_on_enemy_spawn_timer_timeout()
 
 
 func _on_grid_clicked_on_grid(tile_position, tile_size):
@@ -110,6 +113,7 @@ func _on_enemy_spawn_timer_timeout():
 	
 	current_wave_max_score = 0
 	current_wave_score = 0
+	
 	for e_data in next_wave: 
 		for i in e_data.count:
 			var enemy_inst = enemies[e_data.type].instantiate()
@@ -118,8 +122,7 @@ func _on_enemy_spawn_timer_timeout():
 			enemy_inst.line = lane
 			enemy_inst.position = _get_enemy_spawn_position(lane)
 			$Lanes.get_child(lane).add_child(enemy_inst)
-
-	$EnemySpawnTimer.start(rng.randf()* 3 + 2)
+	$EnemySpawnTimer.start(rng.randf_range(7, 11))
 
 func update_score(score: int):
 	current_wave_score += score
