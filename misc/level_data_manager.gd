@@ -14,17 +14,17 @@ class LevelData:
 
 # Holds the data of level being currently played 
 # This gets cleared on level exit
-static var current_level_data: LevelData = null
+var current_level_data: LevelData = null
 
-static func remove_existant_data() -> void: 
+func remove_existant_data() -> void: 
 	current_level_data = null
 
-static func get_data(res_path: String) -> LevelData: 
+func get_data(res_path: String) -> LevelData: 
 	if current_level_data == null: 
 		return loadLevel(res_path)
 	return current_level_data 
 
-static func loadLevel(res_path: String) -> LevelData: 
+func loadLevel(res_path: String) -> LevelData: 
 	var json = JSON.new()
 	var error = json.parse(res_path)
 	
@@ -56,14 +56,14 @@ static func loadLevel(res_path: String) -> LevelData:
 		push_error("Unexpected data")
 		return null
 
-static func save_state(level: BasicLevel) -> void: 
+func save_state(level: BasicLevel) -> void: 
 	for i in range(1, 5): 
 		current_level_data.enemies[i-1] = level.lanes.find_child(str(i)).get_children().duplicate()
 	current_level_data.towers = level.grid_towers.duplicate()
 	current_level_data.pickups = level.grid_pickups.duplicate()
 	current_level_data.projectiles = level.grid_projectiles.duplicate()
 
-static func load_state(level: BasicLevel) -> bool:
+func load_state(level: BasicLevel) -> bool:
 	if current_level_data == null: 
 		return false
 	
