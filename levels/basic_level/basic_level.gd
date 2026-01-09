@@ -20,6 +20,7 @@ var towers = [
 	preload("res://characters/towers/mortar/mortar.tscn"),
 ]
 var enemy = preload("res://characters/enemies/basic_enemy/basic_enemy.tscn")
+var enemies = [ enemy ]
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -27,9 +28,18 @@ func _ready():
 	lane_count = $Lanes.get_child_count() 
 	$"../Hud".connect("_mode_selectd", _mode_selected)
 	
-	# todo: json path from somewhere (level select?)
-	# if not LevelDataManager.load_state(self):
-	# 	LevelDataManager.get_data("")
+	if not LevelDataManager.load_state(self):
+		# Set by Level Selector item button
+		var data = LevelDataManager.get_data(LevelDataManager.current_level_name)
+		for es in data.enemy_queue:
+			for e in es: 
+				# Get the amount of score for each enemy
+				print(e.type, " this many times ->", e.count)
+				var tmp_enemy = enemies[(int)(e.type)].instantiate()
+				data.max_score += tmp_enemy.score
+				tmp_enemy.queue_free()
+		print("Max level score is: ", data.max_score)
+		LevelDataManager.current_level_data = data
 
 func free() -> void:
 	# todo: if going to pause/settings

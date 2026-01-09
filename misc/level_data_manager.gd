@@ -15,6 +15,7 @@ class LevelData:
 # Holds the data of level being currently played 
 # This gets cleared on level exit
 var current_level_data: LevelData = null
+var current_level_name: String
 
 func remove_existant_data() -> void: 
 	current_level_data = null
@@ -26,7 +27,12 @@ func get_data(res_path: String) -> LevelData:
 
 func loadLevel(res_path: String) -> LevelData: 
 	var json = JSON.new()
-	var error = json.parse(res_path)
+	var file = FileAccess.open(res_path, FileAccess.READ)
+	if file.get_error() != OK: 
+		print_debug("error opening file")
+		return null
+	
+	var error = json.parse(file.get_as_text())
 	
 	if error != OK:
 		push_error("JSON Parse Error: ", json.get_error_message(), " in ", res_path, " at line ", json.get_error_line())
