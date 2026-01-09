@@ -22,8 +22,8 @@ func _process(delta):
 	pass
 
 func _physics_process(delta):
-	if targetEnemy == null:
-		return
+#	if targetEnemy == null:
+#		return
 	if speed == INF:
 		initial_y = position.y
 		speed = targetEnemy.position.x - position.x 
