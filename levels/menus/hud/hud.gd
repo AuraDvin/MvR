@@ -69,6 +69,7 @@ func _on_upgrade_pressed(i: int):
 		print_debug("premalo energije")
 		return
 	selected_upgrades.bought_upgrades[i] += 1
+	selected_upgrades.upgrade(i)
 	update_costs(selected_upgrades)
 	update_energy_value(energy)
 

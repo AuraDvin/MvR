@@ -7,6 +7,7 @@ var y: int
 var price: int
 var return_price: int # on destroy currency return
 var type: String #za hud
+var special: bool = false
 @onready var body_area : Area2D = $BodyShape2D
 @onready var attack_timer : Timer = $AttackTimer
 

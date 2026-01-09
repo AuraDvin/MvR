@@ -15,14 +15,22 @@ func _init():
 func _ready() -> void:
 	rng = RandomNumberGenerator.new()
 	attack_timer.start()
+	$Upgrades.connect("special", set_special)
 	super()
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	#print(attack_timer.time_left)
 	pass
 
+func set_special():
+	$Sprite2D.frame = 3
+
 # strelja
 func ability() -> void:
+	if special:
+		var energy = $"../../../Player".spend_energy(ability_value * (-1))
+		$"../../../Hud"._on_basic_level_energy_changed(energy)
+		return
 	var pickup_inst = ENERGY_PICKUP.instantiate()
 	var rand_offset = Vector2(rng.randf_range(-1,1), rng.randf_range(-1,1)).normalized() 
 	pickup_inst.position = global_position + (rand_offset * 50)
