@@ -144,7 +144,8 @@ func _mode_selected(node):
 func empty_selection():
 	var player = $"../Player"
 	player.holding = player.hand.NONE
-	$"../Hud/Selector".visible = false
+	$"../Hud"._hide_upgrades()
+
 
 func _on_tower_health_gone(deleting_tower):
 	if deleting_tower == null:

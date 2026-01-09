@@ -2,6 +2,7 @@ extends Control
 
 enum tower_type {SOLAR, TURRET, MORTAR}
 signal _mode_selectd(tower: tower_type)
+var selected_upgrades
 	 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -34,6 +35,12 @@ func _on_basic_level_energy_changed(newAmount):
 func _show_upgrades(node):
 	var upgrades = $MarginContainer/HBoxContainer2/VBoxContainer2/upgrades
 	upgrades.visible = true
+	selected_upgrades = node
 	for i in range(3):
-		upgrades.get_child(i + 1).text = UpgradeManager.upgrade_names[node.type][i]
-	pass
+		var line2 = "\nenergy required: " + str(UpgradeManager.upgrade_costs[node.type][i][node.bought_upgrades[i]]) 
+		upgrades.get_child(i + 1).text = UpgradeManager.upgrade_names[node.type][i] + line2 
+
+func _hide_upgrades():
+	$MarginContainer/HBoxContainer2/VBoxContainer2/upgrades.visible = false
+	selected_upgrades = null
+	$Selector.visible = false
