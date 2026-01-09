@@ -19,6 +19,8 @@ func _process(delta: float) -> void:
 
 # strelja
 func ability() -> void:
+	if $"../../Lanes".get_child(y).get_child_count()<1:
+		return
 	var projectile_inst = MORTAR_PROJECTILE.instantiate()
 	var target_enemy = $"../../Lanes".get_child(y).get_child(0)
 	projectile_inst.targetEnemy = target_enemy
