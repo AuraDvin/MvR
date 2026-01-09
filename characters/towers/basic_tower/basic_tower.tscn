@@ -1,9 +1,16 @@
+<<<<<<< HEAD
 [gd_scene load_steps=6 format=3 uid="uid://belhk4oowm4dq"]
+=======
+[gd_scene load_steps=5 format=3 uid="uid://belhk4oowm4dq"]
+>>>>>>> b3b8a5e9df769e72bd9413039bbea0e23bdb30c4
 
 [ext_resource type="Script" uid="uid://cxn2573oiu1p6" path="res://characters/towers/basic_tower/basic_tower.gd" id="1_h1sln"]
 [ext_resource type="Texture2D" uid="uid://8hmvqxym3c6b" path="res://assets/textures/shooter-turret.png" id="2_6wl0l"]
 [ext_resource type="PackedScene" uid="uid://dbj00hkiajltd" path="res://characters/towers/upgrades/Upgrades.tscn" id="3_6xx1j"]
+<<<<<<< HEAD
 [ext_resource type="AudioStream" uid="uid://bbgh3u3t20s56" path="res://assets/sfx/Laser_Rifle_pitch1.mp3" id="4_t8vpg"]
+=======
+>>>>>>> b3b8a5e9df769e72bd9413039bbea0e23bdb30c4
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6wl0l"]
 size = Vector2(52, 52)
@@ -27,7 +34,10 @@ hframes = 2
 shape = SubResource("RectangleShape2D_6wl0l")
 
 [node name="Upgrades" parent="." instance=ExtResource("3_6xx1j")]
+<<<<<<< HEAD
 
 [node name="Attack" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("4_t8vpg")
 volume_db = 3.0
+=======
+>>>>>>> b3b8a5e9df769e72bd9413039bbea0e23bdb30c4

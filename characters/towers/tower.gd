@@ -6,16 +6,17 @@ var x: int
 var y: int
 var price: int
 var return_price: int # on destroy currency return
-
+var type: String #za hud
+var special: bool = false
 @onready var body_area : Area2D = $BodyShape2D
 @onready var attack_timer : Timer = $AttackTimer
 
 var ability_delay: float
 var ability_value: int # Damage, currency amount, other shit
 
-@export var max_health: int
-@export var current_health: int
-@export var needs_check: bool
+var max_health: int
+var current_health: int
+var needs_check: bool
 
 signal health_gone
 

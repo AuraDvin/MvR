@@ -111,6 +111,10 @@ theme_override_font_sizes/font_size = 32
 text = "  50"
 
 [node name="upgrades" type="VBoxContainer" parent="MarginContainer/HBoxContainer2/VBoxContainer2"]
+<<<<<<< HEAD
+=======
+visible = false
+>>>>>>> b3b8a5e9df769e72bd9413039bbea0e23bdb30c4
 layout_mode = 2
 
 [node name="Label" type="Label" parent="MarginContainer/HBoxContainer2/VBoxContainer2/upgrades"]

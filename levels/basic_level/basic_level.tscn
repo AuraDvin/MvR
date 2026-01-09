@@ -1,16 +1,37 @@
+<<<<<<< HEAD
 [gd_scene load_steps=7 format=3 uid="uid://cl5i6jqism35s"]
+=======
+[gd_scene load_steps=6 format=3 uid="uid://cl5i6jqism35s"]
+>>>>>>> b3b8a5e9df769e72bd9413039bbea0e23bdb30c4
 
 [ext_resource type="Script" uid="uid://c2bq01dxk51eb" path="res://levels/basic_level/basic_level.gd" id="1_x83mk"]
 [ext_resource type="PackedScene" uid="uid://emqcm546jpvb" path="res://levels/grid/grid.tscn" id="2_h6lqb"]
 [ext_resource type="PackedScene" uid="uid://c7t5icwhp12gx" path="res://levels/menus/hud/hud.tscn" id="3_akcht"]
 [ext_resource type="PackedScene" uid="uid://i5tyih4l3m1m" path="res://characters/player/Player.tscn" id="4_ykins"]
 [ext_resource type="Texture2D" uid="uid://cjpsxhcfdxql6" path="res://assets/textures/bg.png" id="5_nyqwc"]
+<<<<<<< HEAD
 [ext_resource type="AudioStream" uid="uid://ri4vuubg6ct0" path="res://assets/soundtracks/Glorious Morning - Metal version - SEYAR.mp3" id="6_ylr87"]
+=======
+>>>>>>> b3b8a5e9df769e72bd9413039bbea0e23bdb30c4
 
 [node name="BasicLevel" type="Node"]
 
 [node name="BasicLevel" type="Node2D" parent="."]
 script = ExtResource("1_x83mk")
+
+[node name="PausePopout" type="PopupMenu" parent="BasicLevel"]
+oversampling_override = 1.0
+title = "Game is paused"
+initial_position = 1
+size = Vector2i(82, 62)
+max_size = Vector2i(82, 62)
+keep_title_visible = true
+allow_search = false
+item_count = 2
+item_0/text = "Settings"
+item_0/id = 0
+item_1/text = "Quit"
+item_1/id = 1
 
 [node name="Lanes" type="Node" parent="BasicLevel"]
 
@@ -55,11 +76,15 @@ size_flags_horizontal = 4
 mouse_filter = 2
 texture = ExtResource("5_nyqwc")
 
+<<<<<<< HEAD
 [node name="Soundtrack" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("6_ylr87")
 autoplay = true
 bus = &"Music"
 
+=======
+>>>>>>> b3b8a5e9df769e72bd9413039bbea0e23bdb30c4
 [connection signal="energy_changed" from="BasicLevel" to="Hud" method="_on_basic_level_energy_changed"]
+[connection signal="index_pressed" from="BasicLevel/PausePopout" to="BasicLevel" method="_on_pause_popout_index_pressed"]
 [connection signal="clicked_on_grid" from="BasicLevel/Grid" to="BasicLevel" method="_on_grid_clicked_on_grid"]
 [connection signal="timeout" from="BasicLevel/EnemySpawnTimer" to="BasicLevel" method="_on_enemy_spawn_timer_timeout"]

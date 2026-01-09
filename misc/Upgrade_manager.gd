@@ -7,6 +7,21 @@ var upgrade_names = {
 	"solarpannel": ["auto collect energy", "increase production speed", "incrrease energy value"]
 }
 
+<<<<<<< HEAD
+=======
+var upgrade_costs = {
+	"basictower": [[50], [20, 30, 50], [40, 60, 90]],
+	"mortar": [[45], [25, 35, 45], [30, 40, 50]],
+	"solarpannel": [[50], [20, 25, 30], [30, 40, 55]]
+}
+
+var values = {
+	"basictower": [[1], [0.9, 0.8, 0.75], [2,3,4]],
+	"mortar": [[1], [0.95, 0.9, 0.8], [5,6,7]],
+	"solarpannel": [[1], [0.9, 0.8, 0.7], [15, 20, 25]]
+}
+
+>>>>>>> b3b8a5e9df769e72bd9413039bbea0e23bdb30c4
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
