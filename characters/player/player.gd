@@ -8,7 +8,7 @@ enum hand {SOLAR, TURRET, MORTAR, DELETE, NONE}
 
 var money: int = 0
 var maxHealth: int = 3
-var energy: int = 500
+var energy: int = 50
 var currentHealth: int = maxHealth
 var holding: hand = hand.NONE
 

@@ -94,10 +94,7 @@ func on_attack_area_exited(area:Area2D) -> void:
 		towers_in_range.erase(area)
 
 func _cause_damage(amount: int):
-<<<<<<< HEAD
 	enemy_hit.play()
-=======
->>>>>>> b3b8a5e9df769e72bd9413039bbea0e23bdb30c4
 	health_points -= amount
 	if health_points <= 0: 
 		queue_free()

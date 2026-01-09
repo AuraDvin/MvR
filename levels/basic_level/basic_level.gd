@@ -5,21 +5,13 @@ class_name BasicLevel
 @onready var grid_towers = $Towers
 @onready var grid_pickups = $Pickups
 @onready var grid_projectiles = $Projectiles
-<<<<<<< HEAD
 @onready var soundtrack: AudioStreamPlayer2D = $"../Soundtrack"
-=======
-@onready var pause_popout = $PausePopout
->>>>>>> b3b8a5e9df769e72bd9413039bbea0e23bdb30c4
 
 var cooldown = 0.5
 var local_cooldown = 0
 var grid_spaces = {}
 var current_wave_max_score: int
 var current_wave_score: int
-<<<<<<< HEAD
-=======
-
->>>>>>> b3b8a5e9df769e72bd9413039bbea0e23bdb30c4
 @export var lane_count = 5
 
 signal energy_changed(newAmount: int) 
@@ -41,11 +33,7 @@ func _ready():
 	$EnemySpawnTimer.start(RandomNumberGenerator.new().randf_range(7, 11))
 	lane_count = $Lanes.get_child_count() 
 	$"../Hud".connect("_mode_selectd", _mode_selected)
-<<<<<<< HEAD
 	
-=======
-	print_debug("Hello")
->>>>>>> b3b8a5e9df769e72bd9413039bbea0e23bdb30c4
 	if not LevelDataManager.load_state(self):
 		# Set by Level Selector item button
 		var data = LevelDataManager.get_data(LevelDataManager.current_level_name)
@@ -58,17 +46,6 @@ func _ready():
 				tmp_enemy.queue_free()
 		print("Max level score is: ", data.max_score)
 		LevelDataManager.current_level_data = data
-<<<<<<< HEAD
-=======
-	# todo: connect all the signals again(?)
-	else: 
-		for tower: Tower in grid_towers.get_children():
-			var tower_pos = Vector2(tower.x, tower.y)
-			grid_spaces[tower_pos] = tower
-		for lane in lanes.get_children():
-			for enemy: Enemy in lane.get_children(): 
-				enemy.defeated.connect(update_score)
->>>>>>> b3b8a5e9df769e72bd9413039bbea0e23bdb30c4
 
 func free() -> void:
 	# todo: if going to pause/settings
@@ -80,19 +57,9 @@ func free() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	local_cooldown -= delta
-<<<<<<< HEAD
 	if current_wave_score >= current_wave_max_score/2:
 		$EnemySpawnTimer.stop()
 		_on_enemy_spawn_timer_timeout()
-=======
-	#if current_wave_score >= current_wave_max_score/2:
-		#$EnemySpawnTimer.stop()
-		#_on_enemy_spawn_timer_timeout()
-
-func _input(event: InputEvent) -> void:
-	if event.is_action_released("ui_cancel"):
-		pause_popout.visible = not pause_popout.visible
->>>>>>> b3b8a5e9df769e72bd9413039bbea0e23bdb30c4
 
 
 func _on_grid_clicked_on_grid(tile_position, tile_size):
@@ -144,11 +111,7 @@ func _on_enemy_spawn_timer_timeout():
 	
 	# No remaining waves
 	if next_wave == null: 
-<<<<<<< HEAD
 		print_debug("last wave has spawned already")
-=======
-		#print_debug("last wave has spawned already")
->>>>>>> b3b8a5e9df769e72bd9413039bbea0e23bdb30c4
 		# todo: if no more enemies, finish level
 		return
 	
@@ -166,10 +129,6 @@ func _on_enemy_spawn_timer_timeout():
 	$EnemySpawnTimer.start(rng.randf_range(7, 11))
 
 func update_score(score: int):
-<<<<<<< HEAD
-=======
-	print("updating score")
->>>>>>> b3b8a5e9df769e72bd9413039bbea0e23bdb30c4
 	current_wave_score += score
 	LevelDataManager.current_level_data.current_score += score
 
@@ -186,30 +145,10 @@ func _mode_selected(node):
 func empty_selection():
 	var player = $"../Player"
 	player.holding = player.hand.NONE
-<<<<<<< HEAD
 	$"../Hud/Selector".visible = false
-=======
-	$"../Hud"._hide_upgrades()
-
->>>>>>> b3b8a5e9df769e72bd9413039bbea0e23bdb30c4
 
 func _on_tower_health_gone(deleting_tower):
 	if deleting_tower == null:
 		print_debug("deleting null tower after destruction")
 		return
-<<<<<<< HEAD
 	deleting_tower.queue_free()
-=======
-	if deleting_tower.get_child(3) == $"../Hud".selected_upgrades:
-		$"../Hud"._hide_upgrades()
-	deleting_tower.queue_free()
-
-
-func _on_pause_popout_index_pressed(index: int) -> void:
-	if index == 0: 
-		LevelDataManager.save_state(self)
-		SceneSwitcher.switchScene("res://levels/menus/settings/settings.tscn")
-	elif index == 1: 
-		LevelDataManager.remove_existant_data()
-		SceneSwitcher.switchScene("res://levels/menus/level_select/level_select.tscn")
->>>>>>> b3b8a5e9df769e72bd9413039bbea0e23bdb30c4
