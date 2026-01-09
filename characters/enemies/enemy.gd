@@ -13,6 +13,7 @@ var towers_in_range = {}
 
 # Override for each enemy type, so bigger/stronger enemies progress the level more
 var score: int = 1
+signal defeated
 
 @export var speed: float
 @export var max_speed: float = 10.0
@@ -66,6 +67,7 @@ func _init(starting_line: int = 0, starting_speed: float = 600.0, starting_healt
 
 func _exit_tree() -> void:
 	print_debug("Enemy with name %s removed from tree" % name)
+	emit_signal("defeated",score)
 
 
 func ability():

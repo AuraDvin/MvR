@@ -61,5 +61,6 @@ func ability() -> void: # tower specific
 
 func receive_damage(damage: int) -> void:
 	current_health -= damage
+	print_debug("tower %s taking damage, now has %d health" % [name,current_health])
 	if current_health <= 0:
-		health_gone.emit()  # death signal
+		health_gone.emit(self)  # death signal

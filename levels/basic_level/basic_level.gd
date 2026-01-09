@@ -59,6 +59,7 @@ func _on_grid_clicked_on_grid(tile_position, tile_size):
 	new_tower.position += tile_size / 2
 	new_tower.x = tile_position.x
 	new_tower.y = tile_position.y
+	new_tower.health_gone.connect(_on_tower_health_gone)
 	#print(new_tower.position)
 	local_cooldown = cooldown
 	empty_selection()
@@ -86,3 +87,9 @@ func empty_selection():
 	var player = $"../Player"
 	player.holding = player.hand.NONE
 	$"../Hud/Selector".visible = false
+
+func _on_tower_health_gone(deleting_tower):
+	if deleting_tower == null:
+		print_debug("deleting null tower after destruction")
+		return
+	deleting_tower.queue_free()
