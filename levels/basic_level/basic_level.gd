@@ -1,6 +1,11 @@
 extends Node2D
 class_name BasicLevel
 
+@onready var lanes = $Lanes
+@onready var grid_towers = $Towers
+@onready var grid_pickups = $Pickups
+@onready var grid_projectiles = $Projectiles
+
 var cooldown = 0.5
 var local_cooldown = 0
 var grid_spaces = {}
@@ -21,7 +26,17 @@ func _ready():
 	$EnemySpawnTimer.start(RandomNumberGenerator.new().randf()* 3)
 	lane_count = $Lanes.get_child_count() 
 	$"../Hud".connect("_mode_selectd", _mode_selected)
+	
+	# todo: json path from somewhere (level select?)
+	# if not LevelDataManager.load_state(self):
+	# 	LevelDataManager.get_data("")
 
+func free() -> void:
+	# todo: if going to pause/settings
+	#LevelDataManager.save_state(self)
+	# todo: if exiting to level select 
+	#LevelDataManager.remove_existant_data()
+	pass
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
