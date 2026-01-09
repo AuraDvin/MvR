@@ -2,6 +2,7 @@ extends Node2D
 
 @export var speed: float = 10
 var damage: int
+var slow = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -14,3 +15,4 @@ func _process(delta):
 
 func special():
 	$Sprite2D.frame = 1
+	slow = true
