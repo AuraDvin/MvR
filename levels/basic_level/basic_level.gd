@@ -21,15 +21,16 @@ var towers = [
 ]
 var enemy = preload("res://characters/enemies/basic_enemy/basic_enemy.tscn")
 var enemies = [ enemy ]
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	$EnemySpawnTimer.start(RandomNumberGenerator.new().randf()* 3)
 	lane_count = $Lanes.get_child_count() 
 	$"../Hud".connect("_mode_selectd", _mode_selected)
 	
-	# todo: json path from somewhere (level select?)
 	if not LevelDataManager.load_state(self):
-		var data = LevelDataManager.get_data("res://assets/levelData/level1.json")
+		# Set by Level Selector item button
+		var data = LevelDataManager.get_data(LevelDataManager.current_level_name)
 		for es in data.enemy_queue:
 			for e in es: 
 				# Get the amount of score for each enemy
