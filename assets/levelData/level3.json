@@ -1,0 +1,49 @@
+{
+	"energy": 40,
+	"background": "bg",
+	"allowedTowers": [0,1,2],
+	"enemies" : [
+		[
+			{
+				"type": 0,
+				"count": 1
+			},
+		],
+		[
+			{
+				"type": 1,
+				"count": 1
+			},
+		],
+		[
+			{
+				"type": 0,
+				"count": 1
+			},
+			{
+				"type": 1,
+				"count": 2
+			},
+		],
+		[
+			{
+				"type": 0,
+				"count": 3
+			},
+			{
+				"type": 1,
+				"count": 5
+			},
+		],
+		[
+			{
+				"type": 0,
+				"count": 6
+			},
+			{
+				"type": 1,
+				"count": 12
+			},
+		],
+	]
+}
