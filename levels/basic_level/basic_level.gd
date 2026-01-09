@@ -110,7 +110,7 @@ func _on_enemy_spawn_timer_timeout():
 	
 	# No remaining waves
 	if next_wave == null: 
-		print_debug("last wave has spawned already")
+		#print_debug("last wave has spawned already")
 		# todo: if no more enemies, finish level
 		return
 	

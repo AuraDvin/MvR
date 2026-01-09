@@ -7,6 +7,7 @@ func _init():
 	self.price = 10
 	needs_check = true
 	ability_value = 1
+	type = "basictower"
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	super()

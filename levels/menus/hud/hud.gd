@@ -37,6 +37,7 @@ func _show_upgrades(node):
 	upgrades.visible = true
 	selected_upgrades = node
 	for i in range(3):
+		print(node.type, i, node.bought_upgrades[i])
 		var line2 = "\nenergy required: " + str(UpgradeManager.upgrade_costs[node.type][i][node.bought_upgrades[i]]) 
 		upgrades.get_child(i + 1).text = UpgradeManager.upgrade_names[node.type][i] + line2 
 

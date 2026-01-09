@@ -9,6 +9,7 @@ func _init():
 	needs_check = false
 	ability_delay = 4.0
 	ability_value = 3
+	type = "mortar"
 # Called when the node enters the scene tree for the first time.
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
