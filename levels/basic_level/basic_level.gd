@@ -151,4 +151,6 @@ func _on_tower_health_gone(deleting_tower):
 	if deleting_tower == null:
 		print_debug("deleting null tower after destruction")
 		return
+	if deleting_tower.get_child(3) == $"../Hud".selected_upgrades:
+		$"../Hud"._hide_upgrades()
 	deleting_tower.queue_free()
