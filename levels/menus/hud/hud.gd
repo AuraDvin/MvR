@@ -29,4 +29,7 @@ func _on_button_pressed(node: tower_type):
 
 
 func _on_basic_level_energy_changed(newAmount):
-	$MarginContainer/HBoxContainer2/resources/energy_amount.text = " " + str(newAmount)
+	$MarginContainer/HBoxContainer2/VBoxContainer2/resources/energy_amount.text = " " + str(newAmount)
+
+func _show_upgrades(node):
+	pass

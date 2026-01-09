@@ -87,24 +87,51 @@ layout_mode = 2
 size_flags_vertical = 0
 texture_normal = ExtResource("8_62nfb")
 
-[node name="resources" type="HBoxContainer" parent="MarginContainer/HBoxContainer2"]
+[node name="VBoxContainer2" type="VBoxContainer" parent="MarginContainer/HBoxContainer2"]
+layout_mode = 2
+theme_override_constants/separation = 50
+
+[node name="resources" type="HBoxContainer" parent="MarginContainer/HBoxContainer2/VBoxContainer2"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 0
 
-[node name="TextureRect" type="TextureRect" parent="MarginContainer/HBoxContainer2/resources"]
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/HBoxContainer2/VBoxContainer2/resources"]
 layout_mode = 2
 size_flags_horizontal = 10
 texture = ExtResource("3_buv7h")
 expand_mode = 2
 
-[node name="energy_amount" type="Label" parent="MarginContainer/HBoxContainer2/resources"]
+[node name="energy_amount" type="Label" parent="MarginContainer/HBoxContainer2/VBoxContainer2/resources"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
 theme_override_constants/outline_size = 16
 theme_override_font_sizes/font_size = 32
 text = "  50"
+
+[node name="upgrades" type="VBoxContainer" parent="MarginContainer/HBoxContainer2/VBoxContainer2"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/HBoxContainer2/VBoxContainer2/upgrades"]
+layout_mode = 2
+size_flags_horizontal = 8
+text = "Upgrades:"
+
+[node name="Button" type="Button" parent="MarginContainer/HBoxContainer2/VBoxContainer2/upgrades"]
+layout_mode = 2
+size_flags_horizontal = 8
+text = "upgrade 1"
+
+[node name="Button2" type="Button" parent="MarginContainer/HBoxContainer2/VBoxContainer2/upgrades"]
+layout_mode = 2
+size_flags_horizontal = 8
+text = "upgrade 2"
+
+[node name="Button3" type="Button" parent="MarginContainer/HBoxContainer2/VBoxContainer2/upgrades"]
+layout_mode = 2
+size_flags_horizontal = 8
+text = "upgrade 3"
 
 [node name="Selector" type="TextureRect" parent="."]
 visible = false
