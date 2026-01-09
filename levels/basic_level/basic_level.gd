@@ -9,6 +9,8 @@ class_name BasicLevel
 var cooldown = 0.5
 var local_cooldown = 0
 var grid_spaces = {}
+var current_wave_max_score
+var current_wave_score
 @export var lane_count = 5
 
 signal energy_changed(newAmount: int) 
@@ -98,11 +100,30 @@ func _on_grid_clicked_on_grid(tile_position, tile_size):
 func _on_enemy_spawn_timer_timeout():
 	var rng = RandomNumberGenerator.new()
 	var lane = rng.randi_range(0, self.lane_count - 1) # From to is inclusive
-	var enemy_inst = enemy.instantiate()
-	enemy_inst.line = lane
-	enemy_inst.position = _get_enemy_spawn_position(lane)
-	$Lanes.get_child(lane).add_child(enemy_inst)
+	var next_wave = LevelDataManager.current_level_data.enemy_queue.pop_front()
+	
+	# No remaining waves
+	if next_wave == null: 
+		print_debug("last wave has spawned already")
+		# todo: if no more enemies, finish level
+		return
+	
+	current_wave_max_score = 0
+	current_wave_score = 0
+	for e_data in next_wave: 
+		for i in e_data.count:
+			var enemy_inst = enemies[e_data.type].instantiate()
+			enemy_inst.defeated.connect(update_score)
+			current_wave_max_score += enemy_inst.score
+			enemy_inst.line = lane
+			enemy_inst.position = _get_enemy_spawn_position(lane)
+			$Lanes.get_child(lane).add_child(enemy_inst)
+
 	$EnemySpawnTimer.start(rng.randf()* 3 + 2)
+
+func update_score(score: int):
+	current_wave_score += score
+	LevelDataManager.current_level_data.current_score += score
 
 func _get_enemy_spawn_position(lane) -> Vector2:
 	var bottom_left_pos = ($Grid.position + $Grid/BottomLeft.position * $Grid.scale)
