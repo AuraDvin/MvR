@@ -8,7 +8,7 @@ func _init():
 	price = 25
 	return_price = 10
 	needs_check = false
-	ability_delay = 3.1
+	ability_delay = 10
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	rng = RandomNumberGenerator.new()

@@ -76,6 +76,7 @@ func on_body_area_entered(area:Area2D) -> void:
 		health_points -= 1 
 		if health_points <= 0: 
 			queue_free()
+		area.get_parent().queue_free()
 
 func on_attack_area_entered(area:Area2D) -> void: 
 	if area.is_in_group("tower"):

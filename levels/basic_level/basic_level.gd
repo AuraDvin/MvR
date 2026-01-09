@@ -10,7 +10,8 @@ signal energy_changed(newAmount: int)
 # Todo 
 var towers = [
 	preload("res://characters/towers/solar_pannel/solar_pannel.tscn"),
-	preload("res://characters/towers/basic_tower/basic_tower.tscn")
+	preload("res://characters/towers/basic_tower/basic_tower.tscn"),
+	preload("res://characters/towers/mortar/mortar.tscn"),
 ]
 var enemy = preload("res://characters/enemies/basic_enemy/basic_enemy.tscn")
 
@@ -56,6 +57,8 @@ func _on_grid_clicked_on_grid(tile_position, tile_size):
 	new_tower.position += tile_position * tile_size
 	new_tower.position += $Grid.position
 	new_tower.position += tile_size / 2
+	new_tower.x = tile_position.x
+	new_tower.y = tile_position.y
 	#print(new_tower.position)
 	local_cooldown = cooldown
 	empty_selection()
@@ -64,6 +67,7 @@ func _on_enemy_spawn_timer_timeout():
 	var rng = RandomNumberGenerator.new()
 	var lane = rng.randi_range(0, self.lane_count - 1) # From to is inclusive
 	var enemy_inst = enemy.instantiate()
+	enemy_inst.line = lane
 	enemy_inst.position = _get_enemy_spawn_position(lane)
 	$Lanes.get_child(lane).add_child(enemy_inst)
 	$EnemySpawnTimer.start(rng.randf()* 3 + 2)
