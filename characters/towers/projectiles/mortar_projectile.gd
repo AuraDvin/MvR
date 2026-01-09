@@ -1,7 +1,7 @@
 extends Node2D
 
-@export var targetEnemy :Node2D
-@export var damage: int = 3
+var targetEnemy :Node2D
+var damage: int = 3
 
 @export var initial_y_velocity: float = 25
 var speed: float = INF

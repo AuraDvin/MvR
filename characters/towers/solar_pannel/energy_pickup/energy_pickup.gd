@@ -1,6 +1,6 @@
 extends Node2D
 
-@export var energy_amount: int
+var energy_amount: int
 # Called when the node enters the scene tree for the first time.
 func _init():
 	energy_amount = 25

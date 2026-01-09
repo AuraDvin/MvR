@@ -1,6 +1,7 @@
 extends Node2D
 
 @export var speed: float = 10
+var damage: int
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
