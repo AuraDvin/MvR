@@ -3,6 +3,7 @@ class_name SolarPannel
 
 const ENERGY_PICKUP = preload("uid://bxst250rs3x0w")
 var rng: RandomNumberGenerator
+@onready var energy_generate: AudioStreamPlayer2D = $Energy
 
 func _init():
 	price = 25
@@ -32,6 +33,7 @@ func ability() -> void:
 		$"../../../Hud"._on_basic_level_energy_changed(energy)
 		return
 	var pickup_inst = ENERGY_PICKUP.instantiate()
+	energy_generate.play()
 	var rand_offset = Vector2(rng.randf_range(-1,1), rng.randf_range(-1,1)).normalized() 
 	pickup_inst.position = global_position + (rand_offset * 50)
 	pickup_inst.energy_amount = ability_value

@@ -1,8 +1,11 @@
-[gd_scene load_steps=12 format=3 uid="uid://c31r4xho31h28"]
+[gd_scene load_steps=15 format=3 uid="uid://c31r4xho31h28"]
 
 [ext_resource type="Script" uid="uid://blk2rivjn6jmj" path="res://characters/enemies/basic_enemy/basic_enemy.gd" id="1_hlkjt"]
 [ext_resource type="Texture2D" uid="uid://biio8yughr7o8" path="res://assets/textures/tracks-sheet.png" id="2_c4jce"]
 [ext_resource type="Texture2D" uid="uid://cfkxo7w1h4jx7" path="res://assets/textures/simple-enemy-body.png" id="3_0mce4"]
+[ext_resource type="AudioStream" uid="uid://c7jdkfbrhe7vl" path="res://assets/sfx/Enemy_hit.mp3" id="4_0mce4"]
+[ext_resource type="AudioStream" uid="uid://bde2sn7py7y57" path="res://assets/sfx/Tracks_25s.mp3" id="5_jdxxv"]
+[ext_resource type="AudioStream" uid="uid://dv6wsmh8nc3iw" path="res://assets/sfx/Dmg_to_tower_pitch1.mp3" id="6_el2ld"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_c4jce"]
 size = Vector2(51.84, 51.84)
@@ -90,3 +93,14 @@ texture = ExtResource("3_0mce4")
 
 [node name="AttackTimer" type="Timer" parent="."]
 one_shot = true
+
+[node name="Enemy_hit" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_0mce4")
+bus = &"Enemy_hit"
+
+[node name="Tracks" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_jdxxv")
+bus = &"Tracks"
+
+[node name="Attack" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("6_el2ld")

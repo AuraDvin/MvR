@@ -2,6 +2,7 @@ extends Tower
 class_name Mortar
 
 const MORTAR_PROJECTILE = preload("uid://ejoce625gd0q")
+@onready var mortar: AudioStreamPlayer2D = $Mortar
 
 func _init():
 	price = 30
@@ -22,6 +23,7 @@ func ability() -> void:
 	if $"../../Lanes".get_child(y).get_child_count()<1:
 		return
 	var projectile_inst = MORTAR_PROJECTILE.instantiate()
+	mortar.play()
 	var target_enemy = $"../../Lanes".get_child(y).get_child(0)
 	projectile_inst.targetEnemy = target_enemy
 	projectile_inst.position = global_position

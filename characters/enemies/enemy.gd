@@ -22,6 +22,9 @@ signal defeated
 @onready var body_area: Area2D = $BodyArea2D
 @onready var attack_area: Area2D = $AttackArea2D
 @onready var attack_timer: Timer = $AttackTimer
+@onready var enemy_hit: AudioStreamPlayer2D = $Enemy_hit
+@onready var tracks: AudioStreamPlayer2D = $Tracks
+@onready var attack_sfx: AudioStreamPlayer2D = $Attack
 # @onready var sprite: Sprite2D = $Sprite2D
 
 func _ready() -> void:
@@ -51,6 +54,9 @@ func _physics_process(delta: float) -> void:
 	velocity.x += -speed * delta
 	if abs(velocity.x) >= max_speed:
 		velocity.x = sign(velocity.x) * max_speed
+	
+	if not tracks.playing:
+		tracks.play()
 	
 	position += velocity * delta
 	
@@ -88,6 +94,7 @@ func on_attack_area_exited(area:Area2D) -> void:
 		towers_in_range.erase(area)
 
 func _cause_damage(amount: int):
+	enemy_hit.play()
 	health_points -= amount
 	if health_points <= 0: 
 		queue_free()
