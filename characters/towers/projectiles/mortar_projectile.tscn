@@ -1,0 +1,24 @@
+[gd_scene load_steps=5 format=3 uid="uid://ejoce625gd0q"]
+
+[ext_resource type="Script" uid="uid://bwmygkc06v81y" path="res://characters/towers/projectiles/mortar_projectile.gd" id="1_6f10l"]
+[ext_resource type="Texture2D" uid="uid://cts1ly866wacc" path="res://assets/textures/settings-icon.png" id="1_vi22q"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6f10l"]
+atlas = ExtResource("1_vi22q")
+region = Rect2(142, 139.75385, 233, 228.2923)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_hveni"]
+
+[node name="MortarProjectile" type="Node2D"]
+script = ExtResource("1_6f10l")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.1, 0.1)
+texture = SubResource("AtlasTexture_6f10l")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_hveni")
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]

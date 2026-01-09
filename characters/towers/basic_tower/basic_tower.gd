@@ -15,7 +15,6 @@ func _process(delta: float) -> void:
 
 # strelja
 func ability() -> void:
-	print(x, y)
 	var projectile_inst = TURRET_PROJECTILE.instantiate()
 	projectile_inst.position = global_position + Vector2(45,-20)
 	$"../../Projectiles".add_child(projectile_inst)

@@ -5,7 +5,8 @@ extends Node2D
 # This can be used to play an effect or sound or smth
 static var line_count: int = 5
 
-var line: int = randi() % line_count # [0, line_count - 1]
+# line nastavljaš v spawnerju
+var line: int #= randi() % line_count # [0, line_count - 1]
 var velocity: Vector2
 var movable: bool = true
 var towers_in_range = {}
@@ -73,10 +74,7 @@ func ability():
 
 func on_body_area_entered(area:Area2D) -> void:
 	if area.is_in_group("bullet"):
-		health_points -= 1 
-		if health_points <= 0: 
-			queue_free()
-		area.get_parent().queue_free()
+		_cause_damage(1, area)
 
 func on_attack_area_entered(area:Area2D) -> void: 
 	if area.is_in_group("tower"):
@@ -85,3 +83,9 @@ func on_attack_area_entered(area:Area2D) -> void:
 func on_attack_area_exited(area:Area2D) -> void: 
 	if area.is_in_group("tower"):
 		towers_in_range.erase(area)
+
+func _cause_damage(amount: int, area: Area2D):
+	health_points -= amount
+	if health_points <= 0: 
+		queue_free()
+	area.get_parent().queue_free()
