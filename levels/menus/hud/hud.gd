@@ -69,3 +69,7 @@ func _on_upgrade_pressed(i: int):
 		return
 	selected_upgrades.bought_upgrades[i] += 1
 	update_costs(selected_upgrades)
+	update_energy_value(energy)
+
+func update_energy_value(new_value):
+	$MarginContainer/HBoxContainer2/VBoxContainer2/resources/energy_amount.text = str(new_value)
