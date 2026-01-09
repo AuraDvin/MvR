@@ -26,7 +26,12 @@ func get_data(res_path: String) -> LevelData:
 
 func loadLevel(res_path: String) -> LevelData: 
 	var json = JSON.new()
-	var error = json.parse(res_path)
+	var file = FileAccess.open(res_path, FileAccess.READ)
+	if file.get_error() != OK: 
+		print_debug("error opening file")
+		return null
+	
+	var error = json.parse(file.get_as_text())
 	
 	if error != OK:
 		push_error("JSON Parse Error: ", json.get_error_message(), " in ", res_path, " at line ", json.get_error_line())
