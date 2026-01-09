@@ -32,4 +32,8 @@ func _on_basic_level_energy_changed(newAmount):
 	$MarginContainer/HBoxContainer2/VBoxContainer2/resources/energy_amount.text = " " + str(newAmount)
 
 func _show_upgrades(node):
+	var upgrades = $MarginContainer/HBoxContainer2/VBoxContainer2/upgrades
+	upgrades.visible = true
+	for i in range(3):
+		upgrades.get_child(i + 1).text = UpgradeManager.upgrade_names[node.type][i]
 	pass
