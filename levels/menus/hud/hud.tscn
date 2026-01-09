@@ -1,8 +1,7 @@
-[gd_scene load_steps=13 format=3 uid="uid://c7t5icwhp12gx"]
+[gd_scene load_steps=12 format=3 uid="uid://c7t5icwhp12gx"]
 
 [ext_resource type="Script" uid="uid://drmcio5yk84ap" path="res://levels/menus/hud/hud.gd" id="1_pnpax"]
 [ext_resource type="Texture2D" uid="uid://cfgb5ug1qj1xr" path="res://assets/textures/solar-pannel-sheet.png" id="1_vtdkw"]
-[ext_resource type="LabelSettings" uid="uid://cbqx3qie0kyui" path="res://misc/LabelTheme.tres" id="2_5aamc"]
 [ext_resource type="Texture2D" uid="uid://8hmvqxym3c6b" path="res://assets/textures/shooter-turret.png" id="3_5aamc"]
 [ext_resource type="Texture2D" uid="uid://blbh53yq7ouwg" path="res://assets/textures/energy.png" id="3_buv7h"]
 [ext_resource type="Texture2D" uid="uid://cou8mdpj3qrou" path="res://assets/textures/mortar.png" id="4_buv7h"]
@@ -42,66 +41,70 @@ theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+[node name="HBoxContainer2" type="HSplitContainer" parent="MarginContainer"]
+layout_mode = 2
+dragging_enabled = false
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer2"]
 layout_mode = 2
 theme_override_constants/separation = 3
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
-layout_mode = 2
-
-[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer2"]
+[node name="Label" type="Label" parent="MarginContainer/HBoxContainer2/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 0
+theme_override_font_sizes/font_size = 21
 text = "Shop: "
-label_settings = ExtResource("2_5aamc")
 
-[node name="resources" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer2"]
+[node name="shopContainer" type="HBoxContainer" parent="MarginContainer/HBoxContainer2/VBoxContainer"]
 layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainer2/resources"]
-layout_mode = 2
-size_flags_horizontal = 10
-texture = ExtResource("3_buv7h")
-expand_mode = 2
-
-[node name="energy_amount" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer2/resources"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 32
-text = "  50"
-
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 3
 theme_override_constants/separation = 40
 
-[node name="TextureButton" type="TextureButton" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="TextureButton" type="TextureButton" parent="MarginContainer/HBoxContainer2/VBoxContainer/shopContainer"]
 layout_mode = 2
 size_flags_vertical = 0
 texture_normal = SubResource("AtlasTexture_y2vs7")
 
-[node name="TextureButton2" type="TextureButton" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="TextureButton2" type="TextureButton" parent="MarginContainer/HBoxContainer2/VBoxContainer/shopContainer"]
 layout_mode = 2
 size_flags_vertical = 0
 texture_normal = SubResource("AtlasTexture_6bkdy")
 
-[node name="TextureButton3" type="TextureButton" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="TextureButton3" type="TextureButton" parent="MarginContainer/HBoxContainer2/VBoxContainer/shopContainer"]
 material = SubResource("CanvasItemMaterial_buv7h")
 layout_mode = 2
 size_flags_vertical = 0
 texture_normal = ExtResource("4_buv7h")
 
-[node name="TextureButton4" type="TextureButton" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="TextureButton4" type="TextureButton" parent="MarginContainer/HBoxContainer2/VBoxContainer/shopContainer"]
 material = SubResource("CanvasItemMaterial_buv7h")
 layout_mode = 2
 size_flags_vertical = 0
 texture_normal = ExtResource("7_tqvyd")
 
-[node name="TextureButton5" type="TextureButton" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="TextureButton5" type="TextureButton" parent="MarginContainer/HBoxContainer2/VBoxContainer/shopContainer"]
 material = SubResource("CanvasItemMaterial_buv7h")
 layout_mode = 2
 size_flags_vertical = 0
 texture_normal = ExtResource("8_62nfb")
+
+[node name="resources" type="HBoxContainer" parent="MarginContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/HBoxContainer2/resources"]
+layout_mode = 2
+size_flags_horizontal = 10
+texture = ExtResource("3_buv7h")
+expand_mode = 2
+
+[node name="energy_amount" type="Label" parent="MarginContainer/HBoxContainer2/resources"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 16
+theme_override_font_sizes/font_size = 32
+text = "  50"
 
 [node name="Selector" type="TextureRect" parent="."]
 visible = false
