@@ -61,3 +61,11 @@ func on_body_area_entered(area:Area2D) -> void:
 		return
 	# Handle the shield vs real health
 	apply_damage(diff)
+
+func attack():
+	if(towers_in_range.is_empty()):
+		print_debug("Enemy attacking with no towers in range")
+		return
+	var target:Tower=towers_in_range.keys()[0].get_parent()
+	print_debug("Enemy attacks",target)
+	target.receive_damage(1)

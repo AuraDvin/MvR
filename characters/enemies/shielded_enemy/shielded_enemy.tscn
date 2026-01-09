@@ -8,7 +8,7 @@
 size = Vector2(51.84, 51.84)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gacjp"]
-size = Vector2(42, 20)
+size = Vector2(69, 20)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_c4jce"]
 atlas = ExtResource("1_w87x1")
@@ -62,10 +62,12 @@ animations = [{
 [sub_resource type="AtlasTexture" id="AtlasTexture_tt7lk"]
 atlas = ExtResource("2_w87x1")
 
-[node name="ShieldedEnemy" type="Node2D"]
+[node name="ShieldedEnemy" type="Node2D" groups=["enemy"]]
 script = ExtResource("1_tt7lk")
+max_speed = 20.0
+health_points = 10
 
-[node name="BodyArea2D" type="Area2D" parent="."]
+[node name="BodyArea2D" type="Area2D" parent="." groups=["enemy_body"]]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BodyArea2D"]
 shape = SubResource("RectangleShape2D_jto1h")
@@ -73,7 +75,7 @@ shape = SubResource("RectangleShape2D_jto1h")
 [node name="AttackArea2D" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackArea2D"]
-position = Vector2(-47.25, 0)
+position = Vector2(-8.5, 0)
 shape = SubResource("RectangleShape2D_gacjp")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
