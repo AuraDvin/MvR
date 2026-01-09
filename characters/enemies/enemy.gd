@@ -74,7 +74,8 @@ func ability():
 
 func on_body_area_entered(area:Area2D) -> void:
 	if area.is_in_group("bullet"):
-		_cause_damage(1, area)
+		_cause_damage(1)
+		area.get_parent().queue_free()
 
 func on_attack_area_entered(area:Area2D) -> void: 
 	if area.is_in_group("tower"):
@@ -84,8 +85,8 @@ func on_attack_area_exited(area:Area2D) -> void:
 	if area.is_in_group("tower"):
 		towers_in_range.erase(area)
 
-func _cause_damage(amount: int, area: Area2D):
+func _cause_damage(amount: int):
 	health_points -= amount
 	if health_points <= 0: 
 		queue_free()
-	area.get_parent().queue_free()
+	

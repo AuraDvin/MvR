@@ -62,7 +62,7 @@ animations = [{
 [node name="BasicEnemy" type="Node2D" groups=["enemy"]]
 script = ExtResource("1_hlkjt")
 
-[node name="BodyArea2D" type="Area2D" parent="."]
+[node name="BodyArea2D" type="Area2D" parent="." groups=["enemy_body"]]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BodyArea2D"]
 shape = SubResource("RectangleShape2D_c4jce")

@@ -1,20 +1,24 @@
 extends Tower
 class_name Mortar
 
+const MORTAR_PROJECTILE = preload("uid://ejoce625gd0q")
 
 func _init():
 	price = 30
 	return_price = 10
 	needs_check = false
-	ability_delay = 10
+	ability_delay = 4.0
 # Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	attack_timer.start()
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	pass
+	#print($AttackTimer.time_left)
 
 # strelja
 func ability() -> void:
-	#print("attacking")
-	pass
+	var projectile_inst = MORTAR_PROJECTILE.instantiate()
+	var target_enemy = $"../../Lanes".get_child(y).get_child(0)
+	projectile_inst.targetEnemy = target_enemy
+	projectile_inst.position = global_position
+	$"../../Projectiles".add_child(projectile_inst)
