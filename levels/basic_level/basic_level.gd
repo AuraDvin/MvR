@@ -6,6 +6,7 @@ class_name BasicLevel
 @onready var grid_pickups = $Pickups
 @onready var grid_projectiles = $Projectiles
 @onready var pause_popout = $PausePopout
+@onready var soundtrack: AudioStreamPlayer2D = $"../Soundtrack"
 
 var cooldown = 0.5
 var local_cooldown = 0
