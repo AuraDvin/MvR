@@ -9,8 +9,8 @@ class_name BasicLevel
 var cooldown = 0.5
 var local_cooldown = 0
 var grid_spaces = {}
-var current_wave_max_score
-var current_wave_score
+var current_wave_max_score: int
+var current_wave_score: int
 @export var lane_count = 5
 
 signal energy_changed(newAmount: int) 
@@ -21,8 +21,11 @@ var towers = [
 	preload("res://characters/towers/basic_tower/basic_tower.tscn"),
 	preload("res://characters/towers/mortar/mortar.tscn"),
 ]
-var enemy = preload("res://characters/enemies/basic_enemy/basic_enemy.tscn")
-var enemies = [ enemy ]
+var enemies = [
+	preload("res://characters/enemies/basic_enemy/basic_enemy.tscn"),
+	preload("res://characters/enemies/shielded_enemy/shielded_enemy.tscn"),
+	preload("res://characters/enemies/fast_enemy/fast_enemy.tscn")
+]
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
