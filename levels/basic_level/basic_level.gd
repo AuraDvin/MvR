@@ -5,6 +5,7 @@ class_name BasicLevel
 @onready var grid_towers = $Towers
 @onready var grid_pickups = $Pickups
 @onready var grid_projectiles = $Projectiles
+@onready var pause_popout = $PausePopout
 
 var cooldown = 0.5
 var local_cooldown = 0
@@ -45,6 +46,7 @@ func _ready():
 				tmp_enemy.queue_free()
 		print("Max level score is: ", data.max_score)
 		LevelDataManager.current_level_data = data
+		# todo: connect all the signals again(?)
 
 func free() -> void:
 	# todo: if going to pause/settings
@@ -59,6 +61,10 @@ func _process(delta):
 	if current_wave_score >= current_wave_max_score/2:
 		$EnemySpawnTimer.stop()
 		_on_enemy_spawn_timer_timeout()
+
+func _input(event: InputEvent) -> void:
+	if event.is_action_released("ui_cancel"):
+		pause_popout.visible = not pause_popout.visible
 
 
 func _on_grid_clicked_on_grid(tile_position, tile_size):
@@ -154,3 +160,12 @@ func _on_tower_health_gone(deleting_tower):
 	if deleting_tower.get_child(3) == $"../Hud".selected_upgrades:
 		$"../Hud"._hide_upgrades()
 	deleting_tower.queue_free()
+
+
+func _on_pause_popout_index_pressed(index: int) -> void:
+	if index == 0: 
+		LevelDataManager.save_state(self)
+		SceneSwitcher.switchScene("res://levels/menus/settings/settings.tscn")
+	elif index == 1: 
+		LevelDataManager.remove_existant_data()
+		SceneSwitcher.switchScene("res://levels/menus/level_select/level_select.tscn")
