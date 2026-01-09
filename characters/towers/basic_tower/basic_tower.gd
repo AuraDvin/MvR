@@ -10,11 +10,15 @@ func _init():
 	type = "basictower"
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	$Upgrades.connect("special", set_special)
 	super()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	pass
+
+func set_special():
+	$Sprite2D.frame = 1
 
 # strelja
 func ability() -> void:
