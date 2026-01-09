@@ -56,7 +56,12 @@ func _process(delta):
 func _on_grid_clicked_on_grid(tile_position, tile_size):
 	var player = $"../Player"
 	if player.holding == player.hand.NONE:
-		return
+		var selected = grid_spaces.get(tile_position) 
+		if selected == null:
+			return
+		$"../Hud/Selector".visible = true
+		$"../Hud/Selector".position = tile_position * tile_size + $Grid.position
+		$"../Hud"._show_upgrades(selected.get_child(3))
 	if player.holding == player.hand.DELETE:
 		var deleting_tower = grid_spaces.get(tile_position) 
 		if deleting_tower == null:

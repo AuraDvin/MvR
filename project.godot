@@ -20,6 +20,7 @@ config/icon="res://icon.svg"
 SceneSwitcher="*res://misc/scene_switcher.gd"
 PlayerConfig="*res://misc/player_config.gd"
 LevelDataManager="*res://misc/level_data_manager.gd"
+UpgradeManager="*res://misc/Upgrade_manager.gd"
 
 [file_customization]
 
