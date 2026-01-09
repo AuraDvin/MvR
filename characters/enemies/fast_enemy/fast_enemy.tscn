@@ -1,37 +1,36 @@
-[gd_scene load_steps=14 format=3 uid="uid://bgrnespgnxvsj"]
+[gd_scene load_steps=12 format=3 uid="uid://tuuba4br8fwe"]
 
-[ext_resource type="Script" uid="uid://7w54u5hikob6" path="res://characters/enemies/shielded_enemy/shielded_enemy.gd" id="1_tt7lk"]
-[ext_resource type="Texture2D" uid="uid://biio8yughr7o8" path="res://assets/textures/tracks-sheet.png" id="1_w87x1"]
-[ext_resource type="Texture2D" uid="uid://c7q5rix213bt0" path="res://assets/textures/shielded-enemy-body.png" id="2_w87x1"]
-[ext_resource type="AudioStream" uid="uid://b67p2y03ba3au" path="res://assets/sfx/Enemy_shield_hit.mp3" id="4_jto1h"]
+[ext_resource type="Texture2D" uid="uid://biio8yughr7o8" path="res://assets/textures/tracks-sheet.png" id="1_80125"]
+[ext_resource type="Script" uid="uid://cx7q6g7bt7rns" path="res://characters/enemies/fast_enemy/fast_enemy.gd" id="1_s5fes"]
+[ext_resource type="Texture2D" uid="uid://cfkxo7w1h4jx7" path="res://assets/textures/simple-enemy-body.png" id="2_s5fes"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_jto1h"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cfmgu"]
 size = Vector2(51.84, 51.84)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_gacjp"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6vlrf"]
 size = Vector2(69, 20)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_c4jce"]
-atlas = ExtResource("1_w87x1")
+atlas = ExtResource("1_80125")
 region = Rect2(0, 0, 35, 13)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_0mce4"]
-atlas = ExtResource("1_w87x1")
+atlas = ExtResource("1_80125")
 region = Rect2(35, 0, 35, 13)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_m50j3"]
-atlas = ExtResource("1_w87x1")
+atlas = ExtResource("1_80125")
 region = Rect2(70, 0, 35, 13)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_jdxxv"]
-atlas = ExtResource("1_w87x1")
+atlas = ExtResource("1_80125")
 region = Rect2(105, 0, 35, 13)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_el2ld"]
-atlas = ExtResource("1_w87x1")
+atlas = ExtResource("1_80125")
 region = Rect2(140, 0, 35, 13)
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_7mv01"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_6g5so"]
 resource_local_to_scene = true
 animations = [{
 "frames": [],
@@ -60,40 +59,35 @@ animations = [{
 "speed": 9.0
 }]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_tt7lk"]
-atlas = ExtResource("2_w87x1")
-
-[node name="ShieldedEnemy" type="Node2D" groups=["enemy"]]
-script = ExtResource("1_tt7lk")
-max_speed = 20.0
-health_points = 10
+[node name="FastEnemy" type="Node2D" groups=["enemy"]]
+script = ExtResource("1_s5fes")
+max_speed = 50.0
+health_points = 5
 
 [node name="BodyArea2D" type="Area2D" parent="." groups=["enemy_body"]]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BodyArea2D"]
-shape = SubResource("RectangleShape2D_jto1h")
+shape = SubResource("RectangleShape2D_cfmgu")
 
 [node name="AttackArea2D" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackArea2D"]
 position = Vector2(-8.5, 0)
-shape = SubResource("RectangleShape2D_gacjp")
+shape = SubResource("RectangleShape2D_6vlrf")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+modulate = Color(0.6431373, 0.4, 0, 1)
 position = Vector2(3, 31)
 scale = Vector2(2, 2)
-sprite_frames = SubResource("SpriteFrames_7mv01")
+sprite_frames = SubResource("SpriteFrames_6g5so")
 animation = &"tracks_roll"
 autoplay = "tracks_roll"
-
-[node name="ShieldSprite" type="Sprite2D" parent="."]
-position = Vector2(-1.7881393e-07, -11.453129)
-scale = Vector2(2.0800002, 2.0244932)
-texture = SubResource("AtlasTexture_tt7lk")
-hframes = 4
 
 [node name="AttackTimer" type="Timer" parent="."]
 one_shot = true
 
-[node name="Shield_hit" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("4_jto1h")
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(0.6431635, 0.4007443, 0.0018148181, 1)
+position = Vector2(3, -13)
+scale = Vector2(2, 2)
+texture = ExtResource("2_s5fes")

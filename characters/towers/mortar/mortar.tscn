@@ -1,0 +1,18 @@
+[gd_scene load_steps=5 format=3 uid="uid://bw5wun5j5krvm"]
+
+[ext_resource type="PackedScene" uid="uid://belhk4oowm4dq" path="res://characters/towers/basic_tower/basic_tower.tscn" id="1_q5824"]
+[ext_resource type="Script" uid="uid://c1y53t6rn7gml" path="res://characters/towers/mortar/mortar.gd" id="2_e8sm6"]
+[ext_resource type="Texture2D" uid="uid://cou8mdpj3qrou" path="res://assets/textures/mortar.png" id="3_vflsb"]
+[ext_resource type="AudioStream" uid="uid://xie5b2ut3t2x" path="res://assets/sfx/Mortar.mp3" id="4_vflsb"]
+
+[node name="mortar" instance=ExtResource("1_q5824")]
+script = ExtResource("2_e8sm6")
+max_health = 8
+current_health = 8
+
+[node name="Sprite2D" parent="." index="0"]
+texture = ExtResource("3_vflsb")
+hframes = 1
+
+[node name="Mortar" type="AudioStreamPlayer2D" parent="." index="5"]
+stream = ExtResource("4_vflsb")

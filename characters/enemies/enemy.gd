@@ -5,10 +5,15 @@ extends Node2D
 # This can be used to play an effect or sound or smth
 static var line_count: int = 5
 
-var line: int = randi() % line_count # [0, line_count - 1]
+# line nastavljaš v spawnerju
+var line: int #= randi() % line_count # [0, line_count - 1]
 var velocity: Vector2
 var movable: bool = true
 var towers_in_range = {}
+
+# Override for each enemy type, so bigger/stronger enemies progress the level more
+var score: int = 1
+signal defeated
 
 @export var speed: float
 @export var max_speed: float = 10.0
@@ -17,6 +22,9 @@ var towers_in_range = {}
 @onready var body_area: Area2D = $BodyArea2D
 @onready var attack_area: Area2D = $AttackArea2D
 @onready var attack_timer: Timer = $AttackTimer
+@onready var enemy_hit: AudioStreamPlayer2D = $Enemy_hit
+@onready var tracks: AudioStreamPlayer2D = $Tracks
+@onready var attack_sfx: AudioStreamPlayer2D = $Attack
 # @onready var sprite: Sprite2D = $Sprite2D
 
 func _ready() -> void:
@@ -47,6 +55,9 @@ func _physics_process(delta: float) -> void:
 	if abs(velocity.x) >= max_speed:
 		velocity.x = sign(velocity.x) * max_speed
 	
+	if not tracks.playing:
+		tracks.play()
+		
 	position += velocity * delta
 	
 	# For testing purposes - remove if off-screen
@@ -62,6 +73,7 @@ func _init(starting_line: int = 0, starting_speed: float = 600.0, starting_healt
 
 func _exit_tree() -> void:
 	print_debug("Enemy with name %s removed from tree" % name)
+	emit_signal("defeated",score)
 
 
 func ability():
@@ -70,9 +82,8 @@ func ability():
 
 func on_body_area_entered(area:Area2D) -> void:
 	if area.is_in_group("bullet"):
-		health_points -= 1 
-		if health_points <= 0: 
-			queue_free()
+		_cause_damage(area.get_parent().damage)
+		area.get_parent().queue_free()
 
 func on_attack_area_entered(area:Area2D) -> void: 
 	if area.is_in_group("tower"):
@@ -81,3 +92,10 @@ func on_attack_area_entered(area:Area2D) -> void:
 func on_attack_area_exited(area:Area2D) -> void: 
 	if area.is_in_group("tower"):
 		towers_in_range.erase(area)
+
+func _cause_damage(amount: int):
+	enemy_hit.play()
+	health_points -= amount
+	if health_points <= 0: 
+		queue_free()
+	

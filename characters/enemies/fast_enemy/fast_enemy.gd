@@ -1,4 +1,4 @@
-class_name BasicEnemy
+class_name FastEnemy
 extends Enemy
 
 func _ready() -> void:
@@ -16,6 +16,5 @@ func attack():
 		return
 	var target:Tower=towers_in_range.keys()[0].get_parent()
 	print_debug("Enemy attacks",target)
-	attack_sfx.play()
 	target.receive_damage(1)
 	

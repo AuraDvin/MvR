@@ -10,8 +10,8 @@ var return_price: int # on destroy currency return
 @onready var body_area : Area2D = $BodyShape2D
 @onready var attack_timer : Timer = $AttackTimer
 
-@export var ability_delay: float
-@export var ability_value: int # Damage, currency amount, other shit
+var ability_delay: float
+var ability_value: int # Damage, currency amount, other shit
 
 @export var max_health: int
 @export var current_health: int
@@ -33,13 +33,15 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	pass
+	
 func _on_timer_timeout():
 	if (not needs_check) or attack_check():
 		ability()
 	attack_timer.start(ability_delay)
 
 func _exit_tree() -> void:
-	print_debug("Tower at (x,y): (%d, %d) with name %s removed from tree" % [x, y, name])
+	pass
+	#print_debug("Tower at (x,y): (%d, %d) with name %s removed from tree" % [x, y, name])
 	# Potentially trigger death ability, like exploding?
 
 func on_body_area_entered(area:Area2D) -> void:
@@ -59,5 +61,6 @@ func ability() -> void: # tower specific
 
 func receive_damage(damage: int) -> void:
 	current_health -= damage
+	print_debug("tower %s taking damage, now has %d health" % [name,current_health])
 	if current_health <= 0:
-		health_gone.emit()  # death signal
+		health_gone.emit(self)  # death signal

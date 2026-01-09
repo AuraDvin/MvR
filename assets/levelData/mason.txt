@@ -1,0 +1,9 @@
+the numbers mean:
+	towers:
+		0 solar panel
+		1 turret (basic tower)
+		2 mortar
+	enemies:
+		0 basic
+		1 shield
+		2 fast

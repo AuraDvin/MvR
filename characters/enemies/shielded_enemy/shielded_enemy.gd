@@ -12,6 +12,7 @@ const SHIELD_STAGES: int = 4  # Full, minor cracks, major cracks, gone
 # Track shield + enemy health combined
 var last_total_hp: int
 
+@onready var shield_hit: AudioStreamPlayer2D = $Shield_hit
 
 func _ready() -> void:
 	print_debug("ready")
@@ -35,10 +36,12 @@ func apply_damage(amount: int) -> void:
 		var damage_to_shield: int = min(amount, shield_hp)
 		shield_hp -= damage_to_shield
 		amount -= damage_to_shield
+		shield_hit.play()
 		advance_frame(damage_to_shield)
 
 	# Any leftover damage goes to enemy
 	if amount > 0:
+		enemy_hit.play()
 		health_points -= amount
 		if health_points <= 0:
 			print_debug("queueueing freeing here", health_points)
@@ -61,3 +64,11 @@ func on_body_area_entered(area:Area2D) -> void:
 		return
 	# Handle the shield vs real health
 	apply_damage(diff)
+
+func attack():
+	if(towers_in_range.is_empty()):
+		print_debug("Enemy attacking with no towers in range")
+		return
+	var target:Tower=towers_in_range.keys()[0].get_parent()
+	print_debug("Enemy attacks",target)
+	target.receive_damage(1)

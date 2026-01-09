@@ -1,9 +1,11 @@
-[gd_scene load_steps=5 format=3 uid="uid://cl5i6jqism35s"]
+[gd_scene load_steps=7 format=3 uid="uid://cl5i6jqism35s"]
 
 [ext_resource type="Script" uid="uid://c2bq01dxk51eb" path="res://levels/basic_level/basic_level.gd" id="1_x83mk"]
 [ext_resource type="PackedScene" uid="uid://emqcm546jpvb" path="res://levels/grid/grid.tscn" id="2_h6lqb"]
 [ext_resource type="PackedScene" uid="uid://c7t5icwhp12gx" path="res://levels/menus/hud/hud.tscn" id="3_akcht"]
 [ext_resource type="PackedScene" uid="uid://i5tyih4l3m1m" path="res://characters/player/Player.tscn" id="4_ykins"]
+[ext_resource type="Texture2D" uid="uid://cjpsxhcfdxql6" path="res://assets/textures/bg.png" id="5_nyqwc"]
+[ext_resource type="AudioStream" uid="uid://ri4vuubg6ct0" path="res://assets/soundtracks/Glorious Morning - Metal version - SEYAR.mp3" id="6_ylr87"]
 
 [node name="BasicLevel" type="Node"]
 
@@ -23,8 +25,8 @@ script = ExtResource("1_x83mk")
 [node name="5" type="Node" parent="BasicLevel/Lanes"]
 
 [node name="Grid" parent="BasicLevel" instance=ExtResource("2_h6lqb")]
-position = Vector2(89.00001, 198)
-scale = Vector2(84.193245, 42.096622)
+position = Vector2(98.400894, 148.07295)
+scale = Vector2(86.4, 47.76)
 
 [node name="EnemySpawnTimer" type="Timer" parent="BasicLevel"]
 
@@ -32,12 +34,31 @@ scale = Vector2(84.193245, 42.096622)
 
 [node name="Pickups" type="Node" parent="BasicLevel"]
 
+[node name="Projectiles" type="Node" parent="BasicLevel"]
+
 [node name="Hud" parent="." instance=ExtResource("3_akcht")]
 custom_minimum_size = Vector2(600, 400)
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="Player" parent="." instance=ExtResource("4_ykins")]
+
+[node name="bg" type="TextureRect" parent="."]
+z_index = -10
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1, 0.995116)
+size_flags_horizontal = 4
+mouse_filter = 2
+texture = ExtResource("5_nyqwc")
+
+[node name="Soundtrack" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("6_ylr87")
+autoplay = true
+bus = &"Music"
 
 [connection signal="energy_changed" from="BasicLevel" to="Hud" method="_on_basic_level_energy_changed"]
 [connection signal="clicked_on_grid" from="BasicLevel/Grid" to="BasicLevel" method="_on_grid_clicked_on_grid"]

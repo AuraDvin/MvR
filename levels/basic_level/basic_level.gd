@@ -1,8 +1,17 @@
 extends Node2D
+class_name BasicLevel
+
+@onready var lanes = $Lanes
+@onready var grid_towers = $Towers
+@onready var grid_pickups = $Pickups
+@onready var grid_projectiles = $Projectiles
+@onready var soundtrack: AudioStreamPlayer2D = $"../Soundtrack"
 
 var cooldown = 0.5
 var local_cooldown = 0
 var grid_spaces = {}
+var current_wave_max_score: int
+var current_wave_score: int
 @export var lane_count = 5
 
 signal energy_changed(newAmount: int) 
@@ -10,26 +19,58 @@ signal energy_changed(newAmount: int)
 # Todo 
 var towers = [
 	preload("res://characters/towers/solar_pannel/solar_pannel.tscn"),
-	preload("res://characters/towers/basic_tower/basic_tower.tscn")
+	preload("res://characters/towers/basic_tower/basic_tower.tscn"),
+	preload("res://characters/towers/mortar/mortar.tscn"),
 ]
-var enemy = preload("res://characters/enemies/basic_enemy/basic_enemy.tscn")
+var enemies = [
+	preload("res://characters/enemies/basic_enemy/basic_enemy.tscn"),
+	preload("res://characters/enemies/shielded_enemy/shielded_enemy.tscn"),
+	preload("res://characters/enemies/fast_enemy/fast_enemy.tscn")
+]
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	$EnemySpawnTimer.start(RandomNumberGenerator.new().randf()* 3)
+	$EnemySpawnTimer.start(RandomNumberGenerator.new().randf_range(7, 11))
 	lane_count = $Lanes.get_child_count() 
 	$"../Hud".connect("_mode_selectd", _mode_selected)
+	
+	if not LevelDataManager.load_state(self):
+		# Set by Level Selector item button
+		var data = LevelDataManager.get_data(LevelDataManager.current_level_name)
+		for es in data.enemy_queue:
+			for e in es: 
+				# Get the amount of score for each enemy
+				print(e.type, " this many times ->", e.count)
+				var tmp_enemy = enemies[(int)(e.type)].instantiate()
+				data.max_score += tmp_enemy.score
+				tmp_enemy.queue_free()
+		print("Max level score is: ", data.max_score)
+		LevelDataManager.current_level_data = data
 
+func free() -> void:
+	# todo: if going to pause/settings
+	#LevelDataManager.save_state(self)
+	# todo: if exiting to level select 
+	#LevelDataManager.remove_existant_data()
+	pass
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	local_cooldown -= delta
+	if current_wave_score >= current_wave_max_score/2:
+		$EnemySpawnTimer.stop()
+		_on_enemy_spawn_timer_timeout()
 
 
 func _on_grid_clicked_on_grid(tile_position, tile_size):
 	var player = $"../Player"
 	if player.holding == player.hand.NONE:
-		return
+		var selected = grid_spaces.get(tile_position) 
+		if selected == null:
+			return
+		$"../Hud/Selector".visible = true
+		$"../Hud/Selector".position = tile_position * tile_size + $Grid.position
+		$"../Hud"._show_upgrades(selected.get_child(3))
 	if player.holding == player.hand.DELETE:
 		var deleting_tower = grid_spaces.get(tile_position) 
 		if deleting_tower == null:
@@ -56,6 +97,9 @@ func _on_grid_clicked_on_grid(tile_position, tile_size):
 	new_tower.position += tile_position * tile_size
 	new_tower.position += $Grid.position
 	new_tower.position += tile_size / 2
+	new_tower.x = tile_position.x
+	new_tower.y = tile_position.y
+	new_tower.health_gone.connect(_on_tower_health_gone)
 	#print(new_tower.position)
 	local_cooldown = cooldown
 	empty_selection()
@@ -63,10 +107,30 @@ func _on_grid_clicked_on_grid(tile_position, tile_size):
 func _on_enemy_spawn_timer_timeout():
 	var rng = RandomNumberGenerator.new()
 	var lane = rng.randi_range(0, self.lane_count - 1) # From to is inclusive
-	var enemy_inst = enemy.instantiate()
-	enemy_inst.position = _get_enemy_spawn_position(lane)
-	$Lanes.get_child(lane).add_child(enemy_inst)
-	$EnemySpawnTimer.start(rng.randf()* 3 + 2)
+	var next_wave = LevelDataManager.current_level_data.enemy_queue.pop_front()
+	
+	# No remaining waves
+	if next_wave == null: 
+		print_debug("last wave has spawned already")
+		# todo: if no more enemies, finish level
+		return
+	
+	current_wave_max_score = 0
+	current_wave_score = 0
+	
+	for e_data in next_wave: 
+		for i in e_data.count:
+			var enemy_inst = enemies[e_data.type].instantiate()
+			enemy_inst.defeated.connect(update_score)
+			current_wave_max_score += enemy_inst.score
+			enemy_inst.line = lane
+			enemy_inst.position = _get_enemy_spawn_position(lane)
+			$Lanes.get_child(lane).add_child(enemy_inst)
+	$EnemySpawnTimer.start(rng.randf_range(7, 11))
+
+func update_score(score: int):
+	current_wave_score += score
+	LevelDataManager.current_level_data.current_score += score
 
 func _get_enemy_spawn_position(lane) -> Vector2:
 	var bottom_left_pos = ($Grid.position + $Grid/BottomLeft.position * $Grid.scale)
@@ -82,3 +146,9 @@ func empty_selection():
 	var player = $"../Player"
 	player.holding = player.hand.NONE
 	$"../Hud/Selector".visible = false
+
+func _on_tower_health_gone(deleting_tower):
+	if deleting_tower == null:
+		print_debug("deleting null tower after destruction")
+		return
+	deleting_tower.queue_free()

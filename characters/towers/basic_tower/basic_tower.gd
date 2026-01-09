@@ -1,13 +1,27 @@
 extends Tower
 class_name BasicTower
 
+const TURRET_PROJECTILE = preload("uid://ookojfhe8b4l")
+
+@onready var tower_attack: AudioStreamPlayer2D = $Attack
+
 func _init():
 	self.price = 10
+	needs_check = true
+	ability_value = 1
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	attack_timer.start()
+	super()
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	pass
 
 # strelja
+func ability() -> void:
+	tower_attack.play()
+	var projectile_inst = TURRET_PROJECTILE.instantiate()
+	projectile_inst.position = global_position + Vector2(45,-20)
+	projectile_inst.damage = ability_value
+	$"../../Projectiles".add_child(projectile_inst)
+	
