@@ -13,9 +13,9 @@ var return_price: int # on destroy currency return
 var ability_delay: float
 var ability_value: int # Damage, currency amount, other shit
 
-@export var max_health: int
-@export var current_health: int
-@export var needs_check: bool
+var max_health: int
+var current_health: int
+var needs_check: bool
 
 signal health_gone
 
