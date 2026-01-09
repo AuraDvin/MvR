@@ -25,5 +25,7 @@ func ability() -> void:
 	var projectile_inst = TURRET_PROJECTILE.instantiate()
 	projectile_inst.position = global_position + Vector2(45,-20)
 	projectile_inst.damage = ability_value
+	if special:
+		projectile_inst.special()
 	$"../../Projectiles".add_child(projectile_inst)
 	

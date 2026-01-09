@@ -6,6 +6,7 @@ var selected_upgrades
 	 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	
 	await get_tree().process_frame
 	for child in $MarginContainer/HBoxContainer2/VBoxContainer2/upgrades.get_children():
 		if child.name == "Label":
@@ -39,6 +40,8 @@ func _on_basic_level_energy_changed(newAmount):
 
 func _show_upgrades(node):
 	var upgrades = $MarginContainer/HBoxContainer2/VBoxContainer2/upgrades
+	var box_container = $MarginContainer/HBoxContainer2/VBoxContainer/shopContainer
+	$Selector.size = box_container.get_child(0).size * box_container.get_child(0).scale
 	upgrades.visible = true
 	selected_upgrades = node
 	update_costs(node)
