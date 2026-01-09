@@ -177,4 +177,4 @@ func _on_pause_popout_index_pressed(index: int) -> void:
 		SceneSwitcher.switchScene("res://levels/menus/settings/settings.tscn")
 	elif index == 1: 
 		LevelDataManager.remove_existant_data()
-		SceneSwitcher.switchScene("res://levels/menus/level_select/level_select.tscn")
+		SceneSwitcher.returnToPrevScene()
