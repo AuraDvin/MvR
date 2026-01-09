@@ -1,4 +1,5 @@
 extends Node2D
+class_name BasicLevel
 
 var cooldown = 0.5
 var local_cooldown = 0
