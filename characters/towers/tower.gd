@@ -11,7 +11,7 @@ var return_price: int # on destroy currency return
 @onready var attack_timer : Timer = $AttackTimer
 
 var ability_delay: float
-@export var ability_value: int # Damage, currency amount, other shit
+var ability_value: int # Damage, currency amount, other shit
 
 @export var max_health: int
 @export var current_health: int

@@ -76,7 +76,7 @@ func ability():
 
 func on_body_area_entered(area:Area2D) -> void:
 	if area.is_in_group("bullet"):
-		_cause_damage(1)
+		_cause_damage(area.get_parent().damage)
 		area.get_parent().queue_free()
 
 func on_attack_area_entered(area:Area2D) -> void: 
