@@ -63,18 +63,32 @@ func loadLevel(res_path: String) -> LevelData:
 		return null
 
 func save_state(level: BasicLevel) -> void: 
+	current_level_data.enemies = [[],[],[],[]]
+	current_level_data.towers = []
+	current_level_data.pickups = []
+	current_level_data.projectiles = []
+	
 	for i in range(1, 5): 
-		current_level_data.enemies[i-1] = level.lanes.find_child(str(i)).get_children().duplicate()
-	current_level_data.towers = level.grid_towers.duplicate()
-	current_level_data.pickups = level.grid_pickups.duplicate()
-	current_level_data.projectiles = level.grid_projectiles.duplicate()
-
+		for enemies_in_lane in level.lanes.find_child(str(i)).get_children().duplicate_deep():
+			enemies_in_lane.get_parent().remove_child(enemies_in_lane)
+			current_level_data.enemies[i-1].append(enemies_in_lane)
+	for towerss in level.grid_towers.get_children().duplicate_deep():
+		towerss.get_parent().remove_child(towerss)
+		current_level_data.towers.append(towerss)
+	for pickup in level.grid_pickups.get_children().duplicate_deep():
+		pickup.get_parent().remove_child(pickup)
+		current_level_data.pickups.append(pickup)
+	for projectile in level.grid_projectiles.get_children().duplicate_deep():
+		projectile.get_parent().remove_child(projectile)
+		current_level_data.projectiles.append(projectile)
+	print_debug(current_level_data)
+	
 func load_state(level: BasicLevel) -> bool:
 	if current_level_data == null: 
 		return false
-	
 	for i in range(1, 5): 
-		level.lanes.find_child(str(i)).add_child(current_level_data.enemies[i-1])
+		for e in current_level_data.enemies[i-1]:
+			level.lanes.find_child(str(i)).add_child(e)
 	for t in current_level_data.towers:
 		level.grid_towers.add_child(t)
 	for p in current_level_data.pickups: 
