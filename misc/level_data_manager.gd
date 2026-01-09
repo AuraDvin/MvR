@@ -15,6 +15,7 @@ class LevelData:
 # Holds the data of level being currently played 
 # This gets cleared on level exit
 var current_level_data: LevelData = null
+var current_level_name: String
 
 func remove_existant_data() -> void: 
 	current_level_data = null
