@@ -1,16 +1,17 @@
 extends Node
 
 class LevelData: 
-	var current_score: int			# From defeated enemies up until this point
-	var max_score: int  			# After defeating all the enemies
-	var enemy_queue = []			# Spawning information (swarms)
-	var background_path: String		# Image to use as background 
+	var current_score: int					# From defeated enemies up until this point
+	var max_score: int  					# After defeating all the enemies
+	var enemy_queue = []					# Spawning information (swarms)
+	var background_path: String				# Image to use as background 
 	
-	var energy: int					# Player's energy before pausing
-	var enemies = [[], [], [], []]	# Placed enemies 
-	var towers = []					# Placed towers
-	var projectiles = []			# Projectiles on screen
-	var pickups = []				# Pickups on screen
+	var energy: int							# Player's energy before pausing
+	var enemies = [[], [], [], []]			# Placed enemies 
+	var towers = []							# Placed towers
+	var projectiles = []					# Projectiles on screen
+	var pickups = []						# Pickups on screen
+	var wave_time_remaining: float = 0.0	# Time left in the wave
 
 # Holds the data of level being currently played 
 # This gets cleared on level exit
@@ -67,6 +68,7 @@ func save_state(level: BasicLevel) -> void:
 	current_level_data.towers = []
 	current_level_data.pickups = []
 	current_level_data.projectiles = []
+	current_level_data.wave_time_remaining = level.wave_spawn_timer.time_left
 	
 	for i in range(1, 5): 
 		for enemies_in_lane in level.lanes.find_child(str(i)).get_children().duplicate_deep():
@@ -86,6 +88,7 @@ func save_state(level: BasicLevel) -> void:
 func load_state(level: BasicLevel) -> bool:
 	if current_level_data == null: 
 		return false
+	
 	for i in range(1, 5): 
 		for e in current_level_data.enemies[i-1]:
 			level.lanes.find_child(str(i)).add_child(e)
