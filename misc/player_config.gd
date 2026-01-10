@@ -63,3 +63,22 @@ func set_level_beat(value: int) -> void:
 func _notification(what):
 	if what == NOTIFICATION_WM_CLOSE_REQUEST:
 		save()
+
+
+func apply_volumes():
+	set_bus_volume("Music", get_volume_music())
+	set_bus_volume("Sfx", get_volume_sfx())
+
+func set_bus_volume(bus_name: String, slider_value: float) -> void:
+	var bus_index: int = AudioServer.get_bus_index(bus_name)
+	if bus_index == -1:
+		return
+
+	# Slider 0–100 → linear 0.0–1.0
+	var linear: float = slider_value / 100.0
+
+	# Avoid -inf dB
+	linear = max(linear, 0.001)
+
+	var db: float = linear_to_db(linear)
+	AudioServer.set_bus_volume_db(bus_index, db)
