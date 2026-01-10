@@ -9,6 +9,9 @@ extends Control
 
 
 func _ready() -> void:
+	set_volume_on_start()
+
+func set_volume_on_start():
 	var music: float = PlayerConfig.get_volume_music()
 	var sfx: float = PlayerConfig.get_volume_sfx()
 
@@ -19,8 +22,8 @@ func _ready() -> void:
 	sfx_volume.text = str(int(sfx))
 
 	# Apply volumes immediately
-	set_bus_volume("Music", music)
-	set_bus_volume("Sfx", sfx)
+	PlayerConfig.set_bus_volume("Music", music)
+	PlayerConfig.set_bus_volume("Sfx", sfx)
 
 
 func _on_return_btn_pressed() -> void:
@@ -30,25 +33,25 @@ func _on_return_btn_pressed() -> void:
 func _on_music_slider_value_changed(value: float) -> void:
 	PlayerConfig.set_volume_music(value)
 	music_volume.text = str(int(value))
-	set_bus_volume("Music", value)
+	PlayerConfig.set_bus_volume("Music", value)
 
 
 func _on_effects_slider_value_changed(value: float) -> void:
 	PlayerConfig.set_volume_effects(value)
 	sfx_volume.text = str(int(value))
-	set_bus_volume("Sfx", value)
+	PlayerConfig.set_bus_volume("Sfx", value)
 
 
-func set_bus_volume(bus_name: String, slider_value: float) -> void:
-	var bus_index: int = AudioServer.get_bus_index(bus_name)
-	if bus_index == -1:
-		return
-
-	# Slider 0–100 → linear 0.0–1.0
-	var linear: float = slider_value / 100.0
-
-	# Avoid -inf dB
-	linear = max(linear, 0.001)
-
-	var db: float = linear_to_db(linear)
-	AudioServer.set_bus_volume_db(bus_index, db)
+#func set_bus_volume(bus_name: String, slider_value: float) -> void:
+	#var bus_index: int = AudioServer.get_bus_index(bus_name)
+	#if bus_index == -1:
+		#return
+#
+	## Slider 0–100 → linear 0.0–1.0
+	#var linear: float = slider_value / 100.0
+#
+	## Avoid -inf dB
+	#linear = max(linear, 0.001)
+#
+	#var db: float = linear_to_db(linear)
+	#AudioServer.set_bus_volume_db(bus_index, db)
