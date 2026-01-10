@@ -83,8 +83,7 @@ func save_state(level: BasicLevel) -> void:
 	for projectile in level.grid_projectiles.get_children().duplicate_deep():
 		projectile.get_parent().remove_child(projectile)
 		current_level_data.projectiles.append(projectile)
-	print_debug(current_level_data)
-	
+
 func load_state(level: BasicLevel) -> bool:
 	if current_level_data == null: 
 		return false

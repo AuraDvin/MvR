@@ -14,17 +14,20 @@ func switchScene(res_path: String) -> void:
 
 func defferedSwitchScene(res_path: String) -> void:
 	current_scene.free() 
+	
 	var s = load(res_path)
-	print_debug("new scene -> ", res_path)
 	current_scene = s.instantiate()
 	scene_history.append(res_path) 
+	
 	get_tree().root.add_child(current_scene)
 
 func returnToPrevScene() -> void: 
-	print_debug("last ", scene_history.pop_back()) # current scene
+	var print_str = "Returning %s -> %s scene"
+	var curr_old = scene_history.pop_back() # current scene
 	var s = scene_history.pop_back() # last scene
-	print_debug("s ", s)
 	# Fallback to main_menu scene
 	if s == null: 
 		s = "res://levels/menus/main_menu/main_menu.tscn"
+	
+	print_debug(print_str % [curr_old, s])
 	switchScene(s)
