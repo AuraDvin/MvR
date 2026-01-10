@@ -58,3 +58,8 @@ func set_level_beat(value: int) -> void:
 	if value > 5: 
 		value = 5
 	last_beat_level = value
+
+# Save on exit via x button
+func _notification(what):
+	if what == NOTIFICATION_WM_CLOSE_REQUEST:
+		save()
