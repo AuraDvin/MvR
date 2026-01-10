@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://d0o7unf8sblwn"]
+[gd_scene load_steps=12 format=3 uid="uid://d0o7unf8sblwn"]
 
 [ext_resource type="Script" uid="uid://3b13wr3ettbf" path="res://levels/menus/main_menu/main_menu.gd" id="1_s1k5s"]
 [ext_resource type="PackedScene" uid="uid://ckfkoclivdl6b" path="res://levels/menus/level_select/level_select.tscn" id="2_0g4bd"]
@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://bk5hv6sur2uld" path="res://assets/textures/button-play-hover.png" id="7_ksmip"]
 [ext_resource type="Texture2D" uid="uid://cwtr0qbej2i88" path="res://assets/textures/button-back-normal.png" id="8_jpnl1"]
 [ext_resource type="Texture2D" uid="uid://bralhae1f5kru" path="res://assets/textures/button-back-hover.png" id="9_yika2"]
+[ext_resource type="PackedScene" uid="uid://crgs58y67etoe" path="res://levels/menus/menu-bg/menu_bg.tscn" id="10_yika2"]
 
 [sub_resource type="Theme" id="Theme_6huvb"]
 
@@ -75,6 +76,9 @@ initial_position = 4
 size = Vector2i(329, 106)
 dialog_text = "You are about to exit Machine VS Robots"
 dialog_autowrap = true
+
+[node name="menuBg" parent="." instance=ExtResource("10_yika2")]
+layout_mode = 1
 
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/SettingsBTN" to="." method="_on_settings_btn_pressed"]
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/PlayBTN" to="." method="_on_play_btn_pressed"]

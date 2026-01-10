@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://cda4i2ncmge2x"]
+[gd_scene load_steps=8 format=3 uid="uid://cda4i2ncmge2x"]
 
 [ext_resource type="Script" uid="uid://xi7rhi2d0kjs" path="res://levels/menus/settings/settings.gd" id="1_uu6rw"]
 [ext_resource type="Texture2D" uid="uid://cwtr0qbej2i88" path="res://assets/textures/button-back-normal.png" id="2_15gkg"]
@@ -6,6 +6,7 @@
 [ext_resource type="LabelSettings" uid="uid://dk5rixitres36" path="res://misc/PageTitleLabelTheme.tres" id="3_ifqal"]
 [ext_resource type="LabelSettings" uid="uid://ddwwuccbw03wi" path="res://misc/PageSubtitleLabelTheme.tres" id="4_rrw4a"]
 [ext_resource type="LabelSettings" uid="uid://cbqx3qie0kyui" path="res://misc/LabelTheme.tres" id="5_15gkg"]
+[ext_resource type="PackedScene" uid="uid://crgs58y67etoe" path="res://levels/menus/menu-bg/menu_bg.tscn" id="7_d17uv"]
 
 [node name="Settings" type="Control"]
 layout_mode = 3
@@ -100,6 +101,9 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
 value = 100.0
+
+[node name="menuBg" parent="." instance=ExtResource("7_d17uv")]
+layout_mode = 1
 
 [connection signal="pressed" from="ReturnBTN" to="." method="_on_return_btn_pressed"]
 [connection signal="value_changed" from="VBoxContainer/ScrollContainer/VBoxContainer/VBoxContainer/HBoxContainer/MusicSlider" to="." method="_on_music_slider_value_changed"]
