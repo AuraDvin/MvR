@@ -50,8 +50,8 @@ func loadLevel(res_path: String) -> LevelData:
 	current_level_data.background_path = data_dict["background"]
 	
 	if typeof(data_dict["enemies"]) == TYPE_ARRAY:
+		var swarm = 0
 		for enemies_arr in data_dict["enemies"]: 
-			var swarm = 0
 			for enemy_dict in enemies_arr:
 				while current_level_data.enemy_queue.size() <= swarm: 
 					current_level_data.enemy_queue.append([])
