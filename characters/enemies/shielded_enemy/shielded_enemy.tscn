@@ -64,6 +64,7 @@ atlas = ExtResource("2_w87x1")
 
 [node name="ShieldedEnemy" type="Node2D" groups=["enemy"]]
 script = ExtResource("1_tt7lk")
+speed = 15.0
 max_speed = 20.0
 health_points = 10
 

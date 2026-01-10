@@ -64,6 +64,7 @@ animations = [{
 
 [node name="BasicEnemy" type="Node2D" groups=["enemy"]]
 script = ExtResource("1_hlkjt")
+speed = 20.0
 max_speed = 20.0
 health_points = 10
 
