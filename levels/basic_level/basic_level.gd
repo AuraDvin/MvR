@@ -9,6 +9,7 @@ signal energy_changed(newAmount: int)
 @onready var grid_projectiles = $Projectiles
 @onready var pause_popout = $PausePopout
 @onready var soundtrack: AudioStreamPlayer2D = $"../Soundtrack"
+@onready var wave_spawn_timer = $EnemySpawnTimer
 
 var lane_count = 5
 var cooldown = 0.5
@@ -18,7 +19,7 @@ var current_wave_max_score: int = INF
 var stop_spawning = false
 var local_cooldown = 0
 var current_wave_score: int = -INF
-var timer_text: String
+var timer_text: String = "Game start!"
 
 
 var towers = [
@@ -35,8 +36,6 @@ var enemies = [
 
 func _ready():
 	$AcceptDialog.visible = false
-	$ChangeTimerLabel.emit_signal("timeout")
-	$EnemySpawnTimer.start(RandomNumberGenerator.new().randf_range(7, 11))
 	lane_count = $Lanes.get_child_count() 
 	$"../Hud".connect("_mode_selectd", _mode_selected)
 	print_debug("Hello")
@@ -52,7 +51,8 @@ func _ready():
 				tmp_enemy.queue_free()
 		print("Max level score is: ", data.max_score)
 		LevelDataManager.current_level_data = data
-	# todo: connect all the signals again(?)
+		# Spawn first wave (also updates the timer string)
+		$EnemySpawnTimer.emit_signal("timeout")
 	else: 
 		for tower: Tower in grid_towers.get_children():
 			var tower_pos = Vector2(tower.x, tower.y)
@@ -60,6 +60,10 @@ func _ready():
 		for lane in lanes.get_children():
 			for enemy: Enemy in lane.get_children(): 
 				enemy.defeated.connect(update_score)
+		print_debug("Printing with time", LevelDataManager.current_level_data.wave_time_remaining)
+		# use the wait time that was loaded from level data
+		$EnemySpawnTimer.start(LevelDataManager.current_level_data.wave_time_remaining) 
+		$ChangeTimerLabel.emit_signal("timeout") # immediatelly update timer string
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -133,6 +137,10 @@ func _on_enemy_spawn_timer_timeout():
 	if stop_spawning:
 		return
 	
+	# Assume this is player quitting the level
+	if LevelDataManager.current_level_data == null: 
+		return
+	
 	var next_wave = LevelDataManager.current_level_data.enemy_queue.pop_front()
 	
 	if next_wave == null: 
@@ -169,7 +177,8 @@ func spawn_wave(next_wave):
 
 func update_score(score: int):
 	current_wave_score += score
-	LevelDataManager.current_level_data.current_score += score
+	if LevelDataManager.current_level_data != null:
+		LevelDataManager.current_level_data.current_score += score
 
 func _get_enemy_spawn_position(lane) -> Vector2:
 	var bottom_left_pos = ($Grid.position + $Grid/BottomLeft.position * $Grid.scale)
@@ -208,8 +217,7 @@ func win():
 
 func _on_pause_popout_index_pressed(index: int) -> void:
 	if index == 0: 
-		# LevelDataManager.save_state(self)
-		LevelDataManager.save_state.call_deferred(self)
+		LevelDataManager.save_state(self)
 		SceneSwitcher.switchScene("res://levels/menus/settings/settings.tscn")
 	elif index == 1: 
 		LevelDataManager.remove_existant_data.call_deferred()
