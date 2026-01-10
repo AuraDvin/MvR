@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://bpr6i4auacjqh"]
+[gd_scene load_steps=6 format=3 uid="uid://bpr6i4auacjqh"]
 
 [ext_resource type="Texture2D" uid="uid://dg010i0tmssyt" path="res://assets/textures/lock-icon.png" id="1_th1cx"]
 [ext_resource type="Script" uid="uid://cshjpgium5mq1" path="res://levels/menus/level_select/level_selection_item.gd" id="2_th1cx"]
+[ext_resource type="PackedScene" uid="uid://jhu4taxpxon4" path="res://assets/particles/Confetti.tscn" id="3_j4gyi"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_th1cx"]
 texture = ExtResource("1_th1cx")
@@ -25,5 +26,15 @@ theme_override_font_sizes/font_size = 214
 theme_override_styles/disabled = SubResource("StyleBoxTexture_th1cx")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_th1cx")
 script = ExtResource("2_th1cx")
+
+[node name="Confetti" parent="." instance=ExtResource("3_j4gyi")]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
 
 [connection signal="pressed" from="." to="." method="_on_pressed"]

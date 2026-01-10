@@ -8,7 +8,7 @@ var selected_level = 0
 var old_selected = 0
 # Index of the last level that the player unlocked 
 var last_level_unlocked
-
+var last_level = 5
 
 func _ready() -> void:
 	last_level_unlocked = PlayerConfig.get_level_beat()
@@ -22,7 +22,13 @@ func _process(_delta: float) -> void:
 	if old_selected == selected_level: 
 		return 
 	old_selected = selected_level
-	if selected_level <= last_level_unlocked:
+	print(selected_level)
+	if selected_level >= last_level && last_level_unlocked == last_level: 
+		# The last level in game 
+		selected_level_ref.disabled = false
+		selected_level_ref.text = "The end"
+		print("the end")
+	elif selected_level <= last_level_unlocked:
 		selected_level_ref.disabled = false
 		selected_level_ref.text = str(selected_level + 1)
 	else:
