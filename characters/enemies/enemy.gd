@@ -20,7 +20,6 @@ signal defeated
 @export var health_points: int = 3
 
 
-
 @onready var body_area: Area2D = $BodyArea2D
 @onready var attack_area: Area2D = $AttackArea2D
 @onready var attack_timer: Timer = $AttackTimer
@@ -57,14 +56,11 @@ func _physics_process(delta: float) -> void:
 	if not movable: 
 		return
 	
-	velocity.x += -speed * delta
-	if abs(velocity.x) >= max_speed:
-		velocity.x = sign(velocity.x) * max_speed
-	
 	if not tracks.playing:
 		tracks.play()
 	
-	position += velocity * delta
+	var veloc = Vector2(-speed, 0) * delta
+	position += veloc
 	
 	# For testing purposes - remove if off-screen
 	if position.x <= -20000.0:
