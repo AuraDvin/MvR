@@ -1,17 +1,9 @@
-[gd_scene load_steps=16 format=3 uid="uid://bgrnespgnxvsj"]
+[gd_scene load_steps=11 format=3 uid="uid://bgrnespgnxvsj"]
 
-[ext_resource type="Script" uid="uid://7w54u5hikob6" path="res://characters/enemies/shielded_enemy/shielded_enemy.gd" id="1_tt7lk"]
+[ext_resource type="PackedScene" uid="uid://c31r4xho31h28" path="res://characters/enemies/basic_enemy/basic_enemy.tscn" id="1_tt7lk"]
 [ext_resource type="Texture2D" uid="uid://biio8yughr7o8" path="res://assets/textures/tracks-sheet.png" id="1_w87x1"]
+[ext_resource type="Script" uid="uid://7w54u5hikob6" path="res://characters/enemies/shielded_enemy/shielded_enemy.gd" id="2_tt7lk"]
 [ext_resource type="Texture2D" uid="uid://c7q5rix213bt0" path="res://assets/textures/shielded-enemy-body.png" id="2_w87x1"]
-[ext_resource type="AudioStream" uid="uid://c7jdkfbrhe7vl" path="res://assets/sfx/Enemy_hit.mp3" id="4_7mv01"]
-[ext_resource type="AudioStream" uid="uid://bde2sn7py7y57" path="res://assets/sfx/Tracks_25s.mp3" id="5_y4d8v"]
-[ext_resource type="AudioStream" uid="uid://dv6wsmh8nc3iw" path="res://assets/sfx/Dmg_to_tower_pitch1.mp3" id="6_0lfpc"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_jto1h"]
-size = Vector2(51.84, 51.84)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_gacjp"]
-size = Vector2(69, 20)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_c4jce"]
 atlas = ExtResource("1_w87x1")
@@ -33,7 +25,7 @@ region = Rect2(105, 0, 35, 13)
 atlas = ExtResource("1_w87x1")
 region = Rect2(140, 0, 35, 13)
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_7mv01"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_jto1h"]
 resource_local_to_scene = true
 animations = [{
 "frames": [],
@@ -62,49 +54,17 @@ animations = [{
 "speed": 9.0
 }]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_tt7lk"]
-atlas = ExtResource("2_w87x1")
-
-[node name="ShieldedEnemy" type="Node2D" groups=["enemy"]]
-script = ExtResource("1_tt7lk")
+[node name="ShieldedEnemy" instance=ExtResource("1_tt7lk")]
+script = ExtResource("2_tt7lk")
+shield_hp = 0
 speed = 15.0
-max_speed = 20.0
-health_points = 10
+max_speed = 10.0
+health_points = 3
 
-[node name="BodyArea2D" type="Area2D" parent="." groups=["enemy_body"]]
+[node name="AnimatedSprite2D" parent="." index="2"]
+sprite_frames = SubResource("SpriteFrames_jto1h")
+frame_progress = 0.0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="BodyArea2D"]
-shape = SubResource("RectangleShape2D_jto1h")
-
-[node name="AttackArea2D" type="Area2D" parent="."]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackArea2D"]
-position = Vector2(-8.5, 0)
-shape = SubResource("RectangleShape2D_gacjp")
-
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-position = Vector2(3, 31)
-scale = Vector2(2, 2)
-sprite_frames = SubResource("SpriteFrames_7mv01")
-animation = &"tracks_roll"
-autoplay = "tracks_roll"
-
-[node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(-1.7881393e-07, -11.453129)
-scale = Vector2(2.0800002, 2.0244932)
-texture = SubResource("AtlasTexture_tt7lk")
+[node name="Sprite2D" parent="." index="3"]
+texture = ExtResource("2_w87x1")
 hframes = 4
-
-[node name="AttackTimer" type="Timer" parent="."]
-one_shot = true
-
-[node name="Enemy_hit" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("4_7mv01")
-
-[node name="Tracks" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("5_y4d8v")
-
-[node name="Attack" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("6_0lfpc")
-
-[node name="SlowTimer" type="Timer" parent="."]

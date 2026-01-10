@@ -3,6 +3,7 @@ extends Control
 @onready var selected_level_ref = $HBoxContainer/LevelSelectionItem
 @onready var left_btn = $HBoxContainer/LeftLevelPickBTN
 @onready var right_btn = $HBoxContainer/RightLevelPickBTN
+@onready var box = $HBoxContainer
 
 var selected_level = 0
 var old_selected = 0
@@ -11,6 +12,12 @@ var last_level_unlocked
 var last_level = 5
 
 func _ready() -> void:
+	
+	box.add_spacer(true)
+	box.add_spacer(false)
+	box.move_child(left_btn, 0)
+	box.move_child(right_btn, box.get_child_count() - 1)
+	
 	last_level_unlocked = PlayerConfig.get_level_beat()
 	selected_level_ref.text = "1"
 	selected_level_ref.grab_focus.call_deferred()
