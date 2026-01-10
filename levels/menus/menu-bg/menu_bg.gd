@@ -12,5 +12,5 @@ func _ready():
 func _physics_process(delta):
 	background_texture.position.y += speed * delta
 	var diff = background_texture.position.y - init_y
-	if diff > background_texture.size.y / 5:
+	if diff > background_texture.size.y / 5: #loopa na 1/5 texture
 		background_texture.position.y -= background_texture.size.y / 5
