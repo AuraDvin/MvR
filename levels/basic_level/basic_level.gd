@@ -42,6 +42,9 @@ func _ready():
 	if not LevelDataManager.load_state(self):
 		# Set by Level Selector item button
 		var data = LevelDataManager.get_data(LevelDataManager.current_level_name)
+		if data.energy == TYPE_INT:
+			$"../Player".energy=data.energy
+		$"../Player".energy=data.energy
 		for es in data.enemy_queue:
 			for e in es: 
 				# Get the amount of score for each enemy

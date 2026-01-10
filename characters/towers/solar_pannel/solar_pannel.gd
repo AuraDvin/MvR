@@ -6,6 +6,8 @@ var rng: RandomNumberGenerator
 @onready var energy_generate: AudioStreamPlayer2D = $Energy
 
 func _init():
+	max_health=3
+	current_health=3
 	price = 25
 	return_price = 10
 	needs_check = false

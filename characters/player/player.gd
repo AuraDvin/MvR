@@ -8,7 +8,7 @@ enum hand {SOLAR, TURRET, MORTAR, DELETE, NONE}
 
 var money: int = 0
 var maxHealth: int = 3
-var energy: int = 500
+var energy: int = 25	#energy should be read from leveldata and changed by basiclevel.gd
 var currentHealth: int = maxHealth
 var holding: hand = hand.NONE
 
