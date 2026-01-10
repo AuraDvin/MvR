@@ -1,0 +1,110 @@
+[gd_scene load_steps=2 format=3 uid="uid://jhu4taxpxon4"]
+
+[sub_resource type="Curve" id="Curve_f0mjk"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.9941861, 0.46067423), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[node name="Confetti" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+
+[node name="green" type="CPUParticles2D" parent="."]
+emitting = false
+amount = 16
+lifetime = 4.0
+one_shot = true
+explosiveness = 0.8
+randomness = 0.2
+local_coords = true
+direction = Vector2(0, -1)
+gravity = Vector2(0, 150)
+initial_velocity_min = 278.34
+initial_velocity_max = 505.15
+scale_amount_min = 4.0
+scale_amount_max = 10.0
+scale_amount_curve = SubResource("Curve_f0mjk")
+color = Color(0.20249999, 0.75, 0.20249999, 1)
+
+[node name="red" type="CPUParticles2D" parent="."]
+emitting = false
+amount = 16
+lifetime = 4.0
+one_shot = true
+explosiveness = 0.8
+randomness = 0.2
+local_coords = true
+direction = Vector2(0, -1)
+gravity = Vector2(0, 150)
+initial_velocity_min = 278.34
+initial_velocity_max = 505.15
+scale_amount_min = 4.0
+scale_amount_max = 10.0
+scale_amount_curve = SubResource("Curve_f0mjk")
+color = Color(0.75, 0.12000002, 0.12000002, 1)
+
+[node name="blue" type="CPUParticles2D" parent="."]
+emitting = false
+amount = 16
+lifetime = 4.0
+one_shot = true
+explosiveness = 0.8
+randomness = 0.2
+local_coords = true
+direction = Vector2(0, -1)
+gravity = Vector2(0, 150)
+initial_velocity_min = 278.34
+initial_velocity_max = 505.15
+scale_amount_min = 4.0
+scale_amount_max = 10.0
+scale_amount_curve = SubResource("Curve_f0mjk")
+color = Color(0.20249999, 0.43975005, 0.75, 1)
+
+[node name="white" type="CPUParticles2D" parent="."]
+emitting = false
+amount = 16
+lifetime = 4.0
+one_shot = true
+explosiveness = 0.8
+randomness = 0.2
+local_coords = true
+direction = Vector2(0, -1)
+gravity = Vector2(0, 150)
+initial_velocity_min = 278.34
+initial_velocity_max = 505.15
+scale_amount_min = 4.0
+scale_amount_max = 10.0
+scale_amount_curve = SubResource("Curve_f0mjk")
+
+[node name="yellow" type="CPUParticles2D" parent="."]
+emitting = false
+amount = 16
+lifetime = 4.0
+one_shot = true
+explosiveness = 0.8
+randomness = 0.2
+local_coords = true
+direction = Vector2(0, -1)
+gravity = Vector2(0, 150)
+initial_velocity_min = 278.34
+initial_velocity_max = 505.15
+scale_amount_min = 4.0
+scale_amount_max = 10.0
+scale_amount_curve = SubResource("Curve_f0mjk")
+color = Color(0.84, 0.79856, 0.21839999, 1)
+
+[node name="pink" type="CPUParticles2D" parent="."]
+emitting = false
+amount = 16
+lifetime = 4.0
+one_shot = true
+explosiveness = 0.8
+randomness = 0.2
+local_coords = true
+direction = Vector2(0, -1)
+gravity = Vector2(0, 150)
+initial_velocity_min = 278.34
+initial_velocity_max = 505.15
+scale_amount_min = 4.0
+scale_amount_max = 10.0
+scale_amount_curve = SubResource("Curve_f0mjk")
+color = Color(0.91, 0.37310004, 0.7668268, 1)
