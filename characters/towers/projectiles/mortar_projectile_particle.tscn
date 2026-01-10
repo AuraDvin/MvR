@@ -1,0 +1,30 @@
+[gd_scene load_steps=3 format=3 uid="uid://cyxqmbusyi2dq"]
+
+[ext_resource type="Script" uid="uid://ccabwgrf3dl32" path="res://characters/towers/projectiles/mortar_projectile_particle.gd" id="1_erleh"]
+
+[sub_resource type="Gradient" id="Gradient_ga1u6"]
+colors = PackedColorArray(0.13319641, 0.13319641, 0.13319638, 1, 1, 1, 1, 1)
+
+[node name="MortarProjectileParticle" type="Node2D"]
+script = ExtResource("1_erleh")
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+emitting = false
+amount = 16
+lifetime = 0.26
+one_shot = true
+speed_scale = 1.66
+explosiveness = 0.3
+randomness = 0.09
+direction = Vector2(0, -1)
+spread = 67.87
+gravity = Vector2(0, 1192)
+initial_velocity_min = 182.47
+initial_velocity_max = 254.64
+angular_velocity_min = 89.07
+angular_velocity_max = 89.07
+scale_amount_min = 2.0
+scale_amount_max = 5.0
+color_ramp = SubResource("Gradient_ga1u6")
+
+[connection signal="finished" from="CPUParticles2D" to="." method="_on_cpu_particles_2d_finished"]
