@@ -84,8 +84,8 @@ func update_energy_value(new_value):
 
 
 func _on_back_pressed():
-	SceneSwitcher.returnToPrevScene()
+	$"../BasicLevel"._on_pause_popout_index_pressed(1)
 
 
 func _on_settings_pressed():
-	SceneSwitcher.switchScene("res://levels/menus/settings/settings.tscn")
+	$"../BasicLevel"._on_pause_popout_index_pressed(0)
