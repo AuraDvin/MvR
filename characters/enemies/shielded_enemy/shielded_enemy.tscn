@@ -1,8 +1,11 @@
-[gd_scene load_steps=13 format=3 uid="uid://bgrnespgnxvsj"]
+[gd_scene load_steps=16 format=3 uid="uid://bgrnespgnxvsj"]
 
 [ext_resource type="Script" uid="uid://7w54u5hikob6" path="res://characters/enemies/shielded_enemy/shielded_enemy.gd" id="1_tt7lk"]
 [ext_resource type="Texture2D" uid="uid://biio8yughr7o8" path="res://assets/textures/tracks-sheet.png" id="1_w87x1"]
 [ext_resource type="Texture2D" uid="uid://c7q5rix213bt0" path="res://assets/textures/shielded-enemy-body.png" id="2_w87x1"]
+[ext_resource type="AudioStream" uid="uid://c7jdkfbrhe7vl" path="res://assets/sfx/Enemy_hit.mp3" id="4_7mv01"]
+[ext_resource type="AudioStream" uid="uid://bde2sn7py7y57" path="res://assets/sfx/Tracks_25s.mp3" id="5_y4d8v"]
+[ext_resource type="AudioStream" uid="uid://dv6wsmh8nc3iw" path="res://assets/sfx/Dmg_to_tower_pitch1.mp3" id="6_0lfpc"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jto1h"]
 size = Vector2(51.84, 51.84)
@@ -86,7 +89,7 @@ sprite_frames = SubResource("SpriteFrames_7mv01")
 animation = &"tracks_roll"
 autoplay = "tracks_roll"
 
-[node name="ShieldSprite" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(-1.7881393e-07, -11.453129)
 scale = Vector2(2.0800002, 2.0244932)
 texture = SubResource("AtlasTexture_tt7lk")
@@ -94,3 +97,14 @@ hframes = 4
 
 [node name="AttackTimer" type="Timer" parent="."]
 one_shot = true
+
+[node name="Enemy_hit" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_7mv01")
+
+[node name="Tracks" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_y4d8v")
+
+[node name="Attack" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("6_0lfpc")
+
+[node name="SlowTimer" type="Timer" parent="."]

@@ -1,8 +1,11 @@
-[gd_scene load_steps=12 format=3 uid="uid://tuuba4br8fwe"]
+[gd_scene load_steps=15 format=3 uid="uid://tuuba4br8fwe"]
 
 [ext_resource type="Texture2D" uid="uid://biio8yughr7o8" path="res://assets/textures/tracks-sheet.png" id="1_80125"]
 [ext_resource type="Script" uid="uid://cx7q6g7bt7rns" path="res://characters/enemies/fast_enemy/fast_enemy.gd" id="1_s5fes"]
 [ext_resource type="Texture2D" uid="uid://cfkxo7w1h4jx7" path="res://assets/textures/simple-enemy-body.png" id="2_s5fes"]
+[ext_resource type="AudioStream" uid="uid://c7jdkfbrhe7vl" path="res://assets/sfx/Enemy_hit.mp3" id="4_6g5so"]
+[ext_resource type="AudioStream" uid="uid://bde2sn7py7y57" path="res://assets/sfx/Tracks_25s.mp3" id="5_1by2p"]
+[ext_resource type="AudioStream" uid="uid://dv6wsmh8nc3iw" path="res://assets/sfx/Dmg_to_tower_pitch1.mp3" id="6_ccnqn"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cfmgu"]
 size = Vector2(51.84, 51.84)
@@ -92,3 +95,14 @@ modulate = Color(0.6431635, 0.4007443, 0.0018148181, 1)
 position = Vector2(3, -13)
 scale = Vector2(2, 2)
 texture = ExtResource("2_s5fes")
+
+[node name="Enemy_hit" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_6g5so")
+
+[node name="Tracks" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_1by2p")
+
+[node name="Attack" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("6_ccnqn")
+
+[node name="SlowTimer" type="Timer" parent="."]

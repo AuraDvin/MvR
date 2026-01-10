@@ -1,7 +1,7 @@
 class_name ShieldedEnemy
 extends Enemy
 
-@onready var sprite = $ShieldSprite
+@onready var sprite = $Sprite2D
 
 # Number of frames in the shield animation
 const SHIELD_STAGES: int = 4  # Full, minor cracks, major cracks, gone
