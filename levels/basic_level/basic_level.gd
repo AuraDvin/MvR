@@ -89,7 +89,7 @@ func _process(delta):
 		$EnemySpawnTimer.emit_signal("timeout")
 
 func _input(event: InputEvent) -> void:
-	if not $AcceptDialog.visible && event.is_action_released("ui_cancel"):
+	if not $AcceptDialog.visible && event.is_action_pressed("ui_cancel"):
 		pause_popout.visible = not pause_popout.visible
 
 func _on_grid_clicked_on_grid(tile_position, tile_size):
@@ -213,7 +213,8 @@ func win():
 	var basename: String = LevelDataManager.current_level_name.get_basename()
 	LevelDataManager.remove_existant_data()
 	var level_num: int = int(basename[-1])
-	PlayerConfig.last_beat_level = level_num
+	if PlayerConfig.last_beat_level < level_num:
+		PlayerConfig.last_beat_level = level_num
 	print_debug("Level Beaten", PlayerConfig.last_beat_level)
 	$AcceptDialog.visible = false
 	SceneSwitcher.returnToPrevScene()
