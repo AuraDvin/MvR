@@ -21,7 +21,7 @@ func _ready() -> void:
 	$Upgrades.connect("special", set_special)
 	super()
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	#print(attack_timer.time_left)
 	pass
 

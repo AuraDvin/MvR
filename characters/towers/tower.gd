@@ -32,7 +32,7 @@ func _ready() -> void:
 	attack_timer.start(ability_delay)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	pass
 	
 func _on_timer_timeout():
@@ -45,7 +45,7 @@ func _exit_tree() -> void:
 	#print_debug("Tower at (x,y): (%d, %d) with name %s removed from tree" % [x, y, name])
 	# Potentially trigger death ability, like exploding?
 
-func on_body_area_entered(area:Area2D) -> void:
+func on_body_area_entered(_area:Area2D) -> void:
 	pass # I think this is in the enemy class, could call receive_damage there?
 
 # not perfect, generators should generate all the time

@@ -24,7 +24,7 @@ func _ready():
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(_delta):
 	pass
 
 func _on_button_pressed(node: tower_type):
@@ -70,7 +70,7 @@ func _on_upgrade_pressed(i: int):
 	if selected_upgrades == null:
 		return
 	var current_upgrade = selected_upgrades.bought_upgrades[i]
-	var energy = player.spend_energy(UpgradeManager.upgrade_costs[selected_upgrades.type][i][selected_upgrades.bought_upgrades[i]])
+	var energy = player.spend_energy(UpgradeManager.upgrade_costs[selected_upgrades.type][i][current_upgrade])
 	if energy == -1:
 		print_debug("premalo energije")
 		return

@@ -46,7 +46,7 @@ func takeDmg(amount):
 func _ready() -> void:
 	pass
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	pass
 	
 func _set_hand(index: int):

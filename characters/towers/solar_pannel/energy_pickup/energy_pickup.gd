@@ -10,11 +10,11 @@ func _ready():
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(_delta):
 	pass
 
 
-func _on_area_2d_input_event(viewport, event, shape_idx):
+func _on_area_2d_input_event(_viewport, event, _shape_idx):
 	if event is not InputEventMouseButton :
 		return
 	var energy = $"../../../Player".spend_energy(energy_amount * (-1))
