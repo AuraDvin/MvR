@@ -10,8 +10,6 @@ func _ready() -> void:
 #	print_debug(current_scene)
 
 func switchScene(res_path: String) -> void: 
-	if scene_history.back() == null: 
-		print_debug("FUUUCK")
 	call_deferred("defferedSwitchScene", res_path)
 
 func defferedSwitchScene(res_path: String) -> void:
@@ -23,9 +21,9 @@ func defferedSwitchScene(res_path: String) -> void:
 	get_tree().root.add_child(current_scene)
 
 func returnToPrevScene() -> void: 
-	print_debug("last", scene_history.pop_back()) # current scene
+	print_debug("last ", scene_history.pop_back()) # current scene
 	var s = scene_history.pop_back() # last scene
-	print_debug("s", s)
+	print_debug("s ", s)
 	# Fallback to main_menu scene
 	if s == null: 
 		s = "res://levels/menus/main_menu/main_menu.tscn"
