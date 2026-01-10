@@ -1,9 +1,9 @@
 [gd_scene load_steps=5 format=3 uid="uid://dpxxvou3uyr11"]
 
 [ext_resource type="Script" uid="uid://euoguk1ty6fg" path="res://levels/menus/level_select/level_picker.gd" id="1_qsylp"]
-[ext_resource type="Texture2D" uid="uid://bbee0775bhm8o" path="res://assets/textures/left-arrow-icon.png" id="2_qsylp"]
+[ext_resource type="Texture2D" uid="uid://cwtr0qbej2i88" path="res://assets/textures/button-back-normal.png" id="2_qsylp"]
 [ext_resource type="PackedScene" uid="uid://bpr6i4auacjqh" path="res://levels/menus/level_select/level_selection_item.tscn" id="3_ed8i0"]
-[ext_resource type="Texture2D" uid="uid://qu7rnhs6e02e" path="res://assets/textures/right-arrow-icon.png" id="4_u55cg"]
+[ext_resource type="Texture2D" uid="uid://bralhae1f5kru" path="res://assets/textures/button-back-hover.png" id="3_u55cg"]
 
 [node name="LevelPicker" type="Control"]
 layout_mode = 3
@@ -26,26 +26,27 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 320
 
-[node name="LeftLevelPickBTN" type="Button" parent="HBoxContainer"]
+[node name="LeftLevelPickBTN" type="TextureButton" parent="HBoxContainer"]
 custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
+size_flags_vertical = 4
 focus_mode = 0
-icon = ExtResource("2_qsylp")
-flat = true
-expand_icon = true
+texture_normal = ExtResource("2_qsylp")
+texture_hover = ExtResource("3_u55cg")
 
 [node name="LevelSelectionItem" parent="HBoxContainer" instance=ExtResource("3_ed8i0")]
 layout_mode = 2
 size_flags_horizontal = 4
 
-[node name="RightLevelPickBTN" type="Button" parent="HBoxContainer"]
+[node name="RightLevelPickBTN" type="TextureButton" parent="HBoxContainer"]
 custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
 size_flags_horizontal = 8
+size_flags_vertical = 4
 focus_mode = 0
-icon = ExtResource("4_u55cg")
-flat = true
-expand_icon = true
+texture_normal = ExtResource("2_qsylp")
+texture_hover = ExtResource("3_u55cg")
+flip_h = true
 
 [connection signal="pressed" from="HBoxContainer/LeftLevelPickBTN" to="." method="_on_left_level_pick_btn_pressed"]
 [connection signal="pressed" from="HBoxContainer/RightLevelPickBTN" to="." method="_on_right_level_pick_btn_pressed"]

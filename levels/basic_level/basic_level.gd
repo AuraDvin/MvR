@@ -13,11 +13,11 @@ signal energy_changed(newAmount: int)
 var lane_count = 5
 var cooldown = 0.5
 var grid_spaces = {}
-var current_wave_max_score: int = 999999
+var current_wave_max_score: int = INF
 
 var stop_spawning = false
 var local_cooldown = 0
-var current_wave_score: int = -999999
+var current_wave_score: int = -INF
 
 
 var towers = [

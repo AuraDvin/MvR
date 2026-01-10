@@ -3,6 +3,7 @@ extends Control
 enum tower_type {SOLAR, TURRET, MORTAR}
 signal _mode_selectd(tower: tower_type)
 var selected_upgrades
+@onready var texture_button = $MarginContainer/HBoxContainer2/VBoxContainer/shopContainer/TextureButton
 	 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -17,6 +18,8 @@ func _ready():
 		var tb = child as TextureButton
 		tb.scale = tb.get_transform().get_scale() * 2
 	update_energy_value($"../Player".energy)
+	
+
 
 
 
@@ -78,3 +81,11 @@ func _on_upgrade_pressed(i: int):
 
 func update_energy_value(new_value):
 	$MarginContainer/HBoxContainer2/VBoxContainer2/resources/energy_amount.text = str(new_value)
+
+
+func _on_back_pressed():
+	SceneSwitcher.returnToPrevScene()
+
+
+func _on_settings_pressed():
+	SceneSwitcher.switchScene("res://levels/menus/settings/settings.tscn")

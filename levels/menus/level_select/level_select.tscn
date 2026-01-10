@@ -1,9 +1,9 @@
 [gd_scene load_steps=5 format=3 uid="uid://ckfkoclivdl6b"]
 
 [ext_resource type="Script" uid="uid://yi6swm0thjm7" path="res://levels/menus/level_select/level_select.gd" id="1_j0g6b"]
-[ext_resource type="Texture2D" uid="uid://cdjjomguti4jv" path="res://assets/textures/back-icon.png" id="2_rfsf6"]
 [ext_resource type="PackedScene" uid="uid://dpxxvou3uyr11" path="res://levels/menus/level_select/level_picker.tscn" id="2_u4u3e"]
-[ext_resource type="Texture2D" uid="uid://cts1ly866wacc" path="res://assets/textures/settings-icon.png" id="3_655n8"]
+[ext_resource type="Texture2D" uid="uid://cwtr0qbej2i88" path="res://assets/textures/button-back-normal.png" id="3_u4u3e"]
+[ext_resource type="Texture2D" uid="uid://bralhae1f5kru" path="res://assets/textures/button-back-hover.png" id="4_ekgce"]
 
 [node name="LevelSelect" type="Control"]
 layout_mode = 3
@@ -40,24 +40,23 @@ layout_mode = 2
 dragging_enabled = false
 dragger_visibility = 2
 
-[node name="ReturnBTN" type="Button" parent="VBoxContainer/HSplitContainer"]
+[node name="ReturnBTN" type="TextureButton" parent="VBoxContainer/HSplitContainer"]
 custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
 size_flags_horizontal = 0
 focus_mode = 0
-icon = ExtResource("2_rfsf6")
-flat = true
-expand_icon = true
+texture_normal = ExtResource("3_u4u3e")
+texture_hover = ExtResource("4_ekgce")
 
-[node name="SettingsBTN" type="Button" parent="VBoxContainer/HSplitContainer"]
+[node name="SettingsBTN" type="TextureButton" parent="VBoxContainer/HSplitContainer"]
 custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 4
 focus_mode = 0
-icon = ExtResource("3_655n8")
-flat = true
-expand_icon = true
+texture_normal = ExtResource("3_u4u3e")
+texture_hover = ExtResource("4_ekgce")
+flip_h = true
 
 [connection signal="pressed" from="VBoxContainer/HSplitContainer/ReturnBTN" to="." method="_on_return_btn_pressed"]
 [connection signal="pressed" from="VBoxContainer/HSplitContainer/SettingsBTN" to="." method="_on_settings_btn_pressed"]
