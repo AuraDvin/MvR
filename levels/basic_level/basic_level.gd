@@ -38,7 +38,7 @@ func _ready():
 	$AcceptDialog.visible = false
 	lane_count = $Lanes.get_child_count() 
 	$"../Hud".connect("_mode_selectd", _mode_selected)
-	print_debug("Hello")
+#	print_debug("Hello")
 	if not LevelDataManager.load_state(self):
 		# Set by Level Selector item button
 		var data = LevelDataManager.get_data(LevelDataManager.current_level_name)
@@ -60,7 +60,7 @@ func _ready():
 		for lane in lanes.get_children():
 			for enemy: Enemy in lane.get_children(): 
 				enemy.defeated.connect(update_score)
-		print_debug("Printing with time", LevelDataManager.current_level_data.wave_time_remaining)
+#		print_debug("Printing with time", LevelDataManager.current_level_data.wave_time_remaining)
 		# use the wait time that was loaded from level data
 		$EnemySpawnTimer.start(LevelDataManager.current_level_data.wave_time_remaining) 
 		$ChangeTimerLabel.emit_signal("timeout") # immediatelly update timer string
