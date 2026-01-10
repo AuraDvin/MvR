@@ -18,6 +18,7 @@ var current_wave_max_score: int = 999999
 var stop_spawning = false
 var local_cooldown = 0
 var current_wave_score: int = -999999
+var timer_text: String
 
 
 var towers = [
@@ -34,6 +35,7 @@ var enemies = [
 
 func _ready():
 	$AcceptDialog.visible = false
+	$ChangeTimerLabel.emit_signal("timeout")
 	$EnemySpawnTimer.start(RandomNumberGenerator.new().randf_range(7, 11))
 	lane_count = $Lanes.get_child_count() 
 	$"../Hud".connect("_mode_selectd", _mode_selected)
@@ -62,6 +64,8 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	local_cooldown -= delta
+	# print_debug(timer_text)
+	# todo: Set the label.text = timer_text (if different?)
 	if stop_spawning: 
 		var iii = 0
 		for lane1 in lanes.get_children():
@@ -71,6 +75,7 @@ func _process(delta):
 		# print("final count", iii)
 		if iii >= lane_count: 
 			$AcceptDialog.visible = true
+			timer_text = "Game Over!"
 		return
 	
 	if current_wave_score >= (current_wave_max_score / 2.0):
@@ -133,9 +138,15 @@ func _on_enemy_spawn_timer_timeout():
 	if next_wave == null: 
 		stop_spawning = true
 		print_debug("last wave has spawned already")
+		$ChangeTimerLabel.stop()
+		timer_text = "Last Wave"
 		return 
 	
 	spawn_wave(next_wave)
+	
+	$ChangeTimerLabel.stop()
+	timer_text = "New Wave incoming!"
+	$ChangeTimerLabel.start(3)
 	
 	var rng = RandomNumberGenerator.new()
 	$EnemySpawnTimer.start(rng.randf_range(7, 11))
@@ -212,3 +223,11 @@ func _on_accept_dialog_canceled() -> void:
 
 func _on_accept_dialog_close_requested() -> void:
 	win()
+
+
+func _on_change_timer_label_timeout() -> void:
+	var seconds_left: int = int($EnemySpawnTimer.time_left)
+	var minutes : int = int((seconds_left % 3600) / 60.0)	# Doing this to avoid warnings
+	var seconds : int =  seconds_left % 60
+	timer_text = "%02d:%02d" % [minutes, seconds]
+	$ChangeTimerLabel.start(1)

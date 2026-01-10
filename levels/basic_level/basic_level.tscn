@@ -58,6 +58,9 @@ size = Vector2i(232, 100)
 dialog_text = "Congrats, you beat the level"
 dialog_close_on_escape = false
 
+[node name="ChangeTimerLabel" type="Timer" parent="BasicLevel"]
+one_shot = true
+
 [node name="Hud" parent="." instance=ExtResource("3_akcht")]
 custom_minimum_size = Vector2(600, 400)
 size_flags_horizontal = 3
@@ -89,3 +92,4 @@ bus = &"Music"
 [connection signal="canceled" from="BasicLevel/AcceptDialog" to="BasicLevel" method="_on_accept_dialog_canceled"]
 [connection signal="close_requested" from="BasicLevel/AcceptDialog" to="BasicLevel" method="_on_accept_dialog_close_requested"]
 [connection signal="confirmed" from="BasicLevel/AcceptDialog" to="BasicLevel" method="_on_accept_dialog_confirmed"]
+[connection signal="timeout" from="BasicLevel/ChangeTimerLabel" to="BasicLevel" method="_on_change_timer_label_timeout"]
