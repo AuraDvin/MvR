@@ -5,6 +5,8 @@ const MORTAR_PROJECTILE = preload("uid://ejoce625gd0q")
 @onready var mortar: AudioStreamPlayer2D = $Mortar
 
 func _init():
+	max_health=5
+	current_health=5
 	price = 30
 	return_price = 10
 	needs_check = false

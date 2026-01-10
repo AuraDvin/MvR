@@ -5,6 +5,8 @@ const TURRET_PROJECTILE = preload("uid://ookojfhe8b4l")
 @onready var tower_attack: AudioStreamPlayer2D = $Attack
 
 func _init():
+	max_health=4
+	current_health=4
 	self.price = 10
 	needs_check = true
 	ability_value = 1
