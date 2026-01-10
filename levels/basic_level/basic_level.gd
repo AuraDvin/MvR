@@ -77,7 +77,7 @@ func _process(delta):
 		$EnemySpawnTimer.emit_signal("timeout")
 
 func _input(event: InputEvent) -> void:
-	if event.is_action_released("ui_cancel"):
+	if not $AcceptDialog.visible && event.is_action_released("ui_cancel"):
 		pause_popout.visible = not pause_popout.visible
 
 func _on_grid_clicked_on_grid(tile_position, tile_size):
@@ -147,11 +147,12 @@ func spawn_wave(next_wave):
 	for e_data in next_wave: 
 		for i in e_data.count:
 			var lane = rng.randi_range(0, self.lane_count - 1)
-			var enemy_inst = enemies[e_data.type].instantiate()
+			var enemy_inst:Enemy = enemies[e_data.type].instantiate()
 			enemy_inst.defeated.connect(update_score)
 			current_wave_max_score += enemy_inst.score
 			enemy_inst.line = lane
 			enemy_inst.position = _get_enemy_spawn_position(lane)
+			enemy_inst.speed *= rng.randf_range(0.8, 1.2)
 			$Lanes.get_child(lane).add_child(enemy_inst)
 	print_debug("current wave has a max score of ", current_wave_max_score)
 
@@ -162,7 +163,10 @@ func update_score(score: int):
 func _get_enemy_spawn_position(lane) -> Vector2:
 	var bottom_left_pos = ($Grid.position + $Grid/BottomLeft.position * $Grid.scale)
 	var box_width = $Grid/BottomLeft.position.y * $Grid.scale.y / lane_count
-	return Vector2(bottom_left_pos.x, $Grid.position.y + ((0.5 + lane) * box_width))
+	var random_x_shift = RandomNumberGenerator.new().randi_range(-5, 5)
+	var x_position = bottom_left_pos.x + random_x_shift
+	var y_position = $Grid.position.y + ((0.5 + lane) * box_width)
+	return Vector2(x_position, y_position)
 
 func _mode_selected(node):
 	$"../Player"._set_hand(node)
