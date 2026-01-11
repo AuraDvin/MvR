@@ -69,6 +69,7 @@ func save_state(level: BasicLevel) -> void:
 	current_level_data.pickups = []
 	current_level_data.projectiles = []
 	current_level_data.wave_time_remaining = level.wave_spawn_timer.time_left
+	current_level_data.energy = level.player.energy
 	
 	for i in range(1, 5): 
 		for enemies_in_lane in level.lanes.find_child(str(i)).get_children().duplicate_deep():
@@ -83,10 +84,12 @@ func save_state(level: BasicLevel) -> void:
 	for projectile in level.grid_projectiles.get_children().duplicate_deep():
 		projectile.get_parent().remove_child(projectile)
 		current_level_data.projectiles.append(projectile)
-
+##haii
 func load_state(level: BasicLevel) -> bool:
 	if current_level_data == null: 
 		return false
+	
+	level.player.energy = current_level_data.energy
 	
 	for i in range(1, 5): 
 		for e in current_level_data.enemies[i-1]:
