@@ -13,7 +13,9 @@ var towers_in_range = {}
 var og_speed
 # Override for each enemy type, so bigger/stronger enemies progress the level more
 var score: int = 1
+
 signal defeated
+signal survived
 
 @export var speed: float
 @export var max_speed: float = 10.0
@@ -63,7 +65,9 @@ func _physics_process(delta: float) -> void:
 	position += veloc
 	
 	# For testing purposes - remove if off-screen
-	if position.x <= -20000.0:
+	if position.x <= 0.0:
+		emit_signal("survived")
+		await get_tree().create_timer(0.2).timeout
 		queue_free()
 
 
