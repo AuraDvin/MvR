@@ -157,7 +157,13 @@ func _on_enemy_spawn_timer_timeout():
 		return
 	
 	var next_wave = LevelDataManager.current_level_data.enemy_queue.pop_front()
-	
+	#last wave was already spawned
+	if next_wave==null:
+		stop_spawning = true
+		print_debug("last wave has already spawned")
+		$ChangeTimerLabel.stop()
+		timer_text = "Last Wave"
+		return
 	spawn_wave(next_wave)
 	
 	$ChangeTimerLabel.stop()
