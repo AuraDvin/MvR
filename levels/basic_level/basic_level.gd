@@ -22,7 +22,8 @@ var stop_spawning = false
 var local_cooldown = 0
 var current_wave_score: int = int(-INF)
 var timer_text: String = "Game start!"
-var game_lost = false
+var game_lost=false
+var global_speed_mult=1
 
 var towers = [
 	preload("res://characters/towers/solar_pannel/solar_pannel.tscn"),
@@ -157,13 +158,6 @@ func _on_enemy_spawn_timer_timeout():
 	
 	var next_wave = LevelDataManager.current_level_data.enemy_queue.pop_front()
 	
-	if next_wave == null: 
-		stop_spawning = true
-		print_debug("last wave has spawned already")
-		$ChangeTimerLabel.stop()
-		timer_text = "Last Wave"
-		return 
-	
 	spawn_wave(next_wave)
 	
 	$ChangeTimerLabel.stop()
@@ -172,6 +166,13 @@ func _on_enemy_spawn_timer_timeout():
 	
 	var rng = RandomNumberGenerator.new()
 	wave_spawn_timer.start(rng.randf_range(7, 11))
+	#no waves left
+	if LevelDataManager.current_level_data.enemy_queue.is_empty(): 
+		stop_spawning = true
+		print_debug("last wave has spawned")
+		$ChangeTimerLabel.stop()
+		timer_text = "Last Wave"
+		return
 
 func spawn_wave(next_wave):
 	var rng = RandomNumberGenerator.new()
@@ -186,6 +187,7 @@ func spawn_wave(next_wave):
 			enemy_inst.line = lane
 			enemy_inst.position = _get_enemy_spawn_position(lane)
 			enemy_inst.speed *= rng.randf_range(0.8, 1.2)
+			enemy_inst.speed *= global_speed_mult
 			enemy_inst.survived.connect(_on_enemy_survival)
 			$Lanes.get_child(lane).add_child(enemy_inst)
 	print_debug("current wave has a max score of ", current_wave_max_score)
@@ -229,7 +231,7 @@ func win():
 	var level_num: int = int(basename[-1])
 	if PlayerConfig.last_beat_level < level_num:
 		PlayerConfig.last_beat_level = level_num
-	print_debug("Level Beaten", PlayerConfig.last_beat_level)
+	print_debug("Level Beaten ", PlayerConfig.last_beat_level)
 	end_dialog.visible = false
 	SceneSwitcher.returnToPrevScene()
 func lose():
@@ -284,5 +286,5 @@ func _on_change_timer_label_timeout() -> void:
 	var seconds_left: int = int(wave_spawn_timer.time_left)
 	var minutes : int = int((seconds_left % 3600) / 60.0)	# Doing this to avoid warnings
 	var seconds : int =  seconds_left % 60
-	timer_text = "%02d:%02d" % [minutes, seconds]
-	$ChangeTimerLabel.start(1)
+	timer_text = "%02d:%02d" % [minutes, seconds+1]
+	$ChangeTimerLabel.start(0.1)

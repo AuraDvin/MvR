@@ -11,6 +11,8 @@ var velocity: Vector2
 var movable: bool = true
 var towers_in_range = {}
 var og_speed
+var slow_color:Color=Color.ROYAL_BLUE
+var og_color
 # Override for each enemy type, so bigger/stronger enemies progress the level more
 var score: int = 1
 
@@ -40,6 +42,7 @@ func _ready() -> void:
 	attack_area.area_entered.connect(on_attack_area_entered)
 	slow_timer.timeout.connect(stop_slow)
 	og_speed = speed
+	og_color=sprite_2d.self_modulate
 
 func _process(_delta: float) -> void:
 	if towers_in_range.keys().is_empty(): 
@@ -91,9 +94,10 @@ func on_body_area_entered(area:Area2D) -> void:
 		_cause_damage(area.get_parent().damage)
 		area.get_parent().queue_free()
 		if area.get_parent().slow:
-			slow_timer.start(3)
-			sprite_2d.self_modulate = Color.LIGHT_BLUE
-			speed = og_speed * 0.1
+			slow_timer.start(2.5)
+			sprite_2d.self_modulate = slow_color
+			animated_sprite_2d.self_modulate = slow_color
+			speed = og_speed * 0.67
 
 func on_attack_area_entered(area:Area2D) -> void: 
 	if area.is_in_group("tower"):
@@ -111,5 +115,6 @@ func _cause_damage(amount: int):
 	
 
 func stop_slow():
-	sprite_2d.self_modulate = Color.WHITE
+	sprite_2d.self_modulate = og_color
+	animated_sprite_2d.self_modulate = og_color
 	speed = og_speed
