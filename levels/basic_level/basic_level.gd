@@ -54,6 +54,7 @@ func _ready():
 		player.energy=data.energy
 		# Spawn first wave (also updates the timer string)
 		$EnemySpawnTimer.start(5)
+		$ChangeTimerLabel.emit_signal("timeout")
 	else: 
 		for tower: Tower in grid_towers.get_children():
 			var tower_pos = Vector2(tower.x, tower.y)
@@ -67,6 +68,7 @@ func _ready():
 
 func _process(delta):
 	local_cooldown -= delta
+	$"../Hud/MarginContainer/HBoxContainer2/VBoxContainer2/resources/TimerLabel".text = timer_text
 	# This is the strin that should be applied to a label's text
 #	 print_debug(timer_text)
 	if stop_spawning: 

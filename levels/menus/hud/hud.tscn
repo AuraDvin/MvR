@@ -100,6 +100,9 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 0
 
+[node name="TimerLabel" type="Label" parent="MarginContainer/HBoxContainer2/VBoxContainer2/resources"]
+layout_mode = 2
+
 [node name="TextureRect" type="TextureRect" parent="MarginContainer/HBoxContainer2/VBoxContainer2/resources"]
 layout_mode = 2
 size_flags_horizontal = 10
