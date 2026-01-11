@@ -82,8 +82,17 @@ func _process(delta):
 #			print("count", lane1.get_child_count())
 			if lane1.get_child_count() == 0: 
 				iii += 1
+			else:
+				if game_lost:
+					for enemy: Enemy in lane1.get_children():
+						enemy.speed = 0
+		if game_lost:
+			wave_spawn_timer.stop()
+			$ChangeTimerLabel.stop()
+			timer_text = "Game over!"
+			return
 #		print("final count", iii)
-		if iii >= lane_count: 
+		elif iii >= lane_count: 
 			end_dialog.visible = true
 			timer_text = "Game Over!"
 		return
