@@ -11,6 +11,7 @@ signal energy_changed(newAmount: int)
 @onready var soundtrack: AudioStreamPlayer2D = $"../Soundtrack"
 @onready var wave_spawn_timer = $EnemySpawnTimer
 @onready var player = $"../Player"
+@onready var end_dialog = $EndDialog
 
 var lane_count = 5
 var cooldown = 0.5
@@ -21,7 +22,7 @@ var stop_spawning = false
 var local_cooldown = 0
 var current_wave_score: int = int(-INF)
 var timer_text: String = "Game start!"
-
+var game_lost = false
 
 var towers = [
 	preload("res://characters/towers/solar_pannel/solar_pannel.tscn"),
@@ -36,7 +37,10 @@ var enemies = [
 ]
 
 func _ready():
-	$AcceptDialog.visible = false
+	end_dialog.visible = false
+	end_dialog.canceled.connect(win)
+	end_dialog.confirmed.connect(win)
+	end_dialog.close_requested.connect(win)
 	lane_count = $Lanes.get_child_count() 
 	$"../Hud".connect("_mode_selectd", _mode_selected)
 #	print_debug("Hello")
@@ -53,7 +57,7 @@ func _ready():
 		LevelDataManager.current_level_data = data
 		player.energy=data.energy
 		# Spawn first wave (also updates the timer string)
-		$EnemySpawnTimer.start(5)
+		wave_spawn_timer.start(5)
 		$ChangeTimerLabel.emit_signal("timeout")
 	else: 
 		for tower: Tower in grid_towers.get_children():
@@ -62,8 +66,9 @@ func _ready():
 		for lane in lanes.get_children():
 			for enemy: Enemy in lane.get_children(): 
 				enemy.defeated.connect(update_score)
+				enemy.survived.connect(_on_enemy_survival)
 		# use the wait time that was loaded from level data
-		$EnemySpawnTimer.start(LevelDataManager.current_level_data.wave_time_remaining) 
+		wave_spawn_timer.start(LevelDataManager.current_level_data.wave_time_remaining) 
 		$ChangeTimerLabel.emit_signal("timeout") # immediatelly update timer string
 
 func _process(delta):
@@ -79,15 +84,15 @@ func _process(delta):
 				iii += 1
 #		print("final count", iii)
 		if iii >= lane_count: 
-			$AcceptDialog.visible = true
+			end_dialog.visible = true
 			timer_text = "Game Over!"
 		return
 	
 	if current_wave_score >= (current_wave_max_score / 2.0):
-		$EnemySpawnTimer.emit_signal("timeout")
+		wave_spawn_timer.emit_signal("timeout")
 
 func _input(event: InputEvent) -> void:
-	if not $AcceptDialog.visible && event.is_action_pressed("ui_cancel"):
+	if not end_dialog.visible && event.is_action_pressed("ui_cancel"):
 		pause_popout.visible = not pause_popout.visible
 
 func _on_grid_clicked_on_grid(tile_position, tile_size):
@@ -157,7 +162,7 @@ func _on_enemy_spawn_timer_timeout():
 	$ChangeTimerLabel.start(3)
 	
 	var rng = RandomNumberGenerator.new()
-	$EnemySpawnTimer.start(rng.randf_range(7, 11))
+	wave_spawn_timer.start(rng.randf_range(7, 11))
 
 func spawn_wave(next_wave):
 	var rng = RandomNumberGenerator.new()
@@ -172,6 +177,7 @@ func spawn_wave(next_wave):
 			enemy_inst.line = lane
 			enemy_inst.position = _get_enemy_spawn_position(lane)
 			enemy_inst.speed *= rng.randf_range(0.8, 1.2)
+			enemy_inst.survived.connect(_on_enemy_survival)
 			$Lanes.get_child(lane).add_child(enemy_inst)
 	print_debug("current wave has a max score of ", current_wave_max_score)
 
@@ -206,14 +212,46 @@ func _on_tower_health_gone(deleting_tower):
 	deleting_tower.queue_free()
 
 func win():
+	if game_lost: 
+		print_debug("won called but game was lost")
+		return
 	var basename: String = LevelDataManager.current_level_name.get_basename()
 	LevelDataManager.remove_existant_data()
 	var level_num: int = int(basename[-1])
 	if PlayerConfig.last_beat_level < level_num:
 		PlayerConfig.last_beat_level = level_num
 	print_debug("Level Beaten", PlayerConfig.last_beat_level)
-	$AcceptDialog.visible = false
+	end_dialog.visible = false
 	SceneSwitcher.returnToPrevScene()
+func lose():
+	end_dialog.visible = false
+	LevelDataManager.remove_existant_data()
+	SceneSwitcher.returnToPrevScene()
+
+func _on_enemy_survival(): 
+	if game_lost:
+		return
+	
+	game_lost = true
+	stop_spawning = true
+	
+	if end_dialog.confirmed.is_connected(win):
+		end_dialog.confirmed.disconnect(win)
+	if end_dialog.canceled.is_connected(win):
+		end_dialog.canceled.disconnect(win)
+	if end_dialog.close_requested.is_connected(win):
+		end_dialog.close_requested.disconnect(win)
+	
+	if not end_dialog.confirmed.is_connected(lose):
+		end_dialog.confirmed.connect(lose)
+	if not end_dialog.canceled.is_connected(lose):
+		end_dialog.canceled.connect(lose)
+	if not end_dialog.close_requested.is_connected(lose):
+		end_dialog.close_requested.connect(lose)
+	
+	end_dialog.title = "Game over"
+	end_dialog.dialog_text = "The enemy reached the end and your towers did not take it down!\nYou must now go back to level select!"
+	end_dialog.visible = true
 
 func _on_pause_popout_index_pressed(index: int) -> void:
 	if index == 0: 
@@ -234,7 +272,7 @@ func _on_accept_dialog_close_requested() -> void:
 
 
 func _on_change_timer_label_timeout() -> void:
-	var seconds_left: int = int($EnemySpawnTimer.time_left)
+	var seconds_left: int = int(wave_spawn_timer.time_left)
 	var minutes : int = int((seconds_left % 3600) / 60.0)	# Doing this to avoid warnings
 	var seconds : int =  seconds_left % 60
 	timer_text = "%02d:%02d" % [minutes, seconds]
