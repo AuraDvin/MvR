@@ -1,10 +1,12 @@
-[gd_scene load_steps=6 format=3 uid="uid://ckfkoclivdl6b"]
+[gd_scene load_steps=8 format=3 uid="uid://ckfkoclivdl6b"]
 
 [ext_resource type="Script" uid="uid://yi6swm0thjm7" path="res://levels/menus/level_select/level_select.gd" id="1_j0g6b"]
 [ext_resource type="PackedScene" uid="uid://dpxxvou3uyr11" path="res://levels/menus/level_select/level_picker.tscn" id="2_u4u3e"]
 [ext_resource type="Texture2D" uid="uid://cwtr0qbej2i88" path="res://assets/textures/button-back-normal.png" id="3_u4u3e"]
 [ext_resource type="Texture2D" uid="uid://bralhae1f5kru" path="res://assets/textures/button-back-hover.png" id="4_ekgce"]
+[ext_resource type="Texture2D" uid="uid://bwu6gk3a5366p" path="res://assets/textures/button-settings-normal.png" id="5_dts2c"]
 [ext_resource type="PackedScene" uid="uid://crgs58y67etoe" path="res://levels/menus/menu-bg/menu_bg.tscn" id="5_h7c00"]
+[ext_resource type="Texture2D" uid="uid://on86gvdlm4f5" path="res://assets/textures/button-settings-hover.png" id="6_o1li7"]
 
 [node name="LevelSelect" type="Control"]
 layout_mode = 3
@@ -55,8 +57,8 @@ layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 4
 focus_mode = 0
-texture_normal = ExtResource("3_u4u3e")
-texture_hover = ExtResource("4_ekgce")
+texture_normal = ExtResource("5_dts2c")
+texture_hover = ExtResource("6_o1li7")
 flip_h = true
 
 [node name="menuBg" parent="." instance=ExtResource("5_h7c00")]
