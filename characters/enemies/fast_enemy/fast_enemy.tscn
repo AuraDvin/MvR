@@ -56,9 +56,13 @@ animations = [{
 [node name="FastEnemy" instance=ExtResource("1_s5fes")]
 script = ExtResource("2_s5fes")
 speed = 40.0
-max_speed = 10.0
-health_points = 3
+max_speed = 40.0
+health_points = 5
 
 [node name="AnimatedSprite2D" parent="." index="2"]
+self_modulate = Color(1, 0.33333334, 0.09411765, 1)
 sprite_frames = SubResource("SpriteFrames_cfmgu")
 frame_progress = 0.0
+
+[node name="Sprite2D" parent="." index="3"]
+self_modulate = Color(1, 0.33333334, 0.09411765, 1)

@@ -58,8 +58,7 @@ animations = [{
 script = ExtResource("2_tt7lk")
 shield_hp = 0
 speed = 15.0
-max_speed = 10.0
-health_points = 3
+max_speed = 15.0
 
 [node name="AnimatedSprite2D" parent="." index="2"]
 sprite_frames = SubResource("SpriteFrames_jto1h")
