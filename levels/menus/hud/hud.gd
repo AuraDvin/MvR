@@ -9,6 +9,11 @@ var selected_upgrades
 func _ready():
 	
 	await get_tree().process_frame
+	var resources = $MarginContainer/HBoxContainer2/VBoxContainer2/resources
+	# Add spacers and move one between energy and timer label to keep timer in the center
+	resources.add_spacer(true)
+	resources.add_spacer(true)
+	resources.move_child(resources.get_child(0), 2)
 	for child in $MarginContainer/HBoxContainer2/VBoxContainer2/upgrades.get_children():
 		if child.name == "Label":
 			continue
