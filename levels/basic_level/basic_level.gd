@@ -87,6 +87,7 @@ func _process(delta):
 				if game_lost:
 					for enemy: Enemy in lane1.get_children():
 						enemy.speed = 0
+						enemy.animated_sprite_2d.stop()
 		if game_lost:
 			wave_spawn_timer.stop()
 			$ChangeTimerLabel.stop()
@@ -197,6 +198,7 @@ func spawn_wave(next_wave):
 			enemy_inst.survived.connect(_on_enemy_survival)
 			$Lanes.get_child(lane).add_child(enemy_inst)
 	print_debug("current wave has a max score of ", current_wave_max_score)
+	global_speed_mult+=0.1
 
 func update_score(score: int):
 	current_wave_score += score
