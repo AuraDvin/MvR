@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://cl5i6jqism35s"]
+[gd_scene load_steps=8 format=3 uid="uid://cl5i6jqism35s"]
 
 [ext_resource type="Script" uid="uid://c2bq01dxk51eb" path="res://levels/basic_level/basic_level.gd" id="1_x83mk"]
 [ext_resource type="PackedScene" uid="uid://emqcm546jpvb" path="res://levels/grid/grid.tscn" id="2_h6lqb"]
@@ -6,6 +6,9 @@
 [ext_resource type="PackedScene" uid="uid://i5tyih4l3m1m" path="res://characters/player/Player.tscn" id="4_ykins"]
 [ext_resource type="Texture2D" uid="uid://cjpsxhcfdxql6" path="res://assets/textures/bg.png" id="5_nyqwc"]
 [ext_resource type="AudioStream" uid="uid://ri4vuubg6ct0" path="res://assets/soundtracks/Glorious Morning - Metal version - SEYAR.mp3" id="6_ylr87"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ylr87"]
+size = Vector2(83, 739)
 
 [node name="BasicLevel" type="Node"]
 
@@ -50,6 +53,15 @@ scale = Vector2(86.4, 47.76)
 
 [node name="Projectiles" type="Node" parent="BasicLevel"]
 
+[node name="LoseDialog" type="AcceptDialog" parent="BasicLevel"]
+oversampling_override = 1.0
+title = "Level lost"
+initial_position = 1
+size = Vector2i(232, 100)
+ok_button_text = "Level select"
+dialog_text = "You have lost to the robots."
+dialog_close_on_escape = false
+
 [node name="AcceptDialog" type="AcceptDialog" parent="BasicLevel"]
 oversampling_override = 1.0
 title = "Congrats, you beat the level"
@@ -87,11 +99,21 @@ stream = ExtResource("6_ylr87")
 autoplay = true
 bus = &"Music"
 
+[node name="LoseArea2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LoseArea2D"]
+position = Vector2(31.5, 359.5)
+shape = SubResource("RectangleShape2D_ylr87")
+
 [connection signal="energy_changed" from="BasicLevel" to="Hud" method="_on_basic_level_energy_changed"]
 [connection signal="index_pressed" from="BasicLevel/PausePopout" to="BasicLevel" method="_on_pause_popout_index_pressed"]
 [connection signal="clicked_on_grid" from="BasicLevel/Grid" to="BasicLevel" method="_on_grid_clicked_on_grid"]
 [connection signal="timeout" from="BasicLevel/EnemySpawnTimer" to="BasicLevel" method="_on_enemy_spawn_timer_timeout"]
+[connection signal="canceled" from="BasicLevel/LoseDialog" to="BasicLevel" method="_on_lose_dialog_canceled"]
+[connection signal="close_requested" from="BasicLevel/LoseDialog" to="BasicLevel" method="_on_lose_dialog_close_requested"]
+[connection signal="confirmed" from="BasicLevel/LoseDialog" to="BasicLevel" method="_on_lose_dialog_confirmed"]
 [connection signal="canceled" from="BasicLevel/AcceptDialog" to="BasicLevel" method="_on_accept_dialog_canceled"]
 [connection signal="close_requested" from="BasicLevel/AcceptDialog" to="BasicLevel" method="_on_accept_dialog_close_requested"]
 [connection signal="confirmed" from="BasicLevel/AcceptDialog" to="BasicLevel" method="_on_accept_dialog_confirmed"]
 [connection signal="timeout" from="BasicLevel/ChangeTimerLabel" to="BasicLevel" method="_on_change_timer_label_timeout"]
+[connection signal="area_exited" from="LoseArea2D" to="BasicLevel" method="_on_lose_area_2d_area_exited"]

@@ -94,7 +94,7 @@ func on_body_area_entered(area:Area2D) -> void:
 			slow_timer.start(2.5)
 			sprite_2d.self_modulate = slow_color
 			animated_sprite_2d.self_modulate = slow_color
-			speed = og_speed * 0.67
+			speed = og_speed * 0.6767
 
 func on_attack_area_entered(area:Area2D) -> void: 
 	if area.is_in_group("tower"):

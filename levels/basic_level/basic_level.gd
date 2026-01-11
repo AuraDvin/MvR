@@ -20,7 +20,8 @@ var stop_spawning = false
 var local_cooldown = 0
 var current_wave_score: int = int(-INF)
 var timer_text: String = "Game start!"
-
+var global_speed_mult=1
+var game_lost=false
 
 var towers = [
 	preload("res://characters/towers/solar_pannel/solar_pannel.tscn"),
@@ -36,6 +37,7 @@ var enemies = [
 
 func _ready():
 	$AcceptDialog.visible = false
+	$LoseDialog.visible = false
 	lane_count = $Lanes.get_child_count() 
 	$"../Hud".connect("_mode_selectd", _mode_selected)
 #	print_debug("Hello")
@@ -73,14 +75,17 @@ func _process(delta):
 	local_cooldown -= delta
 	# print_debug(timer_text)
 	# todo: Set the label.text = timer_text (if different?)
-	if stop_spawning: 
+	if game_lost:
+		$LoseDialog.visible=true
+		timer_text = "Game Over!"
+	elif stop_spawning: 
 		var iii = 0
 		for lane1 in lanes.get_children():
 			# print("count", lane1.get_child_count())
 			if lane1.get_child_count() == 0: 
 				iii += 1
 		# print("final count", iii)
-		if iii >= lane_count: 
+		if iii >= lane_count:
 			$AcceptDialog.visible = true
 			timer_text = "Game Over!"
 		return
@@ -89,7 +94,7 @@ func _process(delta):
 		$EnemySpawnTimer.emit_signal("timeout")
 
 func _input(event: InputEvent) -> void:
-	if not $AcceptDialog.visible && event.is_action_pressed("ui_cancel"):
+	if not $AcceptDialog.visible && not $LoseDialog.visible && event.is_action_pressed("ui_cancel"):
 		pause_popout.visible = not pause_popout.visible
 
 func _on_grid_clicked_on_grid(tile_position, tile_size):
@@ -175,6 +180,7 @@ func spawn_wave(next_wave):
 			enemy_inst.line = lane
 			enemy_inst.position = _get_enemy_spawn_position(lane)
 			enemy_inst.speed *= rng.randf_range(0.8, 1.2)
+			enemy_inst.speed *= global_speed_mult
 			$Lanes.get_child(lane).add_child(enemy_inst)
 	print_debug("current wave has a max score of ", current_wave_max_score)
 
@@ -215,7 +221,7 @@ func win():
 	var level_num: int = int(basename[-1])
 	if PlayerConfig.last_beat_level < level_num:
 		PlayerConfig.last_beat_level = level_num
-	print_debug("Level Beaten", PlayerConfig.last_beat_level)
+	print_debug("Level Beaten ", PlayerConfig.last_beat_level)
 	$AcceptDialog.visible = false
 	SceneSwitcher.returnToPrevScene()
 
@@ -243,3 +249,29 @@ func _on_change_timer_label_timeout() -> void:
 	var seconds : int =  seconds_left % 60
 	timer_text = "%02d:%02d" % [minutes, seconds]
 	$ChangeTimerLabel.start(1)
+
+
+func _on_lose_area_2d_area_exited(area: Area2D) -> void:
+	#when an enemy passes by the collision, they're offscreen
+	if area.is_in_group("enemy_body"):
+		area.get_parent().queue_free()
+		$"../Player".currentHealth-=1
+		print_debug("player now has %d hp", $"../Player".currentHealth)
+		if $"../Player".currentHealth<=0:
+			print_debug("player has no health left")
+			game_lost=true
+			
+func lose():
+	LevelDataManager.remove_existant_data()
+	print_debug("Level Lost ", PlayerConfig.last_beat_level)
+	$LoseDialog.visible = false
+	SceneSwitcher.returnToPrevScene()
+
+func _on_lose_dialog_canceled() -> void:
+	lose()
+
+func _on_lose_dialog_confirmed() -> void:
+	lose()
+
+func _on_lose_dialog_close_requested() -> void:
+	lose()
