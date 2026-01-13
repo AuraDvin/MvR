@@ -1,9 +1,9 @@
 [gd_scene load_steps=8 format=3 uid="uid://cda4i2ncmge2x"]
 
 [ext_resource type="Script" uid="uid://xi7rhi2d0kjs" path="res://levels/menus/settings/settings.gd" id="1_uu6rw"]
-[ext_resource type="Texture2D" uid="uid://cwtr0qbej2i88" path="res://assets/textures/button-back-normal.png" id="2_15gkg"]
-[ext_resource type="Texture2D" uid="uid://bralhae1f5kru" path="res://assets/textures/button-back-hover.png" id="3_d17uv"]
+[ext_resource type="Texture2D" uid="uid://t6vntxrj2ews" path="res://assets/textures/return-normal.png" id="2_d17uv"]
 [ext_resource type="LabelSettings" uid="uid://dk5rixitres36" path="res://misc/PageTitleLabelTheme.tres" id="3_ifqal"]
+[ext_resource type="Texture2D" uid="uid://bqe03fhj0brb4" path="res://assets/textures/return-hoverl.png" id="3_llk88"]
 [ext_resource type="LabelSettings" uid="uid://ddwwuccbw03wi" path="res://misc/PageSubtitleLabelTheme.tres" id="4_rrw4a"]
 [ext_resource type="LabelSettings" uid="uid://cbqx3qie0kyui" path="res://misc/LabelTheme.tres" id="5_15gkg"]
 [ext_resource type="PackedScene" uid="uid://crgs58y67etoe" path="res://levels/menus/menu-bg/menu_bg.tscn" id="7_d17uv"]
@@ -22,8 +22,8 @@ custom_minimum_size = Vector2(100, 100)
 layout_mode = 0
 offset_right = 100.0
 offset_bottom = 100.0
-texture_normal = ExtResource("2_15gkg")
-texture_hover = ExtResource("3_d17uv")
+texture_normal = ExtResource("2_d17uv")
+texture_hover = ExtResource("3_llk88")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 1

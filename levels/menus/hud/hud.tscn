@@ -5,12 +5,12 @@
 [ext_resource type="Texture2D" uid="uid://8hmvqxym3c6b" path="res://assets/textures/shooter-turret.png" id="3_5aamc"]
 [ext_resource type="Texture2D" uid="uid://blbh53yq7ouwg" path="res://assets/textures/energy.png" id="3_buv7h"]
 [ext_resource type="Texture2D" uid="uid://cou8mdpj3qrou" path="res://assets/textures/mortar.png" id="4_buv7h"]
-[ext_resource type="Texture2D" uid="uid://cwtr0qbej2i88" path="res://assets/textures/button-back-normal.png" id="7_ka03i"]
 [ext_resource type="Texture2D" uid="uid://c646ojx7odwbg" path="res://assets/textures/trash_can.png" id="7_tqvyd"]
 [ext_resource type="Texture2D" uid="uid://dnhh1sc2lkpq6" path="res://assets/textures/cancel.png" id="8_62nfb"]
-[ext_resource type="Texture2D" uid="uid://bralhae1f5kru" path="res://assets/textures/button-back-hover.png" id="8_k8m3l"]
+[ext_resource type="Texture2D" uid="uid://t6vntxrj2ews" path="res://assets/textures/return-normal.png" id="8_ka03i"]
 [ext_resource type="Texture2D" uid="uid://c50jlcy26h5y" path="res://assets/textures/selector.png" id="9_62nfb"]
 [ext_resource type="Texture2D" uid="uid://bwu6gk3a5366p" path="res://assets/textures/button-settings-normal.png" id="9_g1qdu"]
+[ext_resource type="Texture2D" uid="uid://bqe03fhj0brb4" path="res://assets/textures/return-hoverl.png" id="9_k8m3l"]
 [ext_resource type="Texture2D" uid="uid://on86gvdlm4f5" path="res://assets/textures/button-settings-hover.png" id="10_8i481"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_y2vs7"]
@@ -153,8 +153,8 @@ size_flags_vertical = 10
 [node name="back" type="TextureButton" parent="MarginContainer/HBoxContainer2/VBoxContainer2/HBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 0
-texture_normal = ExtResource("7_ka03i")
-texture_hover = ExtResource("8_k8m3l")
+texture_normal = ExtResource("8_ka03i")
+texture_hover = ExtResource("9_k8m3l")
 
 [node name="settings" type="TextureButton" parent="MarginContainer/HBoxContainer2/VBoxContainer2/HBoxContainer"]
 layout_mode = 2
